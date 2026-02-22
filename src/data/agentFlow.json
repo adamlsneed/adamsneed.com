@@ -1,0 +1,18 @@
+{
+  "nodes": [
+    { "id": "router", "label": "Router Agent", "type": "agent" },
+    { "id": "specialist-a", "label": "Specialist A", "type": "agent" },
+    { "id": "specialist-b", "label": "Specialist B", "type": "agent" },
+    { "id": "human-review", "label": "Human Review", "type": "gate" },
+    { "id": "execute", "label": "Execute", "type": "action" },
+    { "id": "feedback", "label": "Feedback Loop", "type": "action" }
+  ],
+  "edges": [
+    { "from": "router", "to": "specialist-a" },
+    { "from": "router", "to": "specialist-b" },
+    { "from": "specialist-a", "to": "human-review" },
+    { "from": "specialist-b", "to": "human-review" },
+    { "from": "human-review", "to": "execute", "label": "approved" },
+    { "from": "human-review", "to": "feedback", "label": "rejected" }
+  ]
+}

@@ -1,0 +1,859 @@
+{
+  "rounds": [
+    {
+      "round": 1,
+      "theme": "Week One: Access Requests",
+      "cards": [
+        {
+          "id": "r1-c1",
+          "title": "Emergency DBA Access",
+          "summary": "Finance database patch is blocked. The app owner asks for direct root on production now.",
+          "details": "Change ticket exists but does not include a rollback plan or approval chain.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -18,
+              "business": 14,
+              "sanity": -4,
+              "result": "Patch starts quickly, but your audit trail is weak and risk exposure jumps."
+            },
+            "Deny": {
+              "security": 8,
+              "business": -15,
+              "sanity": -6,
+              "result": "You hold the line, but operations escalates the outage to leadership."
+            },
+            "Investigate": {
+              "security": 13,
+              "business": 5,
+              "sanity": -3,
+              "result": "You verify scope, require rollback notes, and issue time-boxed access."
+            },
+            "Escalate": {
+              "security": 10,
+              "business": -2,
+              "sanity": -2,
+              "result": "CAB lead approves guarded access with logging, but momentum slows."
+            }
+          }
+        },
+        {
+          "id": "r1-c2",
+          "title": "Shared Admin Account",
+          "summary": "A team requests one shared admin credential for overnight support.",
+          "details": "They claim rotation overhead is slowing incident response.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -16,
+              "business": 9,
+              "sanity": 1,
+              "result": "Support is faster, but accountability disappears across shifts."
+            },
+            "Deny": {
+              "security": 11,
+              "business": -8,
+              "sanity": -4,
+              "result": "You enforce identity-bound access and push teams to adapt."
+            },
+            "Investigate": {
+              "security": 12,
+              "business": 4,
+              "sanity": -2,
+              "result": "You stand up pooled JIT roles with per-user attribution."
+            },
+            "Escalate": {
+              "security": 7,
+              "business": -2,
+              "sanity": -1,
+              "result": "Architecture review confirms your concerns and funds automation."
+            }
+          }
+        },
+        {
+          "id": "r1-c3",
+          "title": "Intern Needs Production Logs",
+          "summary": "An intern asks for full production log access to debug latency.",
+          "details": "Logs include customer identifiers and privileged traces.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -14,
+              "business": 6,
+              "sanity": -2,
+              "result": "Debugging improves, but data minimization controls are bypassed."
+            },
+            "Deny": {
+              "security": 9,
+              "business": -6,
+              "sanity": -3,
+              "result": "You block access and the issue resolution slows down."
+            },
+            "Investigate": {
+              "security": 11,
+              "business": 7,
+              "sanity": -1,
+              "result": "You provide redacted scoped logs and preserve response speed."
+            },
+            "Escalate": {
+              "security": 8,
+              "business": 0,
+              "sanity": -1,
+              "result": "Team lead pairs with intern under monitored session controls."
+            }
+          }
+        },
+        {
+          "id": "r1-c4",
+          "title": "Contractor Offboarding Gap",
+          "summary": "A contractor left last week, but the account is still active.",
+          "details": "Procurement says paperwork is not complete yet.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -20,
+              "business": 3,
+              "sanity": -5,
+              "result": "Work continuity remains, but your insider risk spikes."
+            },
+            "Deny": {
+              "security": 15,
+              "business": -10,
+              "sanity": -3,
+              "result": "Account is disabled immediately; project manager is furious."
+            },
+            "Investigate": {
+              "security": 14,
+              "business": 4,
+              "sanity": -2,
+              "result": "You isolate privileges, force credential reset, and keep limited access."
+            },
+            "Escalate": {
+              "security": 12,
+              "business": -1,
+              "sanity": -2,
+              "result": "Legal and HR align offboarding controls with security policy."
+            }
+          }
+        },
+        {
+          "id": "r1-c5",
+          "title": "Developer Wants Permanent Sudo",
+          "summary": "A lead engineer requests permanent sudo to avoid ticket wait times.",
+          "details": "They are critical to a launch scheduled this week.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -15,
+              "business": 11,
+              "sanity": 0,
+              "result": "Delivery is fast, but least-privilege controls degrade."
+            },
+            "Deny": {
+              "security": 10,
+              "business": -9,
+              "sanity": -4,
+              "result": "You reject standing access and engineering pushes back hard."
+            },
+            "Investigate": {
+              "security": 12,
+              "business": 6,
+              "sanity": -1,
+              "result": "You grant just-in-time sudo with policy-based expiry."
+            },
+            "Escalate": {
+              "security": 8,
+              "business": 2,
+              "sanity": -1,
+              "result": "Security committee approves temporary exception with safeguards."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "theme": "Vendor and Compliance Pressure",
+      "cards": [
+        {
+          "id": "r2-c1",
+          "title": "Vendor Demands Direct VPN",
+          "summary": "A new vendor wants unrestricted VPN access for appliance tuning.",
+          "details": "Their statement of work does not mention segmentation requirements.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -19,
+              "business": 10,
+              "sanity": -4,
+              "result": "Vendor starts quickly, but network blast radius expands."
+            },
+            "Deny": {
+              "security": 12,
+              "business": -8,
+              "sanity": -3,
+              "result": "You block unrestricted paths and delay onboarding."
+            },
+            "Investigate": {
+              "security": 14,
+              "business": 5,
+              "sanity": -2,
+              "result": "You isolate vendor access through brokered sessions and MFA."
+            },
+            "Escalate": {
+              "security": 10,
+              "business": 0,
+              "sanity": -1,
+              "result": "Procurement updates SOW language to enforce secure access clauses."
+            }
+          }
+        },
+        {
+          "id": "r2-c2",
+          "title": "Audit Evidence Due in 2 Hours",
+          "summary": "Internal audit requests session logs and approval records immediately.",
+          "details": "The reporting pipeline is partially manual this quarter.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -8,
+              "business": 6,
+              "sanity": -9,
+              "result": "You rush incomplete evidence and spend the day in follow-up calls."
+            },
+            "Deny": {
+              "security": 6,
+              "business": -12,
+              "sanity": -5,
+              "result": "Audit is unhappy and opens a formal finding."
+            },
+            "Investigate": {
+              "security": 11,
+              "business": 3,
+              "sanity": -4,
+              "result": "You provide defensible partial evidence and schedule validated supplements."
+            },
+            "Escalate": {
+              "security": 9,
+              "business": 1,
+              "sanity": -2,
+              "result": "Leadership allocates support staff to complete the control package."
+            }
+          }
+        },
+        {
+          "id": "r2-c3",
+          "title": "Compliance Exception Request",
+          "summary": "Product asks for a 90-day exception to credential rotation policy.",
+          "details": "Legacy integration cannot tolerate current rotation frequency.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -13,
+              "business": 12,
+              "sanity": -1,
+              "result": "Delivery timeline holds, but compensating controls are missing."
+            },
+            "Deny": {
+              "security": 9,
+              "business": -11,
+              "sanity": -4,
+              "result": "You refuse exception and release schedule slips."
+            },
+            "Investigate": {
+              "security": 12,
+              "business": 6,
+              "sanity": -2,
+              "result": "You issue a short exception with monitoring and remediation milestones."
+            },
+            "Escalate": {
+              "security": 10,
+              "business": 2,
+              "sanity": -1,
+              "result": "Risk committee documents exception ownership and exit criteria."
+            }
+          }
+        },
+        {
+          "id": "r2-c4",
+          "title": "Third-Party Script Execution",
+          "summary": "Vendor support asks to run unsigned scripts on a privileged jump host.",
+          "details": "They insist this is standard troubleshooting procedure.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -22,
+              "business": 8,
+              "sanity": -3,
+              "result": "Issue may clear, but you create a severe code execution pathway."
+            },
+            "Deny": {
+              "security": 13,
+              "business": -7,
+              "sanity": -2,
+              "result": "You block execution and request signed artifacts."
+            },
+            "Investigate": {
+              "security": 15,
+              "business": 4,
+              "sanity": -2,
+              "result": "You isolate the script in sandbox and run static checks first."
+            },
+            "Escalate": {
+              "security": 11,
+              "business": 0,
+              "sanity": -1,
+              "result": "Security architecture approves a controlled, monitored runbook."
+            }
+          }
+        },
+        {
+          "id": "r2-c5",
+          "title": "Executive Demo Credentials",
+          "summary": "Marketing wants admin credentials in a live sales demo tomorrow.",
+          "details": "They need broad visibility to impress a large prospect.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -17,
+              "business": 13,
+              "sanity": -2,
+              "result": "Demo shines, but privileged credentials are now overexposed."
+            },
+            "Deny": {
+              "security": 10,
+              "business": -10,
+              "sanity": -3,
+              "result": "You block risky access and absorb political fallout."
+            },
+            "Investigate": {
+              "security": 12,
+              "business": 7,
+              "sanity": -1,
+              "result": "You provision a read-only demo tenant with expiring tokens."
+            },
+            "Escalate": {
+              "security": 9,
+              "business": 3,
+              "sanity": -1,
+              "result": "Leadership signs off on a controlled exception playbook."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "theme": "Incident Response Wave",
+      "cards": [
+        {
+          "id": "r3-c1",
+          "title": "Suspicious Login Burst",
+          "summary": "SIEM flags privileged logins from two countries within six minutes.",
+          "details": "One session belongs to a known admin on travel.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -21,
+              "business": 2,
+              "sanity": -6,
+              "result": "You allow sessions to continue and potential compromise deepens."
+            },
+            "Deny": {
+              "security": 14,
+              "business": -9,
+              "sanity": -4,
+              "result": "You cut access fast and disrupt legitimate maintenance activity."
+            },
+            "Investigate": {
+              "security": 16,
+              "business": 4,
+              "sanity": -3,
+              "result": "You isolate sessions, confirm travel context, and rotate credentials."
+            },
+            "Escalate": {
+              "security": 12,
+              "business": 0,
+              "sanity": -2,
+              "result": "IR lead mobilizes full response and communications plan."
+            }
+          }
+        },
+        {
+          "id": "r3-c2",
+          "title": "Endpoint EDR Disabled",
+          "summary": "An ops server suddenly reports EDR disabled under a privileged account.",
+          "details": "The owner says this was needed for performance testing.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -20,
+              "business": 7,
+              "sanity": -3,
+              "result": "Performance test runs, but blind spots open across detection coverage."
+            },
+            "Deny": {
+              "security": 12,
+              "business": -8,
+              "sanity": -2,
+              "result": "You force protection re-enable and delay benchmark output."
+            },
+            "Investigate": {
+              "security": 15,
+              "business": 5,
+              "sanity": -2,
+              "result": "You validate request legitimacy and enforce temporary exclusion controls."
+            },
+            "Escalate": {
+              "security": 11,
+              "business": 1,
+              "sanity": -1,
+              "result": "Security and platform teams align on a controlled exception path."
+            }
+          }
+        },
+        {
+          "id": "r3-c3",
+          "title": "Ransom Note on Test VM",
+          "summary": "A non-production VM displays ransom indicators after a script run.",
+          "details": "No customer data is confirmed impacted yet.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -23,
+              "business": 4,
+              "sanity": -7,
+              "result": "You treat it as noise and miss early containment opportunities."
+            },
+            "Deny": {
+              "security": 13,
+              "business": -7,
+              "sanity": -5,
+              "result": "You shut broad systems down and overcorrect containment scope."
+            },
+            "Investigate": {
+              "security": 17,
+              "business": 3,
+              "sanity": -4,
+              "result": "You isolate host, preserve evidence, and prevent lateral movement."
+            },
+            "Escalate": {
+              "security": 14,
+              "business": -1,
+              "sanity": -3,
+              "result": "CSIRT engagement speeds triage and legal communication posture."
+            }
+          }
+        },
+        {
+          "id": "r3-c4",
+          "title": "SOC Wants All Admin Sessions Paused",
+          "summary": "SOC asks for immediate freeze on privileged sessions during investigation.",
+          "details": "Critical patch deployment is running right now.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": 6,
+              "business": -14,
+              "sanity": -5,
+              "result": "Threat exposure drops, but deployment interruption causes outages."
+            },
+            "Deny": {
+              "security": -10,
+              "business": 10,
+              "sanity": -3,
+              "result": "Operations continue, but SOC loses confidence in containment."
+            },
+            "Investigate": {
+              "security": 11,
+              "business": 5,
+              "sanity": -2,
+              "result": "You apply selective freezes for high-risk sessions only."
+            },
+            "Escalate": {
+              "security": 9,
+              "business": 1,
+              "sanity": -2,
+              "result": "Joint incident command sets an approved freeze matrix."
+            }
+          }
+        },
+        {
+          "id": "r3-c5",
+          "title": "Credential Dump Artifact",
+          "summary": "Forensics finds a tool output suggesting partial credential dumping.",
+          "details": "The artifact timestamp overlaps with a maintenance window.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -24,
+              "business": 3,
+              "sanity": -6,
+              "result": "You dismiss it and retain potentially compromised secrets."
+            },
+            "Deny": {
+              "security": 12,
+              "business": -11,
+              "sanity": -5,
+              "result": "You rotate everything immediately and trigger major disruption."
+            },
+            "Investigate": {
+              "security": 18,
+              "business": 2,
+              "sanity": -3,
+              "result": "You stage targeted rotation and validate compromise indicators first."
+            },
+            "Escalate": {
+              "security": 14,
+              "business": -1,
+              "sanity": -2,
+              "result": "Executive incident review approves enterprise-wide response thresholds."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "theme": "Change Window Crunch",
+      "cards": [
+        {
+          "id": "r4-c1",
+          "title": "Late Friday Firewall Rule",
+          "summary": "Network team requests broad allow-list change before weekend release.",
+          "details": "Testing evidence is partial and rollback is vague.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -18,
+              "business": 11,
+              "sanity": -3,
+              "result": "Release proceeds, but segmentation posture weakens significantly."
+            },
+            "Deny": {
+              "security": 10,
+              "business": -10,
+              "sanity": -4,
+              "result": "You reject incomplete change and own the launch delay."
+            },
+            "Investigate": {
+              "security": 13,
+              "business": 5,
+              "sanity": -2,
+              "result": "You constrain scope to approved subnets with explicit rollback."
+            },
+            "Escalate": {
+              "security": 9,
+              "business": 1,
+              "sanity": -1,
+              "result": "CAB signs a narrowed emergency change with controls."
+            }
+          }
+        },
+        {
+          "id": "r4-c2",
+          "title": "Unpatched Legacy System",
+          "summary": "A legacy host cannot patch due to vendor lock-in.",
+          "details": "It still handles privileged automation jobs nightly.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -17,
+              "business": 7,
+              "sanity": -2,
+              "result": "Jobs continue, but exploit exposure remains unmitigated."
+            },
+            "Deny": {
+              "security": 12,
+              "business": -12,
+              "sanity": -4,
+              "result": "You shut it down and disrupt a core operational workflow."
+            },
+            "Investigate": {
+              "security": 14,
+              "business": 4,
+              "sanity": -2,
+              "result": "You isolate host, add compensating controls, and plan migration."
+            },
+            "Escalate": {
+              "security": 11,
+              "business": 0,
+              "sanity": -1,
+              "result": "Risk acceptance is documented with funded remediation timeline."
+            }
+          }
+        },
+        {
+          "id": "r4-c3",
+          "title": "CI Pipeline Secret Exposed",
+          "summary": "A build log reveals a plaintext API secret from a failed job.",
+          "details": "The team requests delaying rotation until after release.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -21,
+              "business": 8,
+              "sanity": -2,
+              "result": "Release remains smooth while exposed secrets stay active."
+            },
+            "Deny": {
+              "security": 13,
+              "business": -9,
+              "sanity": -3,
+              "result": "You force immediate rotation and create deployment churn."
+            },
+            "Investigate": {
+              "security": 16,
+              "business": 4,
+              "sanity": -2,
+              "result": "You rotate in staged waves and patch log retention controls."
+            },
+            "Escalate": {
+              "security": 12,
+              "business": 0,
+              "sanity": -1,
+              "result": "Release leadership agrees on secure stop-the-line threshold."
+            }
+          }
+        },
+        {
+          "id": "r4-c4",
+          "title": "Break-Glass Account Untested",
+          "summary": "Disaster recovery review finds break-glass credentials untested for 8 months.",
+          "details": "The system owner argues there is no immediate risk.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -12,
+              "business": 5,
+              "sanity": -2,
+              "result": "You defer testing and retain uncertainty for real incidents."
+            },
+            "Deny": {
+              "security": 11,
+              "business": -6,
+              "sanity": -2,
+              "result": "You require immediate validation and disrupt planned sprint work."
+            },
+            "Investigate": {
+              "security": 13,
+              "business": 3,
+              "sanity": -1,
+              "result": "You run controlled validation and document a recurring cadence."
+            },
+            "Escalate": {
+              "security": 9,
+              "business": 1,
+              "sanity": -1,
+              "result": "Leadership mandates quarterly break-glass readiness drills."
+            }
+          }
+        },
+        {
+          "id": "r4-c5",
+          "title": "Privileged Session Recording Outage",
+          "summary": "Session recording service fails during peak maintenance activity.",
+          "details": "Teams request temporary bypass until storage is repaired.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -19,
+              "business": 9,
+              "sanity": -3,
+              "result": "Work continues but forensic visibility is temporarily blind."
+            },
+            "Deny": {
+              "security": 12,
+              "business": -10,
+              "sanity": -4,
+              "result": "You halt privileged operations and miss maintenance deadlines."
+            },
+            "Investigate": {
+              "security": 15,
+              "business": 5,
+              "sanity": -2,
+              "result": "You allow limited sessions with parallel command logging controls."
+            },
+            "Escalate": {
+              "security": 10,
+              "business": 1,
+              "sanity": -1,
+              "result": "Incident manager approves staged bypass with strict approvals."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "theme": "Executive Heat",
+      "cards": [
+        {
+          "id": "r5-c1",
+          "title": "Board Meeting Demo Access",
+          "summary": "Leadership wants live privileged workflows shown in a board meeting.",
+          "details": "Security review was never scheduled for the demo environment.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -16,
+              "business": 12,
+              "sanity": -1,
+              "result": "Executive confidence rises while privileged patterns are exposed."
+            },
+            "Deny": {
+              "security": 9,
+              "business": -12,
+              "sanity": -4,
+              "result": "You prevent risky optics but trigger political pushback."
+            },
+            "Investigate": {
+              "security": 12,
+              "business": 6,
+              "sanity": -1,
+              "result": "You provide a sanitized simulation with least-privilege constraints."
+            },
+            "Escalate": {
+              "security": 8,
+              "business": 2,
+              "sanity": -1,
+              "result": "CISO sets board demo guardrails and approved narrative."
+            }
+          }
+        },
+        {
+          "id": "r5-c2",
+          "title": "M&A Due Diligence Rush",
+          "summary": "Potential acquisition requires rapid cross-domain admin visibility.",
+          "details": "The deal team wants broad access granted tonight.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -20,
+              "business": 15,
+              "sanity": -2,
+              "result": "Deal speed improves, but separation-of-duties controls collapse."
+            },
+            "Deny": {
+              "security": 11,
+              "business": -13,
+              "sanity": -4,
+              "result": "You enforce boundaries and become the bottleneck narrative."
+            },
+            "Investigate": {
+              "security": 14,
+              "business": 7,
+              "sanity": -2,
+              "result": "You issue scoped read access through monitored data rooms."
+            },
+            "Escalate": {
+              "security": 10,
+              "business": 3,
+              "sanity": -1,
+              "result": "General counsel signs temporary controls with audit coverage."
+            }
+          }
+        },
+        {
+          "id": "r5-c3",
+          "title": "Public Incident Disclosure Draft",
+          "summary": "Comms asks if they can claim no privileged misuse occurred.",
+          "details": "Investigation is still in progress with open indicators.",
+          "severity": "high",
+          "effects": {
+            "Approve": {
+              "security": -14,
+              "business": 8,
+              "sanity": -5,
+              "result": "Statement lands cleanly now, but credibility risk compounds later."
+            },
+            "Deny": {
+              "security": 10,
+              "business": -9,
+              "sanity": -3,
+              "result": "You block premature claims and face communications pressure."
+            },
+            "Investigate": {
+              "security": 13,
+              "business": 4,
+              "sanity": -2,
+              "result": "You provide qualified language tied to confirmed evidence only."
+            },
+            "Escalate": {
+              "security": 11,
+              "business": 1,
+              "sanity": -1,
+              "result": "Legal, security, and comms align on defensible disclosure language."
+            }
+          }
+        },
+        {
+          "id": "r5-c4",
+          "title": "Talent Retention Exception",
+          "summary": "A key architect threatens to leave unless granted permanent elevated rights.",
+          "details": "Manager wants an immediate exception signed by security.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -18,
+              "business": 10,
+              "sanity": -1,
+              "result": "Retention risk falls, but privilege creep accelerates."
+            },
+            "Deny": {
+              "security": 10,
+              "business": -11,
+              "sanity": -4,
+              "result": "You protect policy integrity and trigger management conflict."
+            },
+            "Investigate": {
+              "security": 12,
+              "business": 6,
+              "sanity": -2,
+              "result": "You design role-based temporary elevation tied to project milestones."
+            },
+            "Escalate": {
+              "security": 9,
+              "business": 2,
+              "sanity": -1,
+              "result": "HR and leadership codify retention controls with risk ownership."
+            }
+          }
+        },
+        {
+          "id": "r5-c5",
+          "title": "Final Control Maturity Review",
+          "summary": "Quarter-end review asks whether PAM controls are production-grade yet.",
+          "details": "Evidence is strong but some workflows still rely on manual checks.",
+          "severity": "medium",
+          "effects": {
+            "Approve": {
+              "security": -9,
+              "business": 9,
+              "sanity": -1,
+              "result": "Leadership gets a confident message, but technical debt is understated."
+            },
+            "Deny": {
+              "security": 8,
+              "business": -8,
+              "sanity": -2,
+              "result": "You highlight gaps directly and invite hard planning conversations."
+            },
+            "Investigate": {
+              "security": 11,
+              "business": 5,
+              "sanity": -1,
+              "result": "You present maturity scores with concrete remediation roadmap."
+            },
+            "Escalate": {
+              "security": 9,
+              "business": 3,
+              "sanity": -1,
+              "result": "Executive steering group commits funding and timeline alignment."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

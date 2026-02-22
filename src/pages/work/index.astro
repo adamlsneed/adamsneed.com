@@ -1,0 +1,56 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const caseStudies = [
+  {
+    href: '/work/pam',
+    title: 'Enterprise PAM Engineering',
+    summary:
+      'Principal engineer for enterprise privileged access deployments with automation, integration architecture, and governance at scale.'
+  },
+  {
+    href: '/work/agents',
+    title: 'Agentic Systems Engineering',
+    summary:
+      'Production multi-agent workflows with role boundaries, structured output validation, security controls, and approval gates.'
+  },
+  {
+    href: '/work/ops',
+    title: 'Operations & Scale',
+    summary:
+      'Nine-year leadership progression from datacenter lead to director of operations, including team growth and P&L ownership.'
+  }
+];
+---
+
+<MainLayout
+  title="Work"
+  description="Case studies in enterprise PAM engineering, agentic systems design, and operational scale leadership by Adam Sneed."
+>
+  <section class="space-y-8">
+    <div class="max-w-4xl space-y-4">
+      <p class="eyebrow">Work</p>
+      <h1 class="section-title">Case Studies</h1>
+      <p class="lead">
+        A selection of architecture-heavy delivery work spanning security engineering, production AI systems, and
+        operations leadership.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        caseStudies.map((study) => (
+          <article class="card flex h-full flex-col justify-between gap-6">
+            <div>
+              <h2 class="mb-3 text-xl font-semibold">{study.title}</h2>
+              <p class="text-textMuted">{study.summary}</p>
+            </div>
+            <a class="btn-secondary w-fit" href={study.href}>
+              Read Case Study
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</MainLayout>

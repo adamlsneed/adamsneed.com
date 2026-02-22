@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab | Adam Sneed</title><meta name="description" content="Interactive Agent Flow Visualizer showing multi-agent request routing, policy gates, and outcome loops."><meta name="robots" content="index,follow"><meta name="theme-color" content="#090d14"><link rel="canonical" href="https://adamsneed.com/lab/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:title" content="Lab | Adam Sneed"><meta property="og:description" content="Interactive Agent Flow Visualizer showing multi-agent request routing, policy gates, and outcome loops."><meta property="og:url" content="https://adamsneed.com/lab/"><meta property="og:image" content="https://adamsneed.com/og-image.svg"><meta property="og:site_name" content="Adam Sneed"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Lab | Adam Sneed"><meta name="twitter:description" content="Interactive Agent Flow Visualizer showing multi-agent request routing, policy gates, and outcome loops."><meta name="twitter:image" content="https://adamsneed.com/og-image.svg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Adam Lacroix Sneed","url":"https://adamsneed.com","jobTitle":"Security-focused Engineering Leader","image":"https://adamsneed.com/og-image.svg","address":{"@type":"PostalAddress","addressLocality":"Austin","addressRegion":"TX","addressCountry":"US"},"sameAs":["https://www.linkedin.com/in/adam-sneed-8113375/","https://github.com/adamlsneed"],"email":"adam@adamsneed.com"}</script><link rel="stylesheet" href="/_astro/about.Ccqpi9qT.css">
+<style>.flow-edge[data-astro-cid-t3nv4xef]{stroke:#4b5d7d;stroke-width:2;transition:stroke .3s ease,stroke-width .3s ease}.flow-edge[data-astro-cid-t3nv4xef].active{stroke:#14b8a6;stroke-width:3}.flow-label[data-astro-cid-t3nv4xef]{fill:#9aa8bf;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.flow-node[data-astro-cid-t3nv4xef]{cursor:pointer}.shape[data-astro-cid-t3nv4xef]{fill:#131f32f5;stroke:#445571;stroke-width:2;transition:fill .2s ease,stroke .2s ease,transform .2s ease}.flow-node[data-astro-cid-t3nv4xef].active .shape[data-astro-cid-t3nv4xef]{fill:#e9456042;stroke:#14b8a6;animation:pulse-node 1.1s ease-in-out infinite}.flow-node[data-astro-cid-t3nv4xef].selected .shape[data-astro-cid-t3nv4xef]{stroke:#0d9488;stroke-width:3}.flow-node-label[data-astro-cid-t3nv4xef]{fill:#e7edf8;font-size:12px;font-weight:600;letter-spacing:.01em;pointer-events:none}.flow-dot[data-astro-cid-t3nv4xef]{fill:#99f6e4;filter:drop-shadow(0 0 8px rgba(233,69,96,.8))}@keyframes pulse-node{0%{transform:scale(1)}50%{transform:scale(1.02)}to{transform:scale(1)}}@media(prefers-reduced-motion:reduce){.flow-node[data-astro-cid-t3nv4xef].active .shape[data-astro-cid-t3nv4xef]{animation:none}}
+</style></head> <body class="flex min-h-screen flex-col"> <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-white">
+Skip to content
+</a> <header class="sticky top-0 z-30 border-b border-borderTone/70 bg-base/80 backdrop-blur-lg"> <div class="container-shell flex flex-wrap items-center justify-between gap-4 py-4"> <a href="/" class="text-lg font-semibold tracking-wide text-textMain">Adam<span class="text-accent">Sneed</span></a> <nav aria-label="Primary"> <ul class="flex flex-wrap items-center gap-2 sm:gap-3"> <li> <a href="/" class="rounded-md px-3 py-2 text-sm font-medium transition text-textMuted hover:bg-surface-soft hover:text-textMain"> Home </a> </li><li> <a href="/about" class="rounded-md px-3 py-2 text-sm font-medium transition text-textMuted hover:bg-surface-soft hover:text-textMain"> About </a> </li><li> <a href="/work" class="rounded-md px-3 py-2 text-sm font-medium transition text-textMuted hover:bg-surface-soft hover:text-textMain"> Work </a> </li><li> <a href="/resume" class="rounded-md px-3 py-2 text-sm font-medium transition text-textMuted hover:bg-surface-soft hover:text-textMain"> Resume </a> </li><li> <a href="/lab" class="rounded-md px-3 py-2 text-sm font-medium transition bg-accentSoft text-accent" aria-current="page"> Lab </a> </li><li> <a href="/game" class="rounded-md px-3 py-2 text-sm font-medium transition text-textMuted hover:bg-surface-soft hover:text-textMain"> Game </a> </li><li> <a href="/contact" class="rounded-md px-3 py-2 text-sm font-medium transition text-textMuted hover:bg-surface-soft hover:text-textMain"> Contact </a> </li> </ul> </nav> </div> </header> <main id="main-content" class="container-shell flex-1 py-10 md:py-14">  <section class="space-y-8" data-astro-cid-t3nv4xef> <div class="max-w-4xl space-y-4" data-astro-cid-t3nv4xef> <p class="eyebrow" data-astro-cid-t3nv4xef>Lab</p> <h1 class="section-title" data-astro-cid-t3nv4xef>Agent Flow Visualizer</h1> <p class="lead" data-astro-cid-t3nv4xef>
+Simulate how a request moves through a production-style multi-agent chain. Start the flow, watch execution paths,
+        and inspect node-level policies.
+</p> </div> <div class="grid gap-6 lg:grid-cols-[2fr,1fr]" data-astro-cid-t3nv4xef> <div class="card space-y-4" data-astro-cid-t3nv4xef> <div class="flex flex-wrap gap-3" data-astro-cid-t3nv4xef> <button id="flow-start" class="btn-primary" type="button" data-astro-cid-t3nv4xef>Start Flow</button> <button id="flow-reset" class="btn-secondary" type="button" data-astro-cid-t3nv4xef>Reset</button> </div> <div class="overflow-hidden rounded-xl border border-borderTone/80 bg-slate-950/50" data-astro-cid-t3nv4xef> <svg id="flow-svg" viewBox="0 0 560 600" class="h-auto w-full" role="img" aria-labelledby="flow-diagram-title flow-diagram-desc" data-astro-cid-t3nv4xef> <title id="flow-diagram-title">Agent flow sequence diagram</title> <desc id="flow-diagram-desc" data-astro-cid-t3nv4xef>
+Request routed from a router agent to specialist agents, then through human review to execution or feedback.
+</desc> <defs data-astro-cid-t3nv4xef> <marker id="flow-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" data-astro-cid-t3nv4xef> <path d="M0,0 L8,4 L0,8 Z" fill="#4b5d7d" data-astro-cid-t3nv4xef></path> </marker> </defs> </svg> </div> </div> <aside class="card space-y-4" data-astro-cid-t3nv4xef> <h2 class="text-xl font-semibold" data-astro-cid-t3nv4xef>Node Policy</h2> <p id="policy-node" class="font-semibold text-accent" data-astro-cid-t3nv4xef>Router Agent</p> <p id="policy-text" class="text-sm text-textMuted" data-astro-cid-t3nv4xef>Click any node to inspect how policy constraints are enforced.</p> <div data-astro-cid-t3nv4xef> <h3 class="metric-label mb-2" data-astro-cid-t3nv4xef>Simulation Log</h3> <ul id="flow-log" class="space-y-2 text-sm text-textMuted" data-astro-cid-t3nv4xef></ul> </div> </aside> </div> </section> <script id="flow-data" type="application/json">{JSON.stringify(workflow)}</script> <script id="flow-policies" type="application/json">{JSON.stringify(policies)}</script> <script type="module">
+    (() => {
+      const dataEl = document.getElementById('flow-data');
+      const policyEl = document.getElementById('flow-policies');
+      const svg = document.getElementById('flow-svg');
+      const startBtn = document.getElementById('flow-start');
+      const resetBtn = document.getElementById('flow-reset');
+      const policyNode = document.getElementById('policy-node');
+      const policyText = document.getElementById('policy-text');
+      const flowLog = document.getElementById('flow-log');
+
+      if (!(dataEl && policyEl && svg && startBtn && resetBtn && policyNode && policyText && flowLog)) {
+        return;
+      }
+
+      const flowData = JSON.parse(dataEl.textContent || '{"nodes":[],"edges":[]}');
+      const policies = JSON.parse(policyEl.textContent || '{}');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const svgNS = 'http://www.w3.org/2000/svg';
+
+      const positions = {
+        router: { x: 280, y: 80 },
+        'specialist-a': { x: 150, y: 225 },
+        'specialist-b': { x: 410, y: 225 },
+        'human-review': { x: 280, y: 360 },
+        execute: { x: 150, y: 510 },
+        feedback: { x: 410, y: 510 }
+      };
+
+      const nodeLayer = document.createElementNS(svgNS, 'g');
+      const edgeLayer = document.createElementNS(svgNS, 'g');
+      const dotLayer = document.createElementNS(svgNS, 'g');
+      svg.append(edgeLayer, nodeLayer, dotLayer);
+
+      const nodeElements = new Map();
+      const edgeElements = new Map();
+
+      const sleep = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+
+      function appendLog(message) {
+        const item = document.createElement('li');
+        item.className = 'rounded-md border border-borderTone/70 bg-surface-soft px-3 py-2';
+        item.textContent = message;
+        flowLog.prepend(item);
+        while (flowLog.children.length > 7) {
+          flowLog.removeChild(flowLog.lastChild);
+        }
+      }
+
+      function splitLabel(label) {
+        const words = label.split(' ');
+        if (words.length <= 2) return [label];
+        const first = words.slice(0, Math.ceil(words.length / 2)).join(' ');
+        const second = words.slice(Math.ceil(words.length / 2)).join(' ');
+        return [first, second];
+      }
+
+      function setPolicy(nodeId) {
+        const node = flowData.nodes.find((item) => item.id === nodeId);
+        if (!node) return;
+        nodeElements.forEach((group, id) => {
+          group.classList.toggle('selected', id === nodeId);
+        });
+        policyNode.textContent = node.label;
+        policyText.textContent = policies[nodeId] || 'No policy information available.';
+      }
+
+      function drawEdge(edge) {
+        const from = positions[edge.from];
+        const to = positions[edge.to];
+        if (!from || !to) return;
+
+        const group = document.createElementNS(svgNS, 'g');
+        const line = document.createElementNS(svgNS, 'line');
+        line.setAttribute('x1', String(from.x));
+        line.setAttribute('y1', String(from.y));
+        line.setAttribute('x2', String(to.x));
+        line.setAttribute('y2', String(to.y));
+        line.setAttribute('marker-end', 'url(#flow-arrow)');
+        line.classList.add('flow-edge');
+
+        group.append(line);
+
+        if (edge.label) {
+          const label = document.createElementNS(svgNS, 'text');
+          label.setAttribute('x', String((from.x + to.x) / 2));
+          label.setAttribute('y', String((from.y + to.y) / 2 - 8));
+          label.setAttribute('text-anchor', 'middle');
+          label.classList.add('flow-label');
+          label.textContent = edge.label;
+          group.append(label);
+        }
+
+        edgeLayer.append(group);
+
+        edgeElements.set(`${edge.from}->${edge.to}`, {
+          line,
+          from,
+          to
+        });
+      }
+
+      function drawNode(node) {
+        const point = positions[node.id];
+        if (!point) return;
+
+        const group = document.createElementNS(svgNS, 'g');
+        group.classList.add('flow-node');
+        group.dataset.nodeId = node.id;
+        group.setAttribute('tabindex', '0');
+        group.setAttribute('role', 'button');
+        group.setAttribute('aria-label', `Show policy for ${node.label}`);
+
+        const shapeClass = `shape shape-${node.type}`;
+
+        if (node.type === 'agent') {
+          const circle = document.createElementNS(svgNS, 'circle');
+          circle.setAttribute('cx', String(point.x));
+          circle.setAttribute('cy', String(point.y));
+          circle.setAttribute('r', '38');
+          circle.setAttribute('class', shapeClass);
+          group.append(circle);
+        } else if (node.type === 'gate') {
+          const diamond = document.createElementNS(svgNS, 'polygon');
+          diamond.setAttribute(
+            'points',
+            `${point.x},${point.y - 42} ${point.x + 42},${point.y} ${point.x},${point.y + 42} ${point.x - 42},${point.y}`
+          );
+          diamond.setAttribute('class', shapeClass);
+          group.append(diamond);
+        } else {
+          const rect = document.createElementNS(svgNS, 'rect');
+          rect.setAttribute('x', String(point.x - 52));
+          rect.setAttribute('y', String(point.y - 30));
+          rect.setAttribute('width', '104');
+          rect.setAttribute('height', '60');
+          rect.setAttribute('rx', '14');
+          rect.setAttribute('class', shapeClass);
+          group.append(rect);
+        }
+
+        const lines = splitLabel(node.label);
+        lines.forEach((line, index) => {
+          const label = document.createElementNS(svgNS, 'text');
+          label.setAttribute('x', String(point.x));
+          label.setAttribute('y', String(point.y + (index - (lines.length - 1) / 2) * 16 + 5));
+          label.setAttribute('text-anchor', 'middle');
+          label.setAttribute('class', 'flow-node-label');
+          label.textContent = line;
+          group.append(label);
+        });
+
+        const onSelect = () => setPolicy(node.id);
+        group.addEventListener('click', onSelect);
+        group.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            onSelect();
+          }
+        });
+
+        nodeLayer.append(group);
+        nodeElements.set(node.id, group);
+      }
+
+      function clearVisualState() {
+        nodeElements.forEach((group) => group.classList.remove('active'));
+        edgeElements.forEach((edge) => edge.line.classList.remove('active'));
+        dotLayer.replaceChildren();
+      }
+
+      async function activateNode(nodeId, message) {
+        const node = nodeElements.get(nodeId);
+        if (!node) return;
+        node.classList.add('active');
+        setPolicy(nodeId);
+        if (message) appendLog(message);
+        await sleep(prefersReducedMotion ? 240 : 420);
+      }
+
+      async function animateEdge(from, to, message) {
+        const edge = edgeElements.get(`${from}->${to}`);
+        if (!edge) return;
+
+        edge.line.classList.add('active');
+        if (message) appendLog(message);
+
+        if (prefersReducedMotion) {
+          await sleep(280);
+          return;
+        }
+
+        const dot = document.createElementNS(svgNS, 'circle');
+        dot.setAttribute('r', '4.6');
+        dot.setAttribute('class', 'flow-dot');
+        dotLayer.append(dot);
+
+        await new Promise((resolve) => {
+          const start = performance.now();
+          const duration = 760;
+
+          const tick = (time) => {
+            const progress = Math.min((time - start) / duration, 1);
+            const x = edge.from.x + (edge.to.x - edge.from.x) * progress;
+            const y = edge.from.y + (edge.to.y - edge.from.y) * progress;
+            dot.setAttribute('cx', String(x));
+            dot.setAttribute('cy', String(y));
+
+            if (progress < 1) {
+              window.requestAnimationFrame(tick);
+            } else {
+              dot.remove();
+              resolve();
+            }
+          };
+
+          window.requestAnimationFrame(tick);
+        });
+      }
+
+      let running = false;
+
+      async function runSimulation() {
+        if (running) return;
+        running = true;
+        startBtn.setAttribute('aria-busy', 'true');
+        startBtn.textContent = 'Running...';
+        clearVisualState();
+        appendLog('Simulation started.');
+
+        await activateNode('router', 'Router receives request envelope.');
+        await animateEdge('router', 'specialist-a', 'Router dispatches to Specialist A.');
+        await activateNode('specialist-a', 'Specialist A completes first-pass analysis.');
+        await animateEdge('router', 'specialist-b', 'Router dispatches to Specialist B.');
+        await activateNode('specialist-b', 'Specialist B returns alternate recommendation.');
+        await animateEdge('specialist-a', 'human-review', 'Specialist A evidence sent to review gate.');
+        await animateEdge('specialist-b', 'human-review', 'Specialist B evidence sent to review gate.');
+        await activateNode('human-review', 'Human reviewer validates confidence and policy fit.');
+
+        const approved = Math.random() >= 0.35;
+        if (approved) {
+          await animateEdge('human-review', 'execute', 'Request approved for execution.');
+          await activateNode('execute', 'Execution agent commits controlled action.');
+        } else {
+          await animateEdge('human-review', 'feedback', 'Request rejected and sent to feedback loop.');
+          await activateNode('feedback', 'Feedback loop records correction tasks and retry metadata.');
+        }
+
+        appendLog('Simulation complete.');
+        running = false;
+        startBtn.removeAttribute('aria-busy');
+        startBtn.textContent = 'Start Flow';
+      }
+
+      function resetSimulation() {
+        running = false;
+        clearVisualState();
+        flowLog.replaceChildren();
+        setPolicy('router');
+        appendLog('State reset. Ready for a new run.');
+        startBtn.removeAttribute('aria-busy');
+        startBtn.textContent = 'Start Flow';
+      }
+
+      flowData.edges.forEach(drawEdge);
+      flowData.nodes.forEach(drawNode);
+      setPolicy('router');
+      appendLog('Visualizer initialized.');
+
+      startBtn.addEventListener('click', () => {
+        runSimulation();
+      });
+
+      resetBtn.addEventListener('click', resetSimulation);
+    })();
+  </script>   </main> <footer class="border-t border-borderTone/70 bg-base/75"> <div class="container-shell flex flex-col gap-3 py-6 text-sm text-textMuted sm:flex-row sm:items-center sm:justify-between"> <p>Security Engineering. Agentic AI. Production-ready systems.</p> <p> <a class="transition hover:text-accent" href="mailto:adam@adamsneed.com">adam@adamsneed.com</a> </p> </div> </footer> </body></html>

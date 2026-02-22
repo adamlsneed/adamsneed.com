@@ -1,0 +1,127 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogType?: 'website' | 'article';
+}
+
+const {
+  title,
+  description = 'Security engineering leader building production-grade automation, PAM architecture, and agentic AI systems.',
+  ogType = 'website'
+} = Astro.props;
+
+const siteRoot = Astro.site ?? new URL('https://adamsneed.com');
+const canonicalUrl = new URL(Astro.url.pathname, siteRoot).toString();
+const pageTitle = title.includes('Adam Sneed') ? title : `${title} | Adam Sneed`;
+const ogImage = new URL('/og-image.svg', siteRoot).toString();
+const path = Astro.url.pathname;
+
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/work', label: 'Work' },
+  { href: '/resume', label: 'Resume' },
+  { href: '/lab', label: 'Lab' },
+  { href: '/game', label: 'Game' },
+  { href: '/contact', label: 'Contact' }
+];
+
+const isActive = (href: string) => {
+  if (href === '/') return path === '/';
+  return path === href || path.startsWith(`${href}/`);
+};
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Adam Lacroix Sneed',
+  url: 'https://adamsneed.com',
+  jobTitle: 'Security-focused Engineering Leader',
+  image: new URL('/og-image.svg', siteRoot).toString(),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Austin',
+    addressRegion: 'TX',
+    addressCountry: 'US'
+  },
+  sameAs: ['https://www.linkedin.com/in/adam-sneed-8113375/', 'https://github.com/adamlsneed'],
+  email: 'adam@adamsneed.com',
+  email: 'adam@adamsneed.com'
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#090d14" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Adam Sneed" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)}></script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-white">
+      Skip to content
+    </a>
+    <header class="sticky top-0 z-30 border-b border-borderTone/70 bg-base/80 backdrop-blur-lg">
+      <div class="container-shell flex flex-wrap items-center justify-between gap-4 py-4">
+        <a href="/" class="text-lg font-semibold tracking-wide text-textMain">Adam<span class="text-accent">Sneed</span></a>
+        <nav aria-label="Primary">
+          <ul class="flex flex-wrap items-center gap-2 sm:gap-3">
+            {
+              nav.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={[
+                      'rounded-md px-3 py-2 text-sm font-medium transition',
+                      isActive(item.href)
+                        ? 'bg-accentSoft text-accent'
+                        : 'text-textMuted hover:bg-surface-soft hover:text-textMain'
+                    ]}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="container-shell flex-1 py-10 md:py-14">
+      <slot />
+    </main>
+
+    <footer class="border-t border-borderTone/70 bg-base/75">
+      <div class="container-shell flex flex-col gap-3 py-6 text-sm text-textMuted sm:flex-row sm:items-center sm:justify-between">
+        <p>Security Engineering. Agentic AI. Production-ready systems.</p>
+        <p>
+          <a class="transition hover:text-accent" href="mailto:adam@adamsneed.com">adam@adamsneed.com</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

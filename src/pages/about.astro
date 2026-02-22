@@ -1,0 +1,53 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import headshot from '../assets/headshot.jpg';
+---
+
+<MainLayout
+  title="About"
+  description="About Adam Sneed: security-focused engineering leader with a two-decade track record in operations, privileged access, and agentic AI systems."
+>
+  <section class="grid gap-8 lg:grid-cols-[320px,1fr]">
+    <div class="card h-fit">
+      <img
+        src={headshot.src}
+        width={headshot.width}
+        height={headshot.height}
+        alt="Illustrated headshot of Adam Sneed with a bookshelf background"
+        class="w-full rounded-xl border border-borderTone object-cover"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="space-y-8">
+      <div class="space-y-4">
+        <p class="eyebrow">About</p>
+        <h1 class="section-title">Built on systems discipline</h1>
+        <p class="lead">
+          Two decades in enterprise IT — from RedHat and AIX administration through datacenter operations, technical leadership, and deep into identity &amp; access management and security engineering.
+        </p>
+        <p class="text-textMuted">
+          At Netwrix, I&apos;m the subject matter expert on our PAM product — a Senior Solutions Architect in Professional Services focused on identity and access management. I design and deploy enterprise PAM solutions, build automation frameworks, and translate complex security requirements into production-grade implementations. My current fascination is agentic engineering and prompt engineering — I build and operate production multi-agent AI systems with the same rigor I bring to privileged access: least privilege, human-in-the-loop oversight, complete audit trails, and fail-safe defaults.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 class="mb-4 text-xl font-semibold">Operating Principles</h2>
+        <ul class="space-y-3 text-textMuted">
+          <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Build for production, not demos.</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Security is architecture, not a feature.</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Agents need guardrails.</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Write it down.</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2 class="mb-3 text-xl font-semibold">Policy Lens</h2>
+        <p class="text-textMuted">
+          My Juris Doctor from LSU Law informs how I design policies, evaluate regulatory risk, and write statement-of-work
+          scope with contract-level precision.
+        </p>
+      </div>
+    </div>
+  </section>
+</MainLayout>
