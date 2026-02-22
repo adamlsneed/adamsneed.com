@@ -1,410 +1,358 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import scenarios from '../data/rootAccessScenarios.json';
 ---
 
 <MainLayout
-  title="Root Access"
-  description="Root Access is a security decision game where each triage call shifts security posture, business satisfaction, and your sanity."
+  title="Tetris"
+  description="A classic Tetris game built with vanilla JavaScript and Canvas."
 >
   <section class="space-y-8">
     <div class="max-w-4xl space-y-4">
       <p class="eyebrow">Game</p>
-      <h1 class="section-title">Root Access</h1>
+      <h1 class="section-title">Tetris</h1>
       <p class="lead">
-        You&apos;re the newly hired security engineer. Every access request, incident signal, and vendor pressure point requires
-        a call: <span class="text-textMain">Approve</span>, <span class="text-textMain">Deny</span>,
-        <span class="text-textMain">Investigate</span>, or <span class="text-textMain">Escalate</span>.
+        Classic block-stacking. Arrow keys to move and rotate, down to soft drop, space to hard drop.
       </p>
-      <p class="text-textMuted">Complete 5 rounds and keep all three metrics alive: Security Posture, Business Satisfaction, and Your Sanity.</p>
     </div>
 
-    <div class="grid gap-6 lg:grid-cols-[2fr,1fr]">
-      <div class="card space-y-5">
-        <div class="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <p id="round-indicator" class="text-sm font-semibold uppercase tracking-[0.16em] text-accent">Round 1 of 5</p>
-            <p id="card-indicator" class="text-sm text-textMuted">Card 1 of 5</p>
-          </div>
-          <p id="theme-indicator" class="rounded-full border border-borderTone px-3 py-1 text-xs text-textMuted"></p>
-        </div>
-
-        <article id="scenario-card" class="rounded-xl border border-borderTone/80 bg-surface-soft p-5">
-          <p id="severity-pill" class="mb-3 inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em]"></p>
-          <h2 id="card-title" class="mb-3 text-2xl font-semibold text-textMain"></h2>
-          <p id="card-summary" class="mb-3 text-textMain"></p>
-          <p id="card-details" class="text-sm text-textMuted"></p>
-        </article>
-
-        <div id="action-grid" class="grid gap-3 sm:grid-cols-2">
-          <button class="decision-btn" data-action="Approve" type="button">Approve</button>
-          <button class="decision-btn" data-action="Deny" type="button">Deny</button>
-          <button class="decision-btn" data-action="Investigate" type="button">Investigate</button>
-          <button class="decision-btn" data-action="Escalate" type="button">Escalate</button>
-        </div>
-
-        <div id="outcome-panel" class="hidden rounded-xl border border-accent/50 bg-accentSoft px-4 py-4">
-          <p id="outcome-text" class="text-sm text-textMain"></p>
-          <button id="next-card" class="btn-primary mt-4" type="button">Next Card</button>
-        </div>
-
-        <div id="end-panel" class="hidden rounded-xl border border-borderTone bg-surface-soft px-4 py-4">
-          <h3 class="mb-2 text-xl font-semibold">Campaign Complete</h3>
-          <p id="end-summary" class="text-textMuted"></p>
-          <button id="restart-game" class="btn-secondary mt-4" type="button">Restart Game</button>
-        </div>
-
-        <p id="status-line" class="text-sm text-textMuted"></p>
+    <div class="grid gap-6 lg:grid-cols-[1fr,280px]">
+      <div class="card flex items-center justify-center p-4">
+        <canvas id="tetris-canvas" width="300" height="600" class="rounded-lg" style="background: #0a0f1a; border: 2px solid #2b3850;"></canvas>
       </div>
 
-      <aside class="card space-y-4">
-        <h2 class="text-xl font-semibold">Scoreboard</h2>
-
+      <aside class="card space-y-6">
         <div>
-          <p class="metric-label">Security Posture</p>
-          <div class="meter-wrap"><span id="security-bar" class="meter-fill"></span></div>
-          <p id="security-value" class="text-sm text-textMuted">0</p>
+          <h2 class="text-xl font-semibold text-textMain">Next</h2>
+          <canvas id="next-canvas" width="120" height="120" class="mt-2 rounded-lg" style="background: #0a0f1a; border: 1px solid #2b3850;"></canvas>
         </div>
 
         <div>
-          <p class="metric-label">Business Satisfaction</p>
-          <div class="meter-wrap"><span id="business-bar" class="meter-fill"></span></div>
-          <p id="business-value" class="text-sm text-textMuted">0</p>
+          <p class="metric-label">Score</p>
+          <p id="score-display" class="text-3xl font-semibold text-textMain">0</p>
         </div>
 
         <div>
-          <p class="metric-label">Your Sanity</p>
-          <div class="meter-wrap"><span id="sanity-bar" class="meter-fill"></span></div>
-          <p id="sanity-value" class="text-sm text-textMuted">0</p>
+          <p class="metric-label">Lines</p>
+          <p id="lines-display" class="text-xl font-semibold text-textMain">0</p>
         </div>
 
         <div>
-          <h3 class="metric-label mb-2">Recent Decisions</h3>
-          <ul id="history-list" class="space-y-2 text-sm text-textMuted"></ul>
+          <p class="metric-label">Level</p>
+          <p id="level-display" class="text-xl font-semibold text-textMain">1</p>
+        </div>
+
+        <div class="flex gap-3">
+          <button id="start-btn" class="btn-primary" type="button">Start</button>
+          <button id="pause-btn" class="btn-secondary" type="button">Pause</button>
+        </div>
+
+        <div class="text-sm text-textMuted space-y-1">
+          <p><kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">←</kbd> <kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">→</kbd> Move</p>
+          <p><kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">↑</kbd> Rotate</p>
+          <p><kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">↓</kbd> Soft drop</p>
+          <p><kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">Space</kbd> Hard drop</p>
         </div>
       </aside>
     </div>
   </section>
 
-  <script id="scenario-data" type="application/json">{JSON.stringify(scenarios)}</script>
-
   <script type="module">
-    (() => {
-      const dataElement = document.getElementById('scenario-data');
-      if (!dataElement) return;
+    const canvas = document.getElementById('tetris-canvas');
+    const ctx = canvas.getContext('2d');
+    const nextCanvas = document.getElementById('next-canvas');
+    const nextCtx = nextCanvas.getContext('2d');
+    const scoreDisplay = document.getElementById('score-display');
+    const linesDisplay = document.getElementById('lines-display');
+    const levelDisplay = document.getElementById('level-display');
+    const startBtn = document.getElementById('start-btn');
+    const pauseBtn = document.getElementById('pause-btn');
 
-      const scenarioData = JSON.parse(dataElement.textContent || '{"rounds": []}');
-      const roundIndicator = document.getElementById('round-indicator');
-      const cardIndicator = document.getElementById('card-indicator');
-      const themeIndicator = document.getElementById('theme-indicator');
-      const severityPill = document.getElementById('severity-pill');
-      const cardTitle = document.getElementById('card-title');
-      const cardSummary = document.getElementById('card-summary');
-      const cardDetails = document.getElementById('card-details');
-      const actionGrid = document.getElementById('action-grid');
-      const outcomePanel = document.getElementById('outcome-panel');
-      const outcomeText = document.getElementById('outcome-text');
-      const nextCardButton = document.getElementById('next-card');
-      const endPanel = document.getElementById('end-panel');
-      const endSummary = document.getElementById('end-summary');
-      const restartButton = document.getElementById('restart-game');
-      const statusLine = document.getElementById('status-line');
-      const historyList = document.getElementById('history-list');
+    const COLS = 10;
+    const ROWS = 20;
+    const BLOCK = 30;
+    const NEXT_BLOCK = 24;
 
-      const bars = {
-        security: document.getElementById('security-bar'),
-        business: document.getElementById('business-bar'),
-        sanity: document.getElementById('sanity-bar')
+    const COLORS = {
+      I: '#14b8a6',
+      O: '#f59e0b',
+      T: '#8b5cf6',
+      S: '#10b981',
+      Z: '#ef4444',
+      J: '#3b82f6',
+      L: '#f97316'
+    };
+
+    const SHAPES = {
+      I: [[1,1,1,1]],
+      O: [[1,1],[1,1]],
+      T: [[0,1,0],[1,1,1]],
+      S: [[0,1,1],[1,1,0]],
+      Z: [[1,1,0],[0,1,1]],
+      J: [[1,0,0],[1,1,1]],
+      L: [[0,0,1],[1,1,1]]
+    };
+
+    const PIECE_NAMES = Object.keys(SHAPES);
+
+    let board = [];
+    let currentPiece = null;
+    let nextPiece = null;
+    let score = 0;
+    let lines = 0;
+    let level = 1;
+    let gameOver = false;
+    let paused = false;
+    let started = false;
+    let dropInterval = 1000;
+    let lastDrop = 0;
+    let animFrame = null;
+
+    function createBoard() {
+      board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+    }
+
+    function randomPiece() {
+      const name = PIECE_NAMES[Math.floor(Math.random() * PIECE_NAMES.length)];
+      const shape = SHAPES[name].map(row => [...row]);
+      return {
+        name,
+        shape,
+        color: COLORS[name],
+        x: Math.floor((COLS - shape[0].length) / 2),
+        y: 0
       };
+    }
 
-      const values = {
-        security: document.getElementById('security-value'),
-        business: document.getElementById('business-value'),
-        sanity: document.getElementById('sanity-value')
-      };
+    function rotate(shape) {
+      const rows = shape.length;
+      const cols = shape[0].length;
+      const rotated = Array.from({ length: cols }, () => Array(rows).fill(0));
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          rotated[c][rows - 1 - r] = shape[r][c];
+        }
+      }
+      return rotated;
+    }
 
-      if (
-        !roundIndicator ||
-        !cardIndicator ||
-        !themeIndicator ||
-        !severityPill ||
-        !cardTitle ||
-        !cardSummary ||
-        !cardDetails ||
-        !actionGrid ||
-        !outcomePanel ||
-        !outcomeText ||
-        !nextCardButton ||
-        !endPanel ||
-        !endSummary ||
-        !restartButton ||
-        !statusLine ||
-        !historyList ||
-        !bars.security ||
-        !bars.business ||
-        !bars.sanity ||
-        !values.security ||
-        !values.business ||
-        !values.sanity
-      ) {
+    function collides(piece, dx = 0, dy = 0, shape = null) {
+      const s = shape || piece.shape;
+      for (let r = 0; r < s.length; r++) {
+        for (let c = 0; c < s[r].length; c++) {
+          if (!s[r][c]) continue;
+          const nx = piece.x + c + dx;
+          const ny = piece.y + r + dy;
+          if (nx < 0 || nx >= COLS || ny >= ROWS) return true;
+          if (ny >= 0 && board[ny][nx]) return true;
+        }
+      }
+      return false;
+    }
+
+    function lock() {
+      for (let r = 0; r < currentPiece.shape.length; r++) {
+        for (let c = 0; c < currentPiece.shape[r].length; c++) {
+          if (!currentPiece.shape[r][c]) continue;
+          const y = currentPiece.y + r;
+          const x = currentPiece.x + c;
+          if (y < 0) { gameOver = true; return; }
+          board[y][x] = currentPiece.color;
+        }
+      }
+      clearLines();
+      currentPiece = nextPiece;
+      nextPiece = randomPiece();
+      if (collides(currentPiece)) gameOver = true;
+    }
+
+    function clearLines() {
+      let cleared = 0;
+      for (let r = ROWS - 1; r >= 0; r--) {
+        if (board[r].every(cell => cell !== 0)) {
+          board.splice(r, 1);
+          board.unshift(Array(COLS).fill(0));
+          cleared++;
+          r++;
+        }
+      }
+      if (cleared > 0) {
+        const points = [0, 100, 300, 500, 800];
+        score += (points[cleared] || 800) * level;
+        lines += cleared;
+        level = Math.floor(lines / 10) + 1;
+        dropInterval = Math.max(100, 1000 - (level - 1) * 80);
+      }
+    }
+
+    function drawBlock(ctx, x, y, color, size) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * size + 1, y * size + 1, size - 2, size - 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      ctx.fillRect(x * size + 1, y * size + 1, size - 2, 3);
+      ctx.fillRect(x * size + 1, y * size + 1, 3, size - 2);
+    }
+
+    function drawBoard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Grid
+      ctx.strokeStyle = '#1a2236';
+      ctx.lineWidth = 0.5;
+      for (let r = 0; r <= ROWS; r++) {
+        ctx.beginPath(); ctx.moveTo(0, r * BLOCK); ctx.lineTo(COLS * BLOCK, r * BLOCK); ctx.stroke();
+      }
+      for (let c = 0; c <= COLS; c++) {
+        ctx.beginPath(); ctx.moveTo(c * BLOCK, 0); ctx.lineTo(c * BLOCK, ROWS * BLOCK); ctx.stroke();
+      }
+
+      // Locked pieces
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          if (board[r][c]) drawBlock(ctx, c, r, board[r][c], BLOCK);
+        }
+      }
+
+      // Ghost piece
+      if (currentPiece && !gameOver) {
+        let ghostY = 0;
+        while (!collides(currentPiece, 0, ghostY + 1)) ghostY++;
+        ctx.globalAlpha = 0.2;
+        for (let r = 0; r < currentPiece.shape.length; r++) {
+          for (let c = 0; c < currentPiece.shape[r].length; c++) {
+            if (currentPiece.shape[r][c]) {
+              drawBlock(ctx, currentPiece.x + c, currentPiece.y + r + ghostY, currentPiece.color, BLOCK);
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+
+        // Current piece
+        for (let r = 0; r < currentPiece.shape.length; r++) {
+          for (let c = 0; c < currentPiece.shape[r].length; c++) {
+            if (currentPiece.shape[r][c]) {
+              drawBlock(ctx, currentPiece.x + c, currentPiece.y + r, currentPiece.color, BLOCK);
+            }
+          }
+        }
+      }
+
+      // Game over overlay
+      if (gameOver) {
+        ctx.fillStyle = 'rgba(9,13,20,0.85)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#e7edf8';
+        ctx.font = 'bold 28px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 10);
+        ctx.font = '16px Inter, sans-serif';
+        ctx.fillStyle = '#9aa8bf';
+        ctx.fillText(`Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
+        ctx.fillText('Press Start to play again', canvas.width / 2, canvas.height / 2 + 45);
+      }
+    }
+
+    function drawNext() {
+      nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
+      if (!nextPiece) return;
+      const s = nextPiece.shape;
+      const offsetX = Math.floor((5 - s[0].length) / 2);
+      const offsetY = Math.floor((5 - s.length) / 2);
+      for (let r = 0; r < s.length; r++) {
+        for (let c = 0; c < s[r].length; c++) {
+          if (s[r][c]) drawBlock(nextCtx, offsetX + c, offsetY + r, nextPiece.color, NEXT_BLOCK);
+        }
+      }
+    }
+
+    function updateUI() {
+      scoreDisplay.textContent = score.toLocaleString();
+      linesDisplay.textContent = lines;
+      levelDisplay.textContent = level;
+    }
+
+    function gameLoop(time) {
+      if (gameOver || paused) {
+        drawBoard();
+        drawNext();
+        updateUI();
+        if (!gameOver) animFrame = requestAnimationFrame(gameLoop);
         return;
       }
 
-      const maxHistory = 8;
-      const allRounds = scenarioData.rounds || [];
-
-      const state = {
-        roundIndex: 0,
-        cardIndex: 0,
-        scores: {
-          security: 72,
-          business: 70,
-          sanity: 68
-        },
-        awaitingContinue: false,
-        pendingOutcome: '',
-        history: [],
-        banner: 'Round 1 begins. Keep controls tight and teams moving.'
-      };
-
-      const clamp = (value) => Math.max(0, Math.min(100, value));
-
-      const currentRound = () => allRounds[state.roundIndex];
-      const currentCard = () => {
-        const round = currentRound();
-        return round ? round.cards[state.cardIndex] : null;
-      };
-
-      const gameComplete = () => state.roundIndex >= allRounds.length;
-
-      function toneClass(value) {
-        if (value >= 70) return 'tone-strong';
-        if (value >= 40) return 'tone-caution';
-        return 'tone-risk';
-      }
-
-      function updateMeters() {
-        ['security', 'business', 'sanity'].forEach((metric) => {
-          const score = state.scores[metric];
-          const bar = bars[metric];
-          const valueLabel = values[metric];
-
-          bar.style.width = `${score}%`;
-          bar.className = `meter-fill ${toneClass(score)}`;
-          valueLabel.textContent = `${score} / 100`;
-        });
-      }
-
-      function renderHistory() {
-        historyList.replaceChildren();
-        state.history.slice(0, maxHistory).forEach((item) => {
-          const li = document.createElement('li');
-          li.className = 'rounded-md border border-borderTone/70 bg-surface-soft px-3 py-2';
-          li.textContent = `R${item.round} - ${item.action}: ${item.title}`;
-          historyList.append(li);
-        });
-      }
-
-      function severityStyles(severity) {
-        if (severity === 'high') return ['border-red-400/45', 'text-red-300', 'bg-red-500/10'];
-        if (severity === 'medium') return ['border-amber-300/45', 'text-amber-200', 'bg-amber-500/10'];
-        return ['border-emerald-300/45', 'text-emerald-200', 'bg-emerald-500/10'];
-      }
-
-      function describeOutcome() {
-        const weighted =
-          state.scores.security * 0.5 +
-          state.scores.business * 0.3 +
-          state.scores.sanity * 0.2;
-
-        if (weighted >= 85) {
-          return 'You built a resilient security posture without losing operational credibility. Leadership trusts your judgment.';
-        }
-        if (weighted >= 70) {
-          return 'You held the line in most high-risk moments and kept the business moving with manageable friction.';
-        }
-        if (weighted >= 55) {
-          return 'Mixed campaign. Some calls were strong, but control debt and pressure tradeoffs accumulated.';
-        }
-        return 'Controls eroded under pressure. Re-center on least privilege, explicit approvals, and evidence-driven triage.';
-      }
-
-      function renderCard() {
-        updateMeters();
-        renderHistory();
-
-        if (gameComplete()) {
-          roundIndicator.textContent = 'Final Result';
-          cardIndicator.textContent = 'All rounds complete';
-          themeIndicator.textContent = 'Postmortem';
-          cardTitle.textContent = 'Root Access Campaign Closed';
-          cardSummary.textContent = 'Your triage decisions are in. Review the final assessment and reset if you want another run.';
-          cardDetails.textContent = 'Tip: high scores come from structured investigation and controlled escalation, not reflexes.';
-          severityPill.textContent = 'Summary';
-          severityPill.className = 'mb-3 inline-flex rounded-full border border-borderTone px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-textMuted';
-
-          actionGrid.classList.add('hidden');
-          outcomePanel.classList.add('hidden');
-          endPanel.classList.remove('hidden');
-          endSummary.textContent = describeOutcome();
-          statusLine.textContent = 'Campaign complete.';
-          return;
-        }
-
-        const round = currentRound();
-        const card = currentCard();
-        if (!round || !card) return;
-
-        endPanel.classList.add('hidden');
-        actionGrid.classList.remove('hidden');
-
-        roundIndicator.textContent = `Round ${state.roundIndex + 1} of ${allRounds.length}`;
-        cardIndicator.textContent = `Card ${state.cardIndex + 1} of ${round.cards.length}`;
-        themeIndicator.textContent = round.theme;
-
-        cardTitle.textContent = card.title;
-        cardSummary.textContent = card.summary;
-        cardDetails.textContent = card.details;
-
-        const [borderTone, textTone, bgTone] = severityStyles(card.severity);
-        severityPill.textContent = `${card.severity} severity`;
-        severityPill.className = `mb-3 inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] ${borderTone} ${textTone} ${bgTone}`;
-
-        const decisionButtons = actionGrid.querySelectorAll('button[data-action]');
-        decisionButtons.forEach((button) => {
-          button.disabled = state.awaitingContinue;
-        });
-
-        if (state.awaitingContinue) {
-          outcomePanel.classList.remove('hidden');
-          outcomeText.textContent = state.pendingOutcome;
-          statusLine.textContent = 'Decision recorded. Continue to the next card.';
+      if (time - lastDrop > dropInterval) {
+        if (!collides(currentPiece, 0, 1)) {
+          currentPiece.y++;
         } else {
-          outcomePanel.classList.add('hidden');
-          statusLine.textContent = state.banner;
+          lock();
         }
+        lastDrop = time;
       }
 
-      function handleDecision(action) {
-        if (state.awaitingContinue || gameComplete()) return;
+      drawBoard();
+      drawNext();
+      updateUI();
+      animFrame = requestAnimationFrame(gameLoop);
+    }
 
-        const card = currentCard();
-        if (!card) return;
-        const effect = card.effects[action];
-        if (!effect) return;
+    function startGame() {
+      createBoard();
+      score = 0; lines = 0; level = 1;
+      dropInterval = 1000;
+      gameOver = false; paused = false; started = true;
+      currentPiece = randomPiece();
+      nextPiece = randomPiece();
+      lastDrop = performance.now();
+      if (animFrame) cancelAnimationFrame(animFrame);
+      animFrame = requestAnimationFrame(gameLoop);
+      startBtn.textContent = 'Restart';
+    }
 
-        state.scores.security = clamp(state.scores.security + effect.security);
-        state.scores.business = clamp(state.scores.business + effect.business);
-        state.scores.sanity = clamp(state.scores.sanity + effect.sanity);
-
-        state.history.unshift({
-          round: state.roundIndex + 1,
-          title: card.title,
-          action
-        });
-
-        state.pendingOutcome = `${action}: ${effect.result}`;
-        state.awaitingContinue = true;
-        state.banner = `You chose ${action}.`;
-        renderCard();
+    startBtn.addEventListener('click', startGame);
+    pauseBtn.addEventListener('click', () => {
+      if (!started || gameOver) return;
+      paused = !paused;
+      pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+      if (!paused) {
+        lastDrop = performance.now();
+        animFrame = requestAnimationFrame(gameLoop);
       }
+    });
 
-      function advanceCard() {
-        if (!state.awaitingContinue) return;
-
-        state.awaitingContinue = false;
-        state.pendingOutcome = '';
-        state.cardIndex += 1;
-
-        const round = currentRound();
-        if (round && state.cardIndex >= round.cards.length) {
-          state.roundIndex += 1;
-          state.cardIndex = 0;
-          if (!gameComplete()) {
-            state.banner = `Round ${state.roundIndex + 1} begins. ${currentRound().theme}.`;
-          }
-        }
-
-        renderCard();
+    document.addEventListener('keydown', (e) => {
+      if (!started || gameOver || paused) return;
+      switch (e.key) {
+        case 'ArrowLeft':
+          if (!collides(currentPiece, -1, 0)) currentPiece.x--;
+          e.preventDefault();
+          break;
+        case 'ArrowRight':
+          if (!collides(currentPiece, 1, 0)) currentPiece.x++;
+          e.preventDefault();
+          break;
+        case 'ArrowDown':
+          if (!collides(currentPiece, 0, 1)) { currentPiece.y++; score += 1; }
+          e.preventDefault();
+          break;
+        case 'ArrowUp':
+          const rotated = rotate(currentPiece.shape);
+          if (!collides(currentPiece, 0, 0, rotated)) currentPiece.shape = rotated;
+          e.preventDefault();
+          break;
+        case ' ':
+          while (!collides(currentPiece, 0, 1)) { currentPiece.y++; score += 2; }
+          lock();
+          lastDrop = performance.now();
+          e.preventDefault();
+          break;
       }
+    });
 
-      function restartGame() {
-        state.roundIndex = 0;
-        state.cardIndex = 0;
-        state.scores = { security: 72, business: 70, sanity: 68 };
-        state.awaitingContinue = false;
-        state.pendingOutcome = '';
-        state.history = [];
-        state.banner = 'Round 1 begins. Keep controls tight and teams moving.';
-        renderCard();
-      }
-
-      actionGrid.querySelectorAll('button[data-action]').forEach((button) => {
-        button.addEventListener('click', () => {
-          handleDecision(button.getAttribute('data-action'));
-        });
-      });
-
-      nextCardButton.addEventListener('click', advanceCard);
-      restartButton.addEventListener('click', restartGame);
-
-      renderCard();
-    })();
+    // Draw empty state
+    createBoard();
+    drawBoard();
+    ctx.fillStyle = '#9aa8bf';
+    ctx.font = '18px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Press Start to play', canvas.width / 2, canvas.height / 2);
   </script>
-
-  <style>
-    .decision-btn {
-      border: 1px solid #2b3850;
-      border-radius: 0.75rem;
-      background: #101726;
-      color: #e7edf8;
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 0.85rem 1rem;
-      transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
-    }
-
-    .decision-btn:hover {
-      transform: translateY(-2px);
-      border-color: #14b8a6;
-      background: rgba(233, 69, 96, 0.12);
-    }
-
-    .decision-btn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .meter-wrap {
-      margin-top: 0.35rem;
-      height: 0.6rem;
-      width: 100%;
-      border-radius: 999px;
-      border: 1px solid #2b3850;
-      background: #111b2c;
-      overflow: hidden;
-    }
-
-    .meter-fill {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      width: 0;
-      transition: width 0.3s ease;
-      background: linear-gradient(90deg, #0d9488 0%, #14b8a6 100%);
-    }
-
-    .meter-fill.tone-strong {
-      background: linear-gradient(90deg, #2dd4bf 0%, #34d399 100%);
-    }
-
-    .meter-fill.tone-caution {
-      background: linear-gradient(90deg, #f59e0b 0%, #f97316 100%);
-    }
-
-    .meter-fill.tone-risk {
-      background: linear-gradient(90deg, #fb7185 0%, #e11d48 100%);
-    }
-  </style>
 </MainLayout>
