@@ -33,6 +33,18 @@ const isActive = (href: string) => {
   return path === href || path.startsWith(`${href}/`);
 };
 
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Adam Sneed',
+  url: siteRoot.toString(),
+  inLanguage: 'en',
+  publisher: {
+    '@type': 'Person',
+    name: 'Adam Lacroix Sneed'
+  }
+};
+
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -77,7 +89,7 @@ const personJsonLd = {
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content="Adam Sneed — Security Engineering & Agentic Systems" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify([websiteJsonLd, personJsonLd])}></script>
 
     <!-- Cloudflare Web Analytics -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "aacd26d2d0f44131a55f4f97ddad5110"}'></script>
