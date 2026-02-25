@@ -61,6 +61,24 @@ const personJsonLd = {
   sameAs: ['https://www.linkedin.com/in/adam-sneed-8113375/', 'https://github.com/adamlsneed'],
   email: 'adam@adamsneed.com'
 };
+
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ogType === 'article' ? 'Article' : 'WebPage',
+  name: pageTitle,
+  url: canonicalUrl,
+  isPartOf: {
+    '@type': 'WebSite',
+    url: siteRoot.toString(),
+    name: 'Adam Sneed'
+  },
+  author: {
+    '@type': 'Person',
+    name: personJsonLd.name,
+    url: personJsonLd.url
+  },
+  description
+};
 ---
 
 <!doctype html>
@@ -89,7 +107,7 @@ const personJsonLd = {
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content="Adam Sneed — Security Engineering & Agentic Systems" />
 
-    <script type="application/ld+json" set:html={JSON.stringify([websiteJsonLd, personJsonLd])}></script>
+    <script type="application/ld+json" set:html={JSON.stringify([websiteJsonLd, personJsonLd, pageJsonLd])}></script>
 
     <!-- Cloudflare Web Analytics -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "aacd26d2d0f44131a55f4f97ddad5110"}'></script>
