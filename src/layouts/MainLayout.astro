@@ -47,7 +47,6 @@ const personJsonLd = {
     addressCountry: 'US'
   },
   sameAs: ['https://www.linkedin.com/in/adam-sneed-8113375/', 'https://github.com/adamlsneed'],
-  email: 'adam@adamsneed.com',
   email: 'adam@adamsneed.com'
 };
 ---
@@ -69,12 +68,14 @@ const personJsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Adam Sneed — Security Engineering & Agentic Systems" />
     <meta property="og:site_name" content="Adam Sneed" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Adam Sneed — Security Engineering & Agentic Systems" />
 
     <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)}></script>
 
