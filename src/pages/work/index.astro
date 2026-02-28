@@ -27,7 +27,7 @@ const caseStudies = [
   title="Work"
   description="Selected case studies: enterprise Privileged Access Management (PAM), production agentic systems engineering, and operations leadership at scale."
 >
-  <section class="space-y-8">
+  <section class="space-y-12">
     <div class="max-w-4xl space-y-4">
       <p class="eyebrow">Work</p>
       <h1 class="section-title">Case Studies</h1>
@@ -37,12 +37,12 @@ const caseStudies = [
       </p>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-3">
+    <div class="grid gap-6 lg:grid-cols-[2fr_1fr_1fr]" data-reveal-stagger>
       {
         caseStudies.map((study) => (
           <article class="card flex h-full flex-col justify-between gap-6">
             <div>
-              <h2 class="mb-3 text-xl font-semibold">{study.title}</h2>
+              <h2 class="mb-3 font-mono text-xl font-semibold">{study.title}</h2>
               <p class="text-textMuted">{study.summary}</p>
             </div>
             <a class="btn-secondary w-fit" href={study.href}>

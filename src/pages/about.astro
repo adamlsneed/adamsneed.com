@@ -8,7 +8,7 @@ import headshot from '../assets/headshot.jpg';
   description="About Adam Sneed: security-focused engineering leader with a two-decade track record in operations, privileged access, and agentic AI systems."
 >
   <section class="grid gap-8 lg:grid-cols-[320px,1fr]">
-    <div class="card h-fit">
+    <div class="card h-fit" data-reveal>
       <img
         src={headshot.src}
         width={headshot.width}
@@ -19,7 +19,7 @@ import headshot from '../assets/headshot.jpg';
       />
     </div>
 
-    <div class="space-y-8">
+    <div class="space-y-10">
       <div class="space-y-4">
         <p class="eyebrow">About</p>
         <h1 class="section-title">Engineering every layer</h1>
@@ -32,13 +32,13 @@ import headshot from '../assets/headshot.jpg';
         <p class="text-textMuted">
           Outside of that, I engineer across all three layers. Physical: home lab infrastructure, edge devices, custom hardware rigs. Software: APIs, integration pipelines, automation systems that hold under pressure. Agentic: multi-agent orchestration, prompt engineering, and autonomous workflows built with the same discipline I bring to privileged access — least privilege, human oversight, audit trails, fail-safe defaults.
         </p>
-        <p class="text-textMuted">
+        <p class="border-l-2 border-accent/40 pl-4 text-lg text-textMain">
           Each layer informs the next. Infrastructure discipline shapes software design. Software discipline shapes agent design. That&apos;s the through-line.
         </p>
       </div>
 
-      <div class="card">
-        <h2 class="mb-4 text-xl font-semibold">Operating Principles</h2>
+      <div class="card border-l-4 border-l-accent/40" data-reveal>
+        <h2 class="mb-4 font-mono text-xl font-semibold">Operating Principles</h2>
         <ul class="space-y-3 text-textMuted">
           <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Build for production, not demos.</span></li>
           <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Security is architecture, not a feature.</span></li>
@@ -47,8 +47,8 @@ import headshot from '../assets/headshot.jpg';
         </ul>
       </div>
 
-      <div class="card">
-        <h2 class="mb-3 text-xl font-semibold">Policy Lens</h2>
+      <div class="card" data-reveal>
+        <h2 class="mb-3 font-mono text-xl font-semibold">Policy Lens</h2>
         <p class="text-textMuted">
           My Juris Doctor from LSU Law informs how I design policies, evaluate regulatory risk, and write statement-of-work
           scope with contract-level precision.
