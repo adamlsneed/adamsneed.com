@@ -9,7 +9,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "resume:pdf": "node scripts/generate-pdf.cjs",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy:staging": "npm run build && rsync -avz --delete dist/ root@192.168.100.50:/var/www/adamsneed.com/",
+    "deploy:prod": "npm run build && CF_TOKEN=$(cat ~/.cache/zip/credentials.json | python3 -c 'import json,sys; print(json.load(sys.stdin)[\"cloudflare\"][\"api_token\"])') CLOUDFLARE_API_TOKEN=$CF_TOKEN CLOUDFLARE_ACCOUNT_ID=1fcc7d83253bff4d6809cc7e5864328b npx wrangler pages deploy dist --project-name adamsneed --commit-dirty=true"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
