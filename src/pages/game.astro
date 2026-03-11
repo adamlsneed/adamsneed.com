@@ -33,45 +33,44 @@ import MainLayout from '../layouts/MainLayout.astro';
         </div>
       </div>
 
-      <aside class="card space-y-6">
-        <div class="grid grid-cols-2 gap-4">
+      <aside class="card space-y-3">
+        <div class="grid grid-cols-2 gap-3">
           <div>
-            <h2 class="text-xl font-semibold text-textMain">Next</h2>
-            <canvas id="next-canvas" width="120" height="120" class="mt-2 rounded-lg panel-canvas"></canvas>
+            <h2 class="text-sm font-semibold text-textMain">Next</h2>
+            <canvas id="next-canvas" width="120" height="120" class="mt-1 rounded-lg panel-canvas" style="width:90px;height:90px;"></canvas>
           </div>
           <div>
-            <h2 class="text-xl font-semibold text-textMain">Hold</h2>
-            <canvas id="hold-canvas" width="120" height="120" class="mt-2 rounded-lg panel-canvas"></canvas>
+            <h2 class="text-sm font-semibold text-textMain">Hold</h2>
+            <canvas id="hold-canvas" width="120" height="120" class="mt-1 rounded-lg panel-canvas" style="width:90px;height:90px;"></canvas>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <p class="metric-label text-[10px]">Score</p>
+            <p id="score-display" class="text-xl font-semibold text-textMain">0</p>
+          </div>
+          <div>
+            <p class="metric-label text-[10px]">High Score</p>
+            <p id="high-score-display" class="text-xl font-semibold text-textMain">0</p>
+          </div>
+          <div>
+            <p class="metric-label text-[10px]">Lines</p>
+            <p id="lines-display" class="text-lg font-semibold text-textMain">0</p>
+          </div>
+          <div>
+            <p class="metric-label text-[10px]">Level</p>
+            <p id="level-display" class="text-lg font-semibold text-textMain">1</p>
           </div>
         </div>
 
         <div>
-          <p class="metric-label">Score</p>
-          <p id="score-display" class="text-3xl font-semibold text-textMain">0</p>
-        </div>
-
-        <div>
-          <p class="metric-label">HIGH SCORE</p>
-          <p id="high-score-display" class="text-xl font-semibold text-textMain">0</p>
-        </div>
-
-        <div>
-          <p class="metric-label">Lines</p>
-          <p id="lines-display" class="text-xl font-semibold text-textMain">0</p>
-        </div>
-
-        <div>
-          <p class="metric-label">Level</p>
-          <p id="level-display" class="text-xl font-semibold text-textMain">1</p>
-        </div>
-
-        <div>
-          <p class="metric-label mb-2">Mode</p>
+          <p class="metric-label text-[10px] mb-1">Mode</p>
           <div class="flex gap-2">
             <button id="mode-classic" class="mode-btn active" type="button">Classic</button>
             <button id="mode-chaos" class="mode-btn" type="button">Chaos</button>
           </div>
-          <p id="mode-desc" class="text-xs text-textMuted mt-1">Clean board, pure skill.</p>
+          <p id="mode-desc" class="text-[10px] text-textMuted mt-1">Clean board, pure skill.</p>
         </div>
 
         <div class="flex flex-wrap gap-2">
@@ -80,13 +79,13 @@ import MainLayout from '../layouts/MainLayout.astro';
           <button id="mute-btn" class="btn-secondary text-sm" type="button">Sound</button>
         </div>
 
-        <div class="space-y-1 text-sm text-textMuted">
-          <p><kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">←</kbd> <kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">→</kbd> Move</p>
-          <p><kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">↑</kbd> Rotate</p>
-          <p><kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">↓</kbd> Soft drop</p>
-          <p><kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">Space</kbd> Hard drop</p>
-          <p><kbd class="rounded border border-borderTone bg-panel px-1.5 py-0.5 text-xs">C</kbd> Hold</p>
-          <p class="pt-1 text-xs">Touch: tap rotate, swipe left/right move, swipe down soft drop, swipe up hard drop.</p>
+        <div class="space-y-0.5 text-xs text-textMuted">
+          <p><kbd class="rounded border border-borderTone bg-panel px-1 py-0.5 text-[10px]">←</kbd> <kbd class="rounded border border-borderTone bg-panel px-1 py-0.5 text-[10px]">→</kbd> Move</p>
+          <p><kbd class="rounded border border-borderTone bg-panel px-1 py-0.5 text-[10px]">↑</kbd> Rotate</p>
+          <p><kbd class="rounded border border-borderTone bg-panel px-1 py-0.5 text-[10px]">↓</kbd> Soft drop</p>
+          <p><kbd class="rounded border border-borderTone bg-panel px-1 py-0.5 text-[10px]">Space</kbd> Hard drop</p>
+          <p><kbd class="rounded border border-borderTone bg-panel px-1 py-0.5 text-[10px]">C</kbd> Hold</p>
+          <p class="pt-0.5 text-[10px]">Touch: tap rotate, swipe left/right, swipe down/up for drops.</p>
         </div>
       </aside>
     </div>
