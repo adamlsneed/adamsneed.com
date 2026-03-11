@@ -14,11 +14,11 @@ import MainLayout from '../layouts/MainLayout.astro';
       </p>
     </div>
 
-    <div class="grid gap-6 lg:grid-cols-[1fr,300px]">
+    <div class="grid gap-6 lg:grid-cols-[1fr,280px]">
       <div class="space-y-4">
         <div class="card flex items-center justify-center p-4">
           <div class="relative">
-            <canvas id="tetris-canvas" width="300" height="600" class="rounded-lg tetris-playfield"></canvas>
+            <canvas id="tetris-canvas" width="360" height="720" class="rounded-lg tetris-playfield"></canvas>
             <div id="tspin-banner" class="tspin-banner" aria-live="polite">T-SPIN!</div>
           </div>
         </div>
@@ -110,7 +110,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
     const COLS = 10;
     const ROWS = 20;
-    const BLOCK = 30;
+    const BLOCK = 36;
     const PREVIEW_BLOCK = 24;
     const HIGH_SCORE_KEY = 'tetris-high-score-v1';
     const FLASH_DURATION = 200;
