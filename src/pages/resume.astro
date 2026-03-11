@@ -1,206 +1,192 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+
+const skills = [
+  'PAM/EPM Architecture', 'IAM & Identity Governance', 'Credential Vaulting & Rotation',
+  'Identity Lifecycle', 'SIEM/SOAR & ITSM', 'Zero Trust', 'Cloud IAM (AWS/Azure/GCP)',
+  'AD/Entra ID', 'PowerShell', 'Python', 'SQL', 'REST APIs', 'Terraform & Ansible',
+  'CI/CD Pipelines', 'Agentic Workflow Design', 'Prompt Engineering',
+  'AI-Assisted Automation', 'Multi-Agent Systems', 'Agent Orchestration',
+  'Policy Enforcement', 'NIST/CIS/ISO 27001', 'SOX/PCI', 'Agile (Scrum/Kanban)'
+];
 ---
 
 <MainLayout
   title="Resume"
   description="Resume for Adam Lacroix Sneed: Senior Solutions Architect specializing in PAM, identity engineering, and agentic AI systems."
 >
-  <section class="mx-auto max-w-5xl space-y-10">
-    <!-- Header -->
-    <div class="flex flex-wrap items-start justify-between gap-4">
-      <div class="space-y-2">
-        <p class="eyebrow">Resume</p>
-        <h1 class="section-title">Adam Lacroix Sneed</h1>
-        <p class="text-textMuted flex flex-wrap gap-x-3 gap-y-1">
-          <span>Austin, TX</span>
-          <span class="text-borderTone">·</span>
-          <a href="mailto:adam@adamsneed.com" class="transition hover:text-accent">adam@adamsneed.com</a>
-          <span class="text-borderTone">·</span>
-          <a href="https://adamsneed.com" class="transition hover:text-accent">adamsneed.com</a>
-          <span class="text-borderTone">·</span>
-          <a href="https://www.linkedin.com/in/adam-sneed-8113375/" class="transition hover:text-accent">LinkedIn</a>
+  <!-- Header -->
+  <section class="px-6 pb-16 pt-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal>
+        <span class="text-xs font-mono uppercase tracking-[0.3em] text-textMuted">Resume</span>
+        <h1 class="mt-4 text-balance text-4xl font-bold leading-tight text-textMain md:text-6xl">Adam Lacroix Sneed</h1>
+        <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-textMuted">
+          <span class="inline-flex items-center gap-1.5">
+            <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Austin, TX
+          </span>
+          <a href="mailto:adam@adamsneed.com" class="inline-flex items-center gap-1.5 transition-colors hover:text-accent">
+            <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            adam@adamsneed.com
+          </a>
+          <a href="https://adamsneed.com" class="inline-flex items-center gap-1.5 transition-colors hover:text-accent">
+            <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            adamsneed.com
+          </a>
+          <a href="https://www.linkedin.com/in/adam-sneed-8113375/" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 transition-colors hover:text-accent">
+            <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+        <div class="mt-8">
+          <a href="/resume/adam-sneed-resume.pdf" download class="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-base transition-all duration-300 hover:shadow-[0_0_30px_rgba(100,220,200,0.2)]">
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Download PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="100">
+        <p class="text-pretty text-lg leading-relaxed text-textMuted">
+          Senior Solutions Architect and PAM subject matter expert with deep expertise in identity &amp; access management and agentic AI systems. 20+ years in IT with 4+ years focused on enterprise PAM/EPM and IAM solutions. Designs and deploys secure, scalable automation &mdash; from credential vaulting, identity lifecycle management, and session governance to AI-driven workflow orchestration with human-in-the-loop guardrails.
         </p>
       </div>
-      <a class="btn-primary" href="/resume/adam-sneed-resume.pdf" download>
-        Download PDF
-      </a>
     </div>
+  </section>
 
-    <!-- Summary -->
-    <div class="card border-l-4 border-l-accent/60" data-reveal>
-      <p class="text-textMain leading-relaxed">
-        Senior Solutions Architect and PAM subject matter expert with deep expertise in identity &amp; access management
-        and agentic AI systems. 20+ years in IT with 4+ years focused on enterprise PAM/EPM and IAM solutions.
-        Designs and deploys secure, scalable automation — from credential vaulting, identity lifecycle management,
-        and session governance to AI-driven workflow orchestration with human-in-the-loop guardrails.
-      </p>
-    </div>
-
-    <!-- Technical Skills -->
-    <div class="space-y-4" data-reveal>
-      <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Technical Skills</h2>
-      <div class="flex flex-wrap gap-2">
-        {[
-          'PAM/EPM Architecture', 'IAM & Identity Governance', 'Credential Vaulting & Rotation',
-          'Identity Lifecycle', 'SIEM/SOAR & ITSM', 'Zero Trust', 'Cloud IAM (AWS/Azure/GCP)',
-          'AD/Entra ID', 'PowerShell', 'Python', 'SQL', 'REST APIs', 'Terraform & Ansible',
-          'CI/CD Pipelines', 'Agentic Workflow Design', 'Prompt Engineering',
-          'AI-Assisted Automation', 'Multi-Agent Systems', 'Agent Orchestration',
-          'Policy Enforcement', 'NIST/CIS/ISO 27001', 'SOX/PCI', 'Agile (Scrum/Kanban)'
-        ].map((skill) => (
-          <span class="rounded-full border border-borderTone/60 bg-panel/50 px-3 py-1 text-sm text-textMuted">{skill}</span>
-        ))}
+  <!-- Technical Skills -->
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="150">
+        <h2 class="mb-6 text-2xl font-bold text-textMain">Technical Skills</h2>
+        <div class="flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <span class="rounded-md border border-borderTone bg-panel px-3 py-1.5 text-xs font-mono text-textMuted transition-colors duration-300 hover:border-accent/40 hover:text-accent">{skill}</span>
+          ))}
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Experience -->
-    <div class="space-y-6" data-reveal>
-      <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Professional Experience</h2>
+  <!-- Experience -->
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="200">
+        <h2 class="mb-8 text-2xl font-bold text-textMain">Professional Experience</h2>
+      </div>
 
       <!-- Netwrix -->
-      <div class="card space-y-4">
-        <div class="flex flex-wrap items-baseline justify-between gap-2">
-          <div>
-            <h3 class="text-lg font-semibold text-textMain">Netwrix Corporation</h3>
-            <p class="text-sm text-textMuted">Remote from Austin, TX</p>
+      <div data-reveal data-reveal-delay="250">
+        <div class="mb-12 rounded-xl border border-borderTone bg-panel p-6">
+          <div class="mb-4 flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+            <div>
+              <h3 class="text-xl font-semibold text-textMain">Netwrix Corporation</h3>
+              <p class="text-sm text-textMuted">Remote from Austin, TX</p>
+            </div>
+            <span class="self-start rounded-md bg-accent/10 px-3 py-1 text-xs font-mono text-accent">Current</span>
           </div>
-          <span class="rounded-full border border-accent/30 bg-accentSoft px-3 py-0.5 text-xs font-semibold text-accent">Current</span>
-        </div>
-        <p class="font-medium text-textMain">Senior Solutions Architect, Privileged Access Management <span class="font-normal text-textMuted">· Sep 2021 – Present</span></p>
-        <ul class="space-y-2.5 text-textMuted leading-relaxed">
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>PAM subject matter expert for enterprise deployments across Fortune-class organizations — credential vaulting, session proxying, JIT access, and service account governance integrated with AD/Entra ID, AWS/Azure cloud IAM, SIEM/SOAR, and ITSM platforms.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Architect API-driven automation frameworks (PowerShell, Python, REST APIs) for privileged account lifecycle management — onboarding, credential rotation, access workflows — enforcing least-privilege policies at scale.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Design operational runbooks, decision-logic SOPs, and escalation policies that translate directly to agentic workflow patterns — conditional branching, retry logic, human-in-the-loop approval gates, and automated remediation.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Lead root cause analysis and platform resilience engineering; build reusable knowledge bases ensuring operational continuity across teams.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Oversee vendor-led PAM implementations including SOW scoping, UAT, and production cutovers within Agile delivery frameworks.</span>
-          </li>
-        </ul>
-        <!-- Award callout -->
-        <div class="flex items-center gap-3 rounded-lg border border-accent/20 bg-accentSoft/50 px-4 py-3">
-          <span class="text-2xl">🏆</span>
-          <div>
-            <p class="font-semibold text-textMain">Netwrix Hero Award</p>
-            <p class="text-sm text-textMuted">Q1 FY'25 — Excellence in enterprise PAM solution delivery</p>
+          <h4 class="mb-4 text-sm font-medium text-textMain">Senior Solutions Architect, Privileged Access Management &middot; Sep 2021 &ndash; Present</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accent"></span><span class="text-sm leading-relaxed text-textMuted">PAM subject matter expert for enterprise deployments across Fortune-class organizations &mdash; credential vaulting, session proxying, JIT access, and service account governance integrated with AD/Entra ID, AWS/Azure cloud IAM, SIEM/SOAR, and ITSM platforms.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accent"></span><span class="text-sm leading-relaxed text-textMuted">Architect API-driven automation frameworks (PowerShell, Python, REST APIs) for privileged account lifecycle management &mdash; onboarding, credential rotation, access workflows &mdash; enforcing least-privilege policies at scale.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accent"></span><span class="text-sm leading-relaxed text-textMuted">Design operational runbooks, decision-logic SOPs, and escalation policies that translate directly to agentic workflow patterns &mdash; conditional branching, retry logic, human-in-the-loop approval gates, and automated remediation.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accent"></span><span class="text-sm leading-relaxed text-textMuted">Lead root cause analysis and platform resilience engineering; build reusable knowledge bases ensuring operational continuity across teams.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accent"></span><span class="text-sm leading-relaxed text-textMuted">Oversee vendor-led PAM implementations including SOW scoping, UAT, and production cutovers within Agile delivery frameworks.</span></li>
+          </ul>
+          <div class="mt-6 rounded-lg border border-accent/20 bg-accent/5 p-4">
+            <p class="text-sm font-mono text-accent">Netwrix Hero Award &mdash; Q1 FY&apos;25</p>
+            <p class="mt-1 text-xs text-textMuted">Excellence in enterprise PAM solution delivery</p>
           </div>
         </div>
       </div>
 
       <!-- Agentic -->
-      <div class="card space-y-4 border-l-4 border-l-accent/40">
-        <div class="flex flex-wrap items-baseline justify-between gap-2">
-          <h3 class="text-lg font-semibold text-textMain">Agentic &amp; AI Systems Engineering</h3>
-          <span class="text-sm text-textMuted">2024 – Present</span>
+      <div data-reveal data-reveal-delay="300">
+        <div class="mb-12 rounded-xl border border-borderTone bg-panel p-6">
+          <div class="mb-4 flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+            <h3 class="text-xl font-semibold text-textMain">Agentic &amp; AI Systems Engineering</h3>
+            <span class="text-xs font-mono text-textMuted">2024 &ndash; Present</span>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accentBlue"></span><span class="text-sm leading-relaxed text-textMuted">Design, build, and operate a production multi-agent system &mdash; 5+ specialized AI agents coordinating across security monitoring, business intelligence, home automation, and infrastructure management with defined roles, guardrails, and chain-of-command policies.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accentBlue"></span><span class="text-sm leading-relaxed text-textMuted">Engineer prompt-driven workflows with structured output parsing, verification loops, retry logic, approval gates, and failure handling &mdash; reliability engineering applied to AI automation.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accentBlue"></span><span class="text-sm leading-relaxed text-textMuted">Build AI-driven business intelligence pipelines: automated competitor monitoring, web scraping, LLM-powered analysis, and branded email digest delivery.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accentBlue"></span><span class="text-sm leading-relaxed text-textMuted">Security-first agent architecture: credential isolation, tool-use policies, output sanitization, injection detection, and mandatory code scanning before execution.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accentBlue"></span><span class="text-sm leading-relaxed text-textMuted">Cross-agent communication protocols, session orchestration, and workflow engines with webhook triggers, template variables, and status-driven state machines.</span></li>
+          </ul>
         </div>
-        <ul class="space-y-2.5 text-textMuted leading-relaxed">
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Design, build, and operate a production multi-agent system — 5+ specialized AI agents coordinating across security monitoring, business intelligence, home automation, and infrastructure management with defined roles, guardrails, and chain-of-command policies.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Engineer prompt-driven workflows with structured output parsing, verification loops, retry logic, approval gates, and failure handling — reliability engineering applied to AI automation.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Build AI-driven business intelligence pipelines: automated competitor monitoring, web scraping, LLM-powered analysis, and branded email digest delivery.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Security-first agent architecture: credential isolation, tool-use policies, output sanitization, injection detection, and mandatory code scanning before execution.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Cross-agent communication protocols, session orchestration, and workflow engines with webhook triggers, template variables, and status-driven state machines.</span>
-          </li>
-        </ul>
       </div>
 
       <!-- GCS -->
-      <div class="card space-y-4">
-        <div class="flex flex-wrap items-baseline justify-between gap-2">
-          <div>
-            <h3 class="text-lg font-semibold text-textMain">GCS Technologies</h3>
-            <p class="text-sm text-textMuted">Austin, TX</p>
+      <div data-reveal data-reveal-delay="350">
+        <div class="mb-12 rounded-xl border border-borderTone bg-panel p-6">
+          <div class="mb-4 flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+            <div>
+              <h3 class="text-xl font-semibold text-textMain">GCS Technologies</h3>
+              <p class="text-sm text-textMuted">Austin, TX</p>
+            </div>
+            <span class="text-xs font-mono text-textMuted">2012 &ndash; 2021</span>
           </div>
-          <span class="text-sm text-textMuted">2012 – 2021</span>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <span class="rounded-full border border-borderTone/50 px-2.5 py-0.5 text-xs text-textMuted">Director of Operations</span>
-          <span class="rounded-full border border-borderTone/50 px-2.5 py-0.5 text-xs text-textMuted">Technical Support Manager</span>
-          <span class="rounded-full border border-borderTone/50 px-2.5 py-0.5 text-xs text-textMuted">Datacenter Team Lead</span>
-        </div>
-        <ul class="space-y-2.5 text-textMuted leading-relaxed">
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Progressed from datacenter operations to directing a business unit — P&amp;L ownership, strategic initiatives, and a 30-member team while exceeding revenue targets for seven consecutive quarters.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Built training programs that increased team utilization from 73% to 86%; designed customer feedback loops that measurably improved retention.</span>
-          </li>
-          <li class="flex gap-2">
-            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/60"></span>
-            <span>Led cross-functional security initiatives aligning IAM practices with compliance requirements and business objectives.</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Early Career -->
-      <div class="rounded-lg border border-borderTone/40 bg-panel/30 px-5 py-3">
-        <p class="text-sm text-textMuted">
-          <span class="font-semibold text-textMain">Early Career:</span> RedHat Linux &amp; AIX Unix Administrator — University of Texas at Austin IT · Security Management Services LLC
-        </p>
-      </div>
-    </div>
-
-    <!-- Education + Certs -->
-    <div class="grid gap-6 md:grid-cols-2" data-reveal-stagger>
-      <div class="card space-y-4">
-        <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Education</h2>
-        <div class="space-y-3">
-          <div>
-            <p class="font-medium text-textMain">Juris Doctor / Graduate Diploma in Civil Law</p>
-            <p class="text-sm text-textMuted">Louisiana State University, Paul M. Hebert Law Center</p>
-          </div>
-          <div>
-            <p class="font-medium text-textMain">Bachelor of Arts in Government, Minor in Biology</p>
-            <p class="text-sm text-textMuted">University of Texas at Austin</p>
-          </div>
-        </div>
-      </div>
-      <div class="card space-y-4">
-        <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Certifications &amp; Affiliations</h2>
-        <div class="space-y-2">
-          <div class="flex items-center gap-2">
-            <span class="h-2 w-2 rounded-full bg-accent/60"></span>
-            <p class="text-textMuted">CompTIA Security+ CE</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="h-2 w-2 rounded-full bg-accent/60"></span>
-            <p class="text-textMuted">Microsoft Certified: Azure Fundamentals</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="h-2 w-2 rounded-full bg-accent/60"></span>
-            <p class="text-textMuted">Member, State Bar of Texas</p>
-          </div>
+          <p class="mb-4 text-sm text-textMain">Director of Operations &middot; Technical Support Manager &middot; Datacenter Team Lead</p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accentPurple"></span><span class="text-sm leading-relaxed text-textMuted">Progressed from datacenter operations to directing a business unit &mdash; P&amp;L ownership, strategic initiatives, and a 30-member team while exceeding revenue targets for seven consecutive quarters.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accentPurple"></span><span class="text-sm leading-relaxed text-textMuted">Built training programs that increased team utilization from 73% to 86%; designed customer feedback loops that measurably improved retention.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-accentPurple"></span><span class="text-sm leading-relaxed text-textMuted">Led cross-functional security initiatives aligning IAM practices with compliance requirements and business objectives.</span></li>
+          </ul>
+          <p class="mt-4 text-xs italic text-textMuted">Early Career: RedHat Linux &amp; AIX Unix Administrator &mdash; University of Texas at Austin IT &middot; Security Management Services LLC</p>
         </div>
       </div>
     </div>
-
   </section>
+
+  <!-- Education -->
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="400">
+        <h2 class="mb-8 text-2xl font-bold text-textMain">Education</h2>
+        <div class="space-y-6">
+          <div class="rounded-xl border border-borderTone bg-panel p-6">
+            <h3 class="font-semibold text-textMain">Juris Doctor / Graduate Diploma in Civil Law</h3>
+            <p class="mt-1 text-sm text-textMuted">Louisiana State University, Paul M. Hebert Law Center</p>
+          </div>
+          <div class="rounded-xl border border-borderTone bg-panel p-6">
+            <h3 class="font-semibold text-textMain">Bachelor of Arts in Government, Minor in Biology</h3>
+            <p class="mt-1 text-sm text-textMuted">University of Texas at Austin</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="px-6 pb-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="450">
+        <h2 class="mb-6 text-2xl font-bold text-textMain">Certifications &amp; Affiliations</h2>
+        <div class="flex flex-wrap gap-3">
+          <span class="rounded-lg border border-borderTone bg-panel px-4 py-2 text-sm text-textMuted">CompTIA Security+ CE</span>
+          <span class="rounded-lg border border-borderTone bg-panel px-4 py-2 text-sm text-textMuted">Microsoft Certified: Azure Fundamentals</span>
+          <span class="rounded-lg border border-borderTone bg-panel px-4 py-2 text-sm text-textMuted">Member, State Bar of Texas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    // Track resume PDF downloads
+    document.querySelectorAll('a[href*="resume"][download]').forEach(link => {
+      link.addEventListener('click', () => {
+        fetch('/api/event', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ event_type: 'resume_download', page: '/resume' }),
+        }).catch(() => {});
+      });
+    });
+  </script>
 </MainLayout>

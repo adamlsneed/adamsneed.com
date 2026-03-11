@@ -8,8 +8,10 @@ export default {
         panel: '#151d2d',
         accent: '#14b8a6',
         accentSoft: 'rgba(20,184,166,0.16)',
+        accentBlue: 'rgb(80,180,255)',
+        accentPurple: 'rgb(160,120,255)',
         textMain: '#e7edf8',
-        textMuted: '#9aa8bf',
+        textMuted: '#8494ad',
         borderTone: '#2b3850'
       },
       boxShadow: {
@@ -18,9 +20,6 @@ export default {
       fontFamily: {
         sans: ['Inter Variable', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono Variable', 'JetBrains Mono', 'ui-monospace', 'monospace']
-      },
-      backgroundImage: {
-        mesh: 'radial-gradient(circle at 20% 20%, rgba(233,69,96,0.2), transparent 38%), radial-gradient(circle at 80% 0%, rgba(47,128,237,0.18), transparent 42%), radial-gradient(circle at 60% 80%, rgba(58,200,153,0.11), transparent 42%)'
       }
     }
   },

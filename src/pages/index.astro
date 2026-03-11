@@ -4,49 +4,897 @@ import MainLayout from '../layouts/MainLayout.astro';
 
 <MainLayout
   title="Adam Sneed | Engineering from the Physical Layer to the Agentic"
-  description="Adam Sneed engineers across the full stack — from hardware and infrastructure through software systems to autonomous AI agents."
+  description="Chat with Adam Sneed's AI assistant to learn about his experience in security engineering, PAM architecture, and agentic AI systems."
+  hideFooter
 >
-  <section class="space-y-14">
-    <div class="max-w-4xl space-y-6">
-      <p class="eyebrow">Security Architect · Agentic Engineer · Context Engineer</p>
-      <h1 class="section-title text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">Adam Sneed</h1>
-      <p class="text-2xl font-medium text-textMain sm:text-3xl">Engineering from the physical layer to the agentic.</p>
-      <p class="lead max-w-3xl">
-        Twenty years of enterprise infrastructure — datacenter operations, identity and access management, security engineering — now applied to agentic systems: designing the agents, the prompts, the memory, and the context that makes AI reliable in production.
-      </p>
-    </div>
+  <section class="relative flex h-[calc(100vh-64px)] items-start justify-center overflow-hidden px-3 pt-20 pb-4 sm:px-6 md:items-center md:pt-16">
+    <div class="mx-auto w-full max-w-4xl">
 
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-4" data-reveal-stagger>
-      <article class="card-featured md:col-span-2 md:row-span-2">
-        <p class="mb-3 text-2xl">🖥️</p>
-        <h2 class="mb-2 font-mono text-xl font-semibold">Physical Layer</h2>
-        <p class="text-textMuted">
-          Hardware, infrastructure, and edge — datacenter operations, enterprise networking, servers, Raspberry Pi, ESP32s, and the systems you can touch.
-        </p>
-      </article>
-      <article class="card md:col-span-2">
-        <p class="mb-3 text-2xl">⚙️</p>
-        <h2 class="mb-2 font-mono text-xl font-semibold">Software Layer</h2>
-        <p class="text-textMuted">
-          Code, APIs, and automation — enterprise PAM &amp; IAM, security engineering, integration pipelines, and production-grade systems that hold under pressure.
-        </p>
-      </article>
-      <article class="card md:col-span-2">
-        <p class="mb-3 text-2xl">🤖</p>
-        <h2 class="mb-2 font-mono text-xl font-semibold">Agentic Layer</h2>
-        <p class="text-textMuted">
-          Multi-agent orchestration, prompt engineering, and autonomous workflows — AI systems built with the same rigor as enterprise security infrastructure.
-        </p>
-      </article>
-      <div class="card md:col-span-4 space-y-6">
-        <p class="text-lg text-textMain">
-          Each layer informs the next. Two decades of infrastructure discipline shapes how I design software. That software discipline shapes how I build agents. The result is agentic systems that are reliable, auditable, and safe to deploy in production.
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a class="btn-primary" href="/work">View My Work &rarr;</a>
-          <a class="btn-secondary" href="/resume/adam-sneed-resume.pdf" download>Download Resume &rarr;</a>
+      <!-- Terminal: animated border wrapper -->
+      <div
+        id="terminal-outer"
+        class="terminal-glow rounded-2xl p-[1.5px]"
+        style="opacity:0; transform: translateY(20px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);"
+      >
+        <div id="terminal" class="relative overflow-hidden rounded-2xl bg-[#070b14]">
+
+          <!-- Title Bar -->
+          <div class="relative flex items-center border-b border-white/[0.03] bg-white/[0.015] px-4 py-2.5 select-none">
+            <div class="flex items-center gap-[7px]">
+              <span class="h-[10px] w-[10px] rounded-full bg-[#ff5f57]/60 transition-all duration-300 hover:bg-[#ff5f57]"></span>
+              <span class="h-[10px] w-[10px] rounded-full bg-[#febc2e]/60 transition-all duration-300 hover:bg-[#febc2e]"></span>
+              <span class="h-[10px] w-[10px] rounded-full bg-[#28c840]/60 transition-all duration-300 hover:bg-[#28c840]"></span>
+            </div>
+            <div class="flex-1 text-center font-mono text-[11px]">
+              <span class="text-accent/50">~</span><span class="text-textMuted/30">/</span><span class="text-textMuted/60">.adam</span>
+            </div>
+            <div class="flex items-center gap-2 w-[52px] justify-end">
+              <span class="h-1.5 w-1.5 rounded-full bg-accent/40 shadow-[0_0_6px_rgba(20,184,166,0.4)]" id="status-dot"></span>
+            </div>
+          </div>
+
+          <!-- Terminal Body -->
+          <div
+            id="terminal-body"
+            class="terminal-scroll relative overflow-y-auto px-5 py-5 font-mono text-[13px] leading-[1.8]"
+            style="height: clamp(250px, 52vh, 560px);"
+            role="log"
+            aria-live="polite"
+            aria-label="Chat messages"
+          >
+            <!-- Dot grid texture -->
+            <div class="pointer-events-none absolute inset-0 dot-grid opacity-100" aria-hidden="true"></div>
+            <!-- Subtle vignette -->
+            <div class="pointer-events-none absolute inset-0" style="background: radial-gradient(ellipse at 50% 0%, rgba(20,184,166,0.025) 0%, transparent 50%), radial-gradient(ellipse at 50% 100%, rgba(7,11,20,0.5) 0%, transparent 70%);" aria-hidden="true"></div>
+            <!-- Content injected by JS -->
+          </div>
+
+          <!-- Input Area -->
+          <div id="input-row" class="relative flex items-center gap-3 border-t border-white/[0.03] bg-white/[0.01] px-5 py-3.5">
+            <!-- Autocomplete dropdown -->
+            <div id="autocomplete" class="absolute bottom-full left-0 right-0 hidden border-t border-white/[0.03] bg-[#0a0f1a]/95 backdrop-blur-sm font-mono text-[13px]" role="listbox" aria-label="Command suggestions"></div>
+            <span class="select-none font-mono text-[15px] font-bold text-accent drop-shadow-[0_0_8px_rgba(20,184,166,0.4)]" aria-hidden="true">❯</span>
+            <input
+              id="terminal-input"
+              type="text"
+              class="flex-1 bg-transparent font-mono text-[13px] text-textMain caret-accent outline-none placeholder:text-textMuted/40"
+              placeholder="Type /help for commands, or ask a question..."
+              autocomplete="off"
+              aria-label="Type your question"
+              spellcheck="false"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-controls="autocomplete"
+              aria-expanded="false"
+            />
+            <kbd class="hidden select-none rounded border border-white/[0.05] bg-white/[0.02] px-1.5 py-0.5 font-mono text-[10px] text-textMuted/40 sm:inline-block">return</kbd>
+          </div>
+
+          <!-- Permission mode bar -->
+          <div id="perm-bar" class="flex items-center gap-2 border-t border-white/[0.03] bg-white/[0.008] px-5 py-2 font-mono text-[12px] select-none">
+            <span class="text-[#f87171]">▸▸</span>
+            <span id="perm-label" class="text-[#f87171]">bypass permissions on</span>
+            <span class="text-textMuted/30">(shift+tab to cycle)</span>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
+
+  <style is:global>
+    /* ── Animated teal border ──────────────────────────── */
+    @property --border-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    .terminal-glow {
+      background: conic-gradient(
+        from var(--border-angle),
+        rgba(20,184,166,0.5) 0%,
+        rgba(20,184,166,0.12) 25%,
+        rgba(20,184,166,0.5) 50%,
+        rgba(20,184,166,0.12) 75%,
+        rgba(20,184,166,0.5) 100%
+      );
+      animation: border-rotate 8s linear infinite;
+      box-shadow:
+        0 0 30px rgba(20,184,166,0.05),
+        0 0 60px rgba(20,184,166,0.02),
+        0 30px 60px rgba(0,0,0,0.4);
+      transition: box-shadow 0.6s ease;
+    }
+
+    .terminal-glow.thinking-active {
+      box-shadow:
+        0 0 50px rgba(20,184,166,0.1),
+        0 0 100px rgba(20,184,166,0.04),
+        0 30px 60px rgba(0,0,0,0.4);
+      animation: border-rotate 3s linear infinite;
+    }
+
+    @keyframes border-rotate {
+      to { --border-angle: 360deg; }
+    }
+
+    /* Fallback for browsers without @property */
+    @supports not (background: conic-gradient(from 0deg, red, blue)) {
+      .terminal-glow {
+        background: rgba(20,184,166,0.3);
+      }
+    }
+
+    /* ── Dot grid texture ──────────────────────────────── */
+    .dot-grid {
+      background-image: radial-gradient(rgba(20,184,166,0.045) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    /* ── Scanline overlay on terminal ──────────────────── */
+    #terminal::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.015) 2px,
+        rgba(0,0,0,0.015) 4px
+      );
+    }
+
+    /* ── Scrollbar ─────────────────────────────────────── */
+    .terminal-scroll::-webkit-scrollbar { width: 5px; }
+    .terminal-scroll::-webkit-scrollbar-track { background: transparent; }
+    .terminal-scroll::-webkit-scrollbar-thumb { background: rgba(20,184,166,0.12); border-radius: 3px; }
+    .terminal-scroll::-webkit-scrollbar-thumb:hover { background: rgba(20,184,166,0.25); }
+    .terminal-scroll { scrollbar-width: thin; scrollbar-color: rgba(20,184,166,0.12) transparent; }
+
+    /* ── Streaming cursor ──────────────────────────────── */
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .stream-cursor {
+      animation: cursor-blink 0.6s step-end infinite;
+      color: var(--accent);
+      margin-left: 1px;
+      text-shadow: 0 0 8px rgba(20,184,166,0.6);
+    }
+
+    /* ── Boot sequence lines ───────────────────────────── */
+    @keyframes boot-fade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .boot-line {
+      opacity: 0;
+      animation: boot-fade 0.3s ease forwards;
+    }
+
+    /* ── Message content markdown ───────────────────────── */
+    .msg-content pre {
+      background: rgba(20,184,166,0.03);
+      border: 1px solid rgba(20,184,166,0.08);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      overflow-x: auto;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+    .msg-content code:not(pre code) {
+      background: rgba(20,184,166,0.06);
+      border: 1px solid rgba(20,184,166,0.1);
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+      color: #7ee8d5;
+    }
+    .msg-content strong { color: #e7edf8; font-weight: 600; }
+    .msg-content em { color: #8fb3d0; font-style: italic; }
+    .msg-content ul, .msg-content ol { margin: 6px 0 6px 1.3em; }
+    .msg-content ul { list-style: disc; }
+    .msg-content ol { list-style: decimal; }
+    .msg-content li { margin: 3px 0; }
+    .msg-content li::marker { color: rgba(20,184,166,0.4); }
+    .msg-content p { margin: 6px 0; }
+    .msg-content p:first-child { margin-top: 0; }
+    .msg-content p:last-child { margin-bottom: 0; }
+    .msg-content a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── Slash command output ───────────────────────────── */
+    .cmd-output {
+      color: #8fb3c8;
+    }
+    .cmd-output .cmd-heading {
+      color: #e7edf8;
+      font-weight: 600;
+    }
+    .cmd-output .cmd-label {
+      color: rgba(20,184,166,0.8);
+    }
+    .cmd-output .cmd-muted {
+      color: rgba(132,148,173,0.7);
+    }
+    .cmd-output .cmd-accent {
+      color: #14b8a6;
+    }
+    .cmd-output .cmd-link {
+      color: #14b8a6;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      cursor: pointer;
+    }
+    .cmd-output .cmd-link:hover {
+      color: #5eead4;
+    }
+    .cmd-output .cmd-divider {
+      display: block;
+      height: 1px;
+      margin: 8px 0;
+      background: linear-gradient(to right, rgba(20,184,166,0.1), transparent 60%);
+    }
+
+    /* ── Autocomplete dropdown ─────────────────────────── */
+    #autocomplete .ac-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: background 0.1s ease;
+    }
+    #autocomplete .ac-item:first-child {
+      padding-top: 10px;
+    }
+    #autocomplete .ac-item:last-child {
+      padding-bottom: 10px;
+    }
+    #autocomplete .ac-item.active,
+    #autocomplete .ac-item:hover {
+      background: rgba(20,184,166,0.06);
+    }
+    #autocomplete .ac-item .ac-cmd {
+      color: #14b8a6;
+      min-width: 100px;
+    }
+    #autocomplete .ac-item .ac-desc {
+      color: rgba(132,148,173,0.7);
+    }
+    #autocomplete .ac-item.active .ac-cmd {
+      text-shadow: 0 0 8px rgba(20,184,166,0.4);
+    }
+    #autocomplete .ac-hint {
+      padding: 4px 20px 8px;
+      font-size: 10px;
+      color: rgba(132,148,173,0.35);
+    }
+
+    /* ── Status dot pulse ──────────────────────────────── */
+    @keyframes status-pulse {
+      0%, 100% { opacity: 0.4; box-shadow: 0 0 6px rgba(20,184,166,0.4); }
+      50% { opacity: 1; box-shadow: 0 0 12px rgba(20,184,166,0.8); }
+    }
+    #status-dot {
+      animation: status-pulse 3s ease-in-out infinite;
+    }
+    .thinking-active #status-dot {
+      animation: status-pulse 0.8s ease-in-out infinite;
+    }
+  </style>
+
+  <script>
+    (function() {
+      const body = document.getElementById('terminal-body');
+      const input = document.getElementById('terminal-input') as HTMLInputElement;
+      const terminalOuter = document.getElementById('terminal-outer');
+      if (!body || !input) return;
+
+      // ── Entrance animation ────────────────────────────
+
+      requestAnimationFrame(() => {
+        if (terminalOuter) {
+          terminalOuter.style.opacity = '1';
+          terminalOuter.style.transform = 'translateY(0)';
+        }
+      });
+
+      const chatHistory: Array<{role: string; content: string}> = [];
+      let isProcessing = false;
+
+      // Session ID for tracking
+      const sessionId = crypto.randomUUID();
+
+      // Fire-and-forget event tracking
+      function trackEvent(eventType: string, eventData?: string) {
+        fetch('/api/event', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ event_type: eventType, event_data: eventData, page: '/', session_id: sessionId }),
+        }).catch(() => {});
+      }
+
+      // ── Utility ─────────────────────────────────────────
+
+      function escapeHtml(text: string): string {
+        const el = document.createElement('span');
+        el.textContent = text;
+        return el.innerHTML;
+      }
+
+      function scrollToBottom() {
+        requestAnimationFrame(() => { body.scrollTop = body.scrollHeight; });
+      }
+
+      function renderMarkdown(text: string): string {
+        let html = text;
+        html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_: string, __: string, code: string) => {
+          return `<pre><code>${escapeHtml(code.trim())}</code></pre>`;
+        });
+        html = html.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+        html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
+        html = html.replace(/^[-•] (.+)$/gm, '‹li›$1‹/li›');
+        html = html.replace(/((?:‹li›.*‹\/li›\n?)+)/g, '<ul>$1</ul>');
+        html = html.replace(/‹li›/g, '<li>').replace(/‹\/li›/g, '</li>');
+        html = html.replace(/\n\n+/g, '</p><p>');
+        html = html.replace(/\n/g, '<br>');
+        return `<p>${html}</p>`;
+      }
+
+      // ── Slash Commands ──────────────────────────────────
+
+      function addCommandOutput(html: string) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'cmd-output mb-2 mt-2 ml-5 text-[13px] leading-[1.8]';
+        wrapper.innerHTML = html;
+        body.appendChild(wrapper);
+
+        // Wire up any internal links
+        wrapper.querySelectorAll('[data-cmd]').forEach(el => {
+          el.addEventListener('click', () => {
+            const cmd = (el as HTMLElement).dataset.cmd;
+            if (cmd) {
+              input.value = cmd;
+              handleInput();
+            }
+          });
+        });
+
+        scrollToBottom();
+      }
+
+      const slashCommands: Record<string, () => void> = {
+        '/help': () => {
+          addCommandOutput(`
+            <div class="cmd-heading mb-2">Available commands</div>
+            <div class="cmd-divider"></div>
+            <div class="grid gap-1">
+              <div><span class="cmd-accent">/help</span> <span class="cmd-muted">—</span> <span class="cmd-muted">Show this list</span></div>
+              <div><span class="cmd-accent">/resume</span> <span class="cmd-muted">—</span> <span class="cmd-muted">Resume highlights</span></div>
+              <div><span class="cmd-accent">/skills</span> <span class="cmd-muted">—</span> <span class="cmd-muted">Technical skills</span></div>
+              <div><span class="cmd-accent">/experience</span> <span class="cmd-muted">—</span> <span class="cmd-muted">Work history</span></div>
+              <div><span class="cmd-accent">/work</span> <span class="cmd-muted">—</span> <span class="cmd-muted">Case studies &amp; projects</span></div>
+              <div><span class="cmd-accent">/about</span> <span class="cmd-muted">—</span> <span class="cmd-muted">Quick bio</span></div>
+              <div><span class="cmd-accent">/contact</span> <span class="cmd-muted">—</span> <span class="cmd-muted">Get in touch</span></div>
+              <div><span class="cmd-accent">/game</span> <span class="cmd-muted">—</span> <span class="cmd-muted">Play Tetris</span></div>
+              <div><span class="cmd-accent">/clear</span> <span class="cmd-muted">—</span> <span class="cmd-muted">Clear terminal</span></div>
+            </div>
+            <div class="cmd-divider"></div>
+            <div class="cmd-muted text-[11px]">Or just type a question to chat with the AI.</div>
+          `);
+        },
+
+        '/resume': () => {
+          addCommandOutput(`
+            <div class="cmd-heading mb-1">Adam Lacroix Sneed</div>
+            <div class="cmd-muted text-[11px] mb-2">Senior Solutions Architect · Austin, TX</div>
+            <div class="cmd-divider"></div>
+            <div class="mt-1"><span class="cmd-label">current</span>  Netwrix — PAM Solutions Architect (2021–present)</div>
+            <div><span class="cmd-label">focus</span>    Enterprise PAM, identity engineering, agentic AI</div>
+            <div><span class="cmd-label">edu</span>      JD — LSU Law · BA Government — UT Austin</div>
+            <div><span class="cmd-label">certs</span>    Security+ CE · Azure Fundamentals · State Bar of TX</div>
+            <div><span class="cmd-label">award</span>    Netwrix Hero Award — Q1 FY'25</div>
+            <div class="cmd-divider"></div>
+            <div class="mt-1">
+              <a href="/resume" class="cmd-link">View full resume →</a>
+              <span class="cmd-muted mx-2">·</span>
+              <a href="/resume/adam-sneed-resume.pdf" download class="cmd-link">Download PDF →</a>
+            </div>
+          `);
+        },
+
+        '/skills': () => {
+          addCommandOutput(`
+            <div class="cmd-heading mb-2">Technical Skills</div>
+            <div class="cmd-divider"></div>
+            <div class="mt-1"><span class="cmd-label">security</span>   PAM/EPM Architecture · IAM Governance · Zero Trust · NIST/CIS/ISO</div>
+            <div><span class="cmd-label">identity</span>   Credential Vaulting · Identity Lifecycle · AD/Entra ID · Cloud IAM</div>
+            <div><span class="cmd-label">code</span>       PowerShell · Python · SQL · REST APIs · Terraform · Ansible</div>
+            <div><span class="cmd-label">ops</span>        CI/CD · SIEM/SOAR · ITSM · SOX/PCI · Agile</div>
+            <div><span class="cmd-label">agentic</span>    Multi-Agent Systems · Prompt Engineering · Workflow Orchestration</div>
+          `);
+        },
+
+        '/experience': () => {
+          addCommandOutput(`
+            <div class="cmd-heading mb-2">Work History</div>
+            <div class="cmd-divider"></div>
+            <div class="mt-1">
+              <div class="cmd-heading text-[13px]">Netwrix Corporation <span class="cmd-muted font-normal">· 2021–present</span></div>
+              <div class="cmd-muted ml-2 text-[12px]">Sr. Solutions Architect, Privileged Access Management</div>
+              <div class="cmd-muted ml-2 text-[12px]">PAM SME for Fortune-class enterprise deployments</div>
+            </div>
+            <div class="mt-3">
+              <div class="cmd-heading text-[13px]">Agentic AI <span class="cmd-muted font-normal">· 2024–present</span></div>
+              <div class="cmd-muted ml-2 text-[12px]">5+ production AI agents across security, BI, infra, home automation</div>
+            </div>
+            <div class="mt-3">
+              <div class="cmd-heading text-[13px]">GCS Technologies <span class="cmd-muted font-normal">· 2012–2021</span></div>
+              <div class="cmd-muted ml-2 text-[12px]">Director of Ops → Tech Support Mgr → Datacenter Lead</div>
+              <div class="cmd-muted ml-2 text-[12px]">P&L ownership, 30-member team, 7 consecutive quarters above target</div>
+            </div>
+            <div class="mt-3">
+              <div class="cmd-muted text-[11px]">Early career: Linux/Unix admin — UT Austin IT, Security Management Services</div>
+            </div>
+          `);
+        },
+
+        '/work': () => {
+          addCommandOutput(`
+            <div class="cmd-heading mb-2">Case Studies & Projects</div>
+            <div class="cmd-divider"></div>
+            <div class="mt-1">
+              <div><a href="/work/pam" class="cmd-link">Enterprise PAM Architecture</a> <span class="cmd-muted">— Credential vaulting & session governance</span></div>
+              <div><a href="/work/agents" class="cmd-link">Agentic AI Systems</a> <span class="cmd-muted">— Multi-agent orchestration platform</span></div>
+              <div><a href="/work/ops" class="cmd-link">Operations & Infrastructure</a> <span class="cmd-muted">— Datacenter to director pipeline</span></div>
+            </div>
+            <div class="cmd-divider"></div>
+            <div><a href="/work" class="cmd-link">View all →</a></div>
+          `);
+        },
+
+        '/about': () => {
+          addCommandOutput(`
+            <div class="cmd-heading mb-2">About Adam</div>
+            <div class="cmd-divider"></div>
+            <div class="mt-1">20 years building from the physical layer up — datacenter operations, enterprise networking, security engineering, and now autonomous AI agents.</div>
+            <div class="mt-2">Each layer informs the next: infrastructure discipline shapes software design, software discipline shapes agent design.</div>
+            <div class="mt-2">
+              <span class="cmd-label">principles</span>
+              <div class="ml-2 mt-1">
+                <div><span class="cmd-accent">01</span> <span class="cmd-muted">Build for production, not demos</span></div>
+                <div><span class="cmd-accent">02</span> <span class="cmd-muted">Security is architecture, not a feature</span></div>
+                <div><span class="cmd-accent">03</span> <span class="cmd-muted">Agents need guardrails</span></div>
+                <div><span class="cmd-accent">04</span> <span class="cmd-muted">Write it down</span></div>
+              </div>
+            </div>
+            <div class="cmd-divider"></div>
+            <div><a href="/about" class="cmd-link">Read more →</a></div>
+          `);
+        },
+
+        '/contact': () => {
+          addCommandOutput(`
+            <div class="cmd-heading mb-2">Contact</div>
+            <div class="cmd-divider"></div>
+            <div class="mt-1">
+              <div><span class="cmd-label">email</span>    <a href="mailto:adam@adamsneed.com" class="cmd-link">adam@adamsneed.com</a></div>
+              <div><span class="cmd-label">linkedin</span> <a href="https://www.linkedin.com/in/adam-sneed-8113375/" target="_blank" rel="noreferrer" class="cmd-link">linkedin.com/in/adam-sneed</a></div>
+              <div><span class="cmd-label">github</span>   <a href="https://github.com/adamlsneed" target="_blank" rel="noreferrer" class="cmd-link">github.com/adamlsneed</a></div>
+              <div><span class="cmd-label">web</span>      <a href="/contact" class="cmd-link">adamsneed.com/contact</a></div>
+            </div>
+          `);
+        },
+
+        '/game': () => {
+          addCommandOutput(`
+            <div class="cmd-heading mb-2">Launching Tetris...</div>
+            <div class="cmd-muted">Redirecting to <a href="/game" class="cmd-link">/game</a></div>
+          `);
+          setTimeout(() => { window.location.href = '/game'; }, 800);
+        },
+
+        '/clear': () => {
+          // Remove all children except the background layers
+          const children = Array.from(body.children);
+          children.forEach(child => {
+            const el = child as HTMLElement;
+            if (!el.classList.contains('dot-grid') && !el.classList.contains('pointer-events-none')) {
+              el.remove();
+            }
+          });
+          chatHistory.length = 0;
+          input.placeholder = 'Type /help for commands, or ask a question...';
+        },
+      };
+
+      // ── Autocomplete ──────────────────────────────────
+
+      const autocompleteEl = document.getElementById('autocomplete')!;
+      let acSelectedIndex = -1;
+      let acVisible = false;
+      let acFiltered: Array<{ cmd: string; desc: string }> = [];
+
+      const commandMeta: Array<{ cmd: string; desc: string }> = [
+        { cmd: '/help', desc: 'Show available commands' },
+        { cmd: '/resume', desc: 'Resume highlights' },
+        { cmd: '/skills', desc: 'Technical skills' },
+        { cmd: '/experience', desc: 'Work history' },
+        { cmd: '/work', desc: 'Case studies & projects' },
+        { cmd: '/about', desc: 'Quick bio' },
+        { cmd: '/contact', desc: 'Get in touch' },
+        { cmd: '/game', desc: 'Play Tetris' },
+        { cmd: '/clear', desc: 'Clear terminal' },
+      ];
+
+      function showAutocomplete(filter: string) {
+        const query = filter.toLowerCase();
+        acFiltered = commandMeta.filter(c => c.cmd.startsWith(query));
+        if (acFiltered.length === 0) {
+          hideAutocomplete();
+          return;
+        }
+
+        acSelectedIndex = 0;
+        autocompleteEl.innerHTML = acFiltered.map((c, i) =>
+          `<div class="ac-item ${i === 0 ? 'active' : ''}" role="option" data-index="${i}" data-cmd="${c.cmd}">
+            <span class="ac-cmd">${c.cmd}</span>
+            <span class="ac-desc">${c.desc}</span>
+          </div>`
+        ).join('') + '<div class="ac-hint">↑↓ navigate · tab/enter select · esc dismiss</div>';
+
+        autocompleteEl.classList.remove('hidden');
+        input.setAttribute('aria-expanded', 'true');
+        acVisible = true;
+
+        // Click handler for items
+        autocompleteEl.querySelectorAll('.ac-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const cmd = (item as HTMLElement).dataset.cmd;
+            if (cmd) {
+              input.value = cmd;
+              hideAutocomplete();
+              input.focus();
+            }
+          });
+        });
+      }
+
+      function hideAutocomplete() {
+        autocompleteEl.classList.add('hidden');
+        autocompleteEl.innerHTML = '';
+        input.setAttribute('aria-expanded', 'false');
+        acVisible = false;
+        acSelectedIndex = -1;
+        acFiltered = [];
+      }
+
+      function acUpdateSelection() {
+        autocompleteEl.querySelectorAll('.ac-item').forEach((el, i) => {
+          el.classList.toggle('active', i === acSelectedIndex);
+        });
+      }
+
+      input.addEventListener('input', () => {
+        const val = input.value;
+        if (val.startsWith('/') && val.length >= 1) {
+          showAutocomplete(val);
+        } else {
+          hideAutocomplete();
+        }
+      });
+
+      // Intercept arrow/tab/esc keys for autocomplete navigation
+      input.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (!acVisible) return;
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          acSelectedIndex = (acSelectedIndex + 1) % acFiltered.length;
+          acUpdateSelection();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          acSelectedIndex = (acSelectedIndex - 1 + acFiltered.length) % acFiltered.length;
+          acUpdateSelection();
+        } else if (e.key === 'Tab') {
+          e.preventDefault();
+          if (acSelectedIndex >= 0 && acSelectedIndex < acFiltered.length) {
+            input.value = acFiltered[acSelectedIndex].cmd;
+            hideAutocomplete();
+          }
+        } else if (e.key === 'Enter') {
+          if (acSelectedIndex >= 0 && acSelectedIndex < acFiltered.length) {
+            input.value = acFiltered[acSelectedIndex].cmd;
+            hideAutocomplete();
+            // Don't prevent default — let the existing Enter handler fire
+          }
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          hideAutocomplete();
+        }
+      });
+
+      // Hide autocomplete when clicking outside
+      document.addEventListener('click', (e) => {
+        if (acVisible && !(e.target as HTMLElement).closest('#input-row')) {
+          hideAutocomplete();
+        }
+      });
+
+      // ── Permission Mode Cycling ──────────────────────────
+
+      const permModes = [
+        { label: 'bypass permissions on', color: '#f87171' },
+        { label: 'auto-accept edits', color: '#fbbf24' },
+        { label: 'plan mode', color: '#60a5fa' },
+        { label: 'default permissions', color: '#8494ad' },
+      ];
+      let permIndex = 0;
+      const permLabel = document.getElementById('perm-label')!;
+      const permArrows = document.querySelector('#perm-bar > span:first-child') as HTMLElement;
+
+      document.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Tab' && e.shiftKey) {
+          e.preventDefault();
+          permIndex = (permIndex + 1) % permModes.length;
+          const mode = permModes[permIndex];
+          permLabel.textContent = mode.label;
+          permLabel.style.color = mode.color;
+          permArrows.style.color = mode.color;
+        }
+      });
+
+      // ── Boot Sequence ───────────────────────────────────
+
+      const bootLines = [
+        { text: '[sys] initializing ~/.adam v0.1.0', color: 'text-textMuted/60' },
+        { text: '[ctx] loading: resume, skills, 20yr experience', color: 'text-textMuted/60' },
+        { text: '[net] connected — type /help for commands', color: 'text-accent/80' },
+      ];
+
+      async function runBootSequence() {
+        for (let i = 0; i < bootLines.length; i++) {
+          const line = document.createElement('div');
+          line.className = `boot-line ${bootLines[i].color} text-[11px] leading-relaxed`;
+          line.style.animationDelay = `${i * 200 + 300}ms`;
+          line.textContent = bootLines[i].text;
+          body.appendChild(line);
+        }
+
+        await new Promise(r => setTimeout(r, bootLines.length * 200 + 600));
+
+        const hr = document.createElement('div');
+        hr.className = 'my-4 h-px bg-gradient-to-r from-transparent via-accent/10 to-transparent';
+        body.appendChild(hr);
+
+        // Welcome banner
+        const banner = document.createElement('div');
+        banner.className = 'mb-2 boot-line';
+        banner.style.animationDelay = '0ms';
+        banner.innerHTML = `
+          <div class="rounded-lg border border-accent/[0.08] bg-accent/[0.02] px-5 py-4">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="inline-flex h-5 w-5 items-center justify-center rounded bg-accent/10 text-accent text-[11px] font-bold">▸</span>
+              <span class="font-bold text-textMain text-[14px] tracking-tight">~/.adam</span>
+              <span class="rounded bg-accent/[0.08] px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.12em] text-accent/50">interactive</span>
+            </div>
+            <p class="text-textMuted text-[13px] leading-relaxed mb-1.5">
+              I have full context on Adam's 20+ years across infrastructure, security engineering, and agentic AI. Ask me anything, or try a command.
+            </p>
+            <p class="text-textMuted/50 text-[10px]">Responses are AI-generated and may not be perfectly accurate.</p>
+          </div>
+        `;
+        body.appendChild(banner);
+        scrollToBottom();
+      }
+
+      // ── Message Rendering ───────────────────────────────
+
+      function addUserMessage(text: string) {
+        const msg = document.createElement('div');
+        msg.className = 'mt-5 mb-1';
+        msg.innerHTML = `<span class="font-bold text-accent drop-shadow-[0_0_6px_rgba(20,184,166,0.3)]">❯</span> <span class="text-textMain">${escapeHtml(text)}</span>`;
+        body.appendChild(msg);
+        scrollToBottom();
+      }
+
+      function createAssistantMessage(): { wrapper: HTMLElement; textNode: Text; cursor: HTMLElement } {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'mb-2 mt-3';
+
+        const header = document.createElement('div');
+        header.className = 'mb-1.5 flex items-center gap-2';
+        header.innerHTML = `
+          <span class="inline-flex h-4 w-4 items-center justify-center rounded bg-accent/10 text-accent text-[9px] font-bold">▸</span>
+          <span class="text-[11px] font-semibold tracking-wide text-accent/60">~/.adam</span>
+        `;
+
+        const content = document.createElement('div');
+        content.className = 'msg-content ml-6 text-[#8fb3c8]';
+
+        const textNode = document.createTextNode('');
+        const cursor = document.createElement('span');
+        cursor.className = 'stream-cursor';
+        cursor.textContent = '▋';
+
+        content.appendChild(textNode);
+        content.appendChild(cursor);
+
+        wrapper.appendChild(header);
+        wrapper.appendChild(content);
+        body.appendChild(wrapper);
+        scrollToBottom();
+
+        return { wrapper, textNode, cursor };
+      }
+
+      // ── Thinking Indicator ──────────────────────────────
+
+      let thinkingInterval: number | null = null;
+
+      function showThinking() {
+        terminalOuter?.classList.add('thinking-active');
+
+        const el = document.createElement('div');
+        el.id = 'thinking-indicator';
+        el.className = 'mt-3 mb-2 flex items-center gap-2 text-accent/30 text-[12px]';
+        const spinner = document.createElement('span');
+        const label = document.createElement('span');
+        label.textContent = 'processing…';
+        el.appendChild(spinner);
+        el.appendChild(label);
+        body.appendChild(el);
+
+        const frames = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏'];
+        let i = 0;
+        spinner.textContent = frames[0];
+        thinkingInterval = window.setInterval(() => {
+          i = (i + 1) % frames.length;
+          spinner.textContent = frames[i];
+        }, 80);
+
+        scrollToBottom();
+      }
+
+      function hideThinking() {
+        terminalOuter?.classList.remove('thinking-active');
+        if (thinkingInterval !== null) {
+          clearInterval(thinkingInterval);
+          thinkingInterval = null;
+        }
+        document.getElementById('thinking-indicator')?.remove();
+      }
+
+      // ── Chat API ────────────────────────────────────────
+
+      interface TerminalChatAPI {
+        getResponse(
+          messages: Array<{role: string; content: string}>,
+          onToken: (token: string) => void,
+          onComplete: () => void
+        ): Promise<void>;
+      }
+
+      const chatAPI: TerminalChatAPI = {
+        async getResponse(messages, onToken, onComplete) {
+          try {
+            const res = await fetch('/api/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ messages, session_id: sessionId }),
+            });
+
+            if (!res.ok) {
+              const data = await res.json().catch(() => ({}));
+              throw new Error((data as any).error || `HTTP ${res.status}`);
+            }
+
+            const data = await res.json() as { response: string };
+            const text = data.response || '';
+
+            for (let i = 0; i < text.length; i++) {
+              onToken(text[i]);
+              await new Promise(r => setTimeout(r, 8 + Math.random() * 6));
+            }
+            onComplete();
+          } catch (err: any) {
+            throw err;
+          }
+        }
+      };
+
+      (window as any).terminalChat = chatAPI;
+
+      // ── Input Handler ───────────────────────────────────
+
+      async function handleInput() {
+        const text = input.value.trim();
+        if (!text || isProcessing) return;
+
+        const lowerText = text.toLowerCase();
+
+        // Check for slash commands
+        if (lowerText in slashCommands) {
+          input.value = '';
+          addUserMessage(text);
+          trackEvent('slash_command', lowerText);
+          slashCommands[lowerText]();
+          return;
+        }
+
+        // Otherwise, send to AI
+        isProcessing = true;
+        input.value = '';
+        input.disabled = true;
+        input.placeholder = '';
+
+        chatHistory.push({ role: 'user', content: text });
+        addUserMessage(text);
+        showThinking();
+
+        const { wrapper, textNode, cursor } = createAssistantMessage();
+        wrapper.style.display = 'none';
+        let fullText = '';
+
+        try {
+          await (window as any).terminalChat.getResponse(
+            [...chatHistory],
+            (token: string) => {
+              if (wrapper.style.display === 'none') {
+                hideThinking();
+                wrapper.style.display = '';
+              }
+              fullText += token;
+              textNode.textContent = fullText;
+              scrollToBottom();
+            },
+            () => {
+              cursor.remove();
+              const content = wrapper.querySelector('.msg-content') as HTMLElement;
+              if (content) content.innerHTML = renderMarkdown(fullText);
+              chatHistory.push({ role: 'assistant', content: fullText });
+              scrollToBottom();
+            }
+          );
+        } catch (err: any) {
+          hideThinking();
+          wrapper.style.display = '';
+          cursor.remove();
+          const content = wrapper.querySelector('.msg-content') as HTMLElement;
+          if (content) {
+            content.innerHTML = `<span class="text-[#ff5f57]">Error: ${escapeHtml(err?.message || String(err))}</span>`;
+          }
+        } finally {
+          isProcessing = false;
+          input.disabled = false;
+          input.placeholder = 'Type /help for commands, or ask a follow-up…';
+          input.focus();
+        }
+      }
+
+      // ── Event Listeners ─────────────────────────────────
+
+      input.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleInput();
+        }
+      });
+
+      if (window.innerWidth > 768) {
+        input.focus();
+      }
+
+      // ── Init ────────────────────────────────────────────
+
+      runBootSequence();
+    })();
+  </script>
 </MainLayout>

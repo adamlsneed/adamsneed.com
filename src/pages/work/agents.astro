@@ -7,41 +7,77 @@ import MainLayout from '../../layouts/MainLayout.astro';
   description="Agentic systems case study: production multi-agent orchestration, structured outputs, verification loops, and security-first guardrails for safe automation."
   ogType="article"
 >
-  <article class="space-y-10">
-    <div class="space-y-4">
-      <p class="eyebrow">Case Study</p>
-      <h1 class="section-title">Agentic Systems Engineering</h1>
-      <p class="lead">
-        Built a production multi-agent system with explicit roles, permissions, and chains of command across specialized
-        agents.
-      </p>
+  <section class="px-6 pb-20 pt-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal>
+        <a href="/work" class="mb-8 inline-flex items-center gap-2 text-sm text-textMuted transition-colors duration-300 hover:text-accent">
+          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          Back to Work
+        </a>
+        <span class="block text-xs font-mono uppercase tracking-[0.3em] text-textMuted">Case Study</span>
+        <h1 class="mt-4 text-balance text-4xl font-bold leading-tight text-textMain md:text-6xl">Agentic Systems Engineering</h1>
+        <p class="mt-6 text-pretty text-lg leading-relaxed text-textMuted">
+          Built a production multi-agent system with explicit roles, permissions, and chains of command across specialized agents.
+        </p>
+      </div>
     </div>
+  </section>
 
-    <section class="card space-y-4" data-reveal>
-      <h2 class="font-mono text-2xl font-semibold">System Design</h2>
-      <ul class="space-y-3 text-textMuted">
-        <li>Coordinated 5+ specialized agents with deterministic handoffs and policy-aware routing.</li>
-        <li>Implemented prompt-engineered workflows with structured output parsing and verification loops.</li>
-        <li>Added retry logic, confidence thresholds, and mandatory approval gates for high-risk actions.</li>
-      </ul>
-    </section>
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="100">
+        <h2 class="mb-6 text-2xl font-bold text-textMain">System Design</h2>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-4">
+            <span class="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accentBlue"></span>
+            <span class="text-pretty leading-relaxed text-textMuted">Coordinated 5+ specialized agents with deterministic handoffs and policy-aware routing.</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accentBlue"></span>
+            <span class="text-pretty leading-relaxed text-textMuted">Implemented prompt-engineered workflows with structured output parsing and verification loops.</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accentBlue"></span>
+            <span class="text-pretty leading-relaxed text-textMuted">Added retry logic, confidence thresholds, and mandatory approval gates for high-risk actions.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <section class="card space-y-4 md:ml-8" data-reveal>
-      <h2 class="font-mono text-2xl font-semibold">Security Controls</h2>
-      <ul class="space-y-3 text-textMuted">
-        <li>Credential isolation and tool-use restrictions to limit blast radius.</li>
-        <li>Prompt injection detection and output sanitization on external context ingestion.</li>
-        <li>Code scanning and policy checks before execution pathways.</li>
-      </ul>
-    </section>
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="200">
+        <h2 class="mb-6 text-2xl font-bold text-textMain">Security Controls</h2>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-4">
+            <span class="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accentBlue"></span>
+            <span class="text-pretty leading-relaxed text-textMuted">Credential isolation and tool-use restrictions to limit blast radius.</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accentBlue"></span>
+            <span class="text-pretty leading-relaxed text-textMuted">Prompt injection detection and output sanitization on external context ingestion.</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accentBlue"></span>
+            <span class="text-pretty leading-relaxed text-textMuted">Code scanning and policy checks before execution pathways.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <section class="card space-y-4 border-l-4 border-l-accent/40" data-reveal>
-      <h2 class="font-mono text-2xl font-semibold">Orchestration Outcomes</h2>
-      <p class="text-textMuted">
-        Designed cross-agent communication, session orchestration, and webhook-driven state machines that supported
-        commercial intelligence delivery while maintaining auditable control boundaries.
-      </p>
-      <p class="text-textMuted">Core tooling included Claude Code, OpenClaw, and structured agentic workflow design patterns.</p>
-    </section>
-  </article>
+  <section class="px-6 pb-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="300">
+        <h2 class="mb-6 text-2xl font-bold text-textMain">Orchestration Outcomes</h2>
+        <p class="text-pretty leading-relaxed text-textMuted">
+          Designed cross-agent communication, session orchestration, and webhook-driven state machines that supported commercial intelligence delivery while maintaining auditable control boundaries.
+        </p>
+        <p class="mt-4 text-pretty leading-relaxed text-textMuted">
+          Core tooling included Claude Code, OpenClaw, and structured agentic workflow design patterns.
+        </p>
+      </div>
+    </div>
+  </section>
 </MainLayout>

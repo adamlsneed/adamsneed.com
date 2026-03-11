@@ -7,45 +7,72 @@ import MainLayout from '../../layouts/MainLayout.astro';
   description="Enterprise Privileged Access Management (PAM) case study: credential lifecycle automation, session governance, and integration architecture across AD/Entra ID and cloud IAM."
   ogType="article"
 >
-  <article class="space-y-10">
-    <div class="space-y-4">
-      <p class="eyebrow">Case Study</p>
-      <h1 class="section-title">Enterprise PAM Engineering</h1>
-      <p class="lead">
-        Senior Solutions Architect and PAM subject matter expert at Netwrix, designing and deploying enterprise privileged access and identity management solutions for complex environments.
-      </p>
+  <section class="px-6 pb-20 pt-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal>
+        <a href="/work" class="mb-8 inline-flex items-center gap-2 text-sm text-textMuted transition-colors duration-300 hover:text-accent">
+          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          Back to Work
+        </a>
+        <span class="block text-xs font-mono uppercase tracking-[0.3em] text-textMuted">Case Study</span>
+        <h1 class="mt-4 text-balance text-4xl font-bold leading-tight text-textMain md:text-6xl">Enterprise PAM Engineering</h1>
+        <p class="mt-6 text-pretty text-lg leading-relaxed text-textMuted">
+          Senior Solutions Architect and PAM subject matter expert at Netwrix, designing and deploying enterprise privileged access and identity management solutions for complex environments.
+        </p>
+      </div>
     </div>
+  </section>
 
-    <section class="card space-y-4" data-reveal>
-      <h2 class="font-mono text-2xl font-semibold">Scope</h2>
-      <ul class="space-y-3 text-textMuted">
-        <li>Credential lifecycle automation using Python, PowerShell, and API-driven orchestration.</li>
-        <li>Session governance through proxied recording, monitoring, and just-in-time access controls.</li>
-        <li>Service account policy enforcement with vaulting, rotation, and risk-based access pathways.</li>
-      </ul>
-    </section>
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="100">
+        <h2 class="mb-6 text-2xl font-bold text-textMain">Scope</h2>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-4">
+            <span class="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"></span>
+            <span class="leading-relaxed text-textMuted">Credential lifecycle automation using Python, PowerShell, and API-driven orchestration.</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"></span>
+            <span class="leading-relaxed text-textMuted">Session governance through proxied recording, monitoring, and just-in-time access controls.</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"></span>
+            <span class="leading-relaxed text-textMuted">Service account policy enforcement with vaulting, rotation, and risk-based access pathways.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <section class="card space-y-4 md:ml-8" data-reveal>
-      <h2 class="font-mono text-2xl font-semibold">Integration Architecture</h2>
-      <p class="text-textMuted">
-        Designed PAM integration patterns tying together SIEM/SOAR telemetry, ITSM workflows, and CI/CD deployment
-        controls. The objective was not just control enforcement, but resilient, auditable operations with minimal
-        friction for delivery teams.
-      </p>
-      <p class="text-textMuted">
-        Implementations emphasized deterministic onboarding, clean rollback paths, and measurable policy compliance.
-      </p>
-    </section>
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="200">
+        <h2 class="mb-6 text-2xl font-bold text-textMain">Integration Architecture</h2>
+        <div class="space-y-4 leading-relaxed text-textMuted">
+          <p class="text-pretty">
+            Designed PAM integration patterns tying together SIEM/SOAR telemetry, ITSM workflows, and CI/CD deployment controls. The objective was not just control enforcement, but resilient, auditable operations with minimal friction for delivery teams.
+          </p>
+          <p class="text-pretty">
+            Implementations emphasized deterministic onboarding, clean rollback paths, and measurable policy compliance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="card space-y-4 border-l-4 border-l-accent/40" data-reveal>
-      <h2 class="font-mono text-2xl font-semibold">Result</h2>
-      <p class="text-textMuted">
-        Delivered enterprise-grade privileged access platforms with repeatable automation patterns and governance models
-        that held up under audit and production pressure.
-      </p>
-      <p class="text-textMuted">
-        Recognized with the Netwrix Hero Award (Q1 FY&apos;25) for impact in enterprise PAM solution delivery.
-      </p>
-    </section>
-  </article>
+  <section class="px-6 pb-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="300">
+        <h2 class="mb-6 text-2xl font-bold text-textMain">Result</h2>
+        <p class="text-pretty leading-relaxed text-textMuted">
+          Delivered enterprise-grade privileged access platforms with repeatable automation patterns and governance models that held up under audit and production pressure.
+        </p>
+        <div class="mt-8 rounded-xl border border-accent/20 bg-accent/5 p-6">
+          <p class="text-sm font-mono text-accent">Netwrix Hero Award &mdash; Q1 FY&apos;25</p>
+          <p class="mt-2 text-sm text-textMuted">Excellence in enterprise PAM solution delivery</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </MainLayout>

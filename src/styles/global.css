@@ -15,13 +15,19 @@
   --surface-soft: #101726;
   --border: #2b3850;
   --text: #e7edf8;
-  --muted: #9aa8bf;
+  --muted: #8494ad;
   --accent: #14b8a6;
   --accent-soft: rgba(20, 184, 166, 0.16);
+  --accent-blue: rgb(80, 180, 255);
+  --accent-purple: rgb(160, 120, 255);
 }
 
 * {
   border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -32,26 +38,11 @@ body {
 
 body {
   background-color: var(--bg);
-  background-image: radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.2), transparent 38%),
-    radial-gradient(circle at 80% 0%, rgba(47, 128, 237, 0.18), transparent 42%),
-    radial-gradient(circle at 60% 80%, rgba(58, 200, 153, 0.11), transparent 42%);
   color: var(--text);
   font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
   line-height: 1.55;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
 }
 
 a {
@@ -70,6 +61,30 @@ button:focus-visible,
   color: #fff;
 }
 
+/* Scroll reveal — CSS transition based */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Keyframes */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+}
+
+/* Backward-compatible component classes (used by game.astro) */
 @layer components {
   .container-shell {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
@@ -80,11 +95,11 @@ button:focus-visible,
   }
 
   .card {
-    @apply rounded-2xl border border-borderTone/90 bg-panel/85 p-6 backdrop-blur-sm;
+    @apply rounded-xl border border-borderTone/90 bg-panel/85 p-6 backdrop-blur-sm;
   }
 
   .section-title {
-    @apply font-mono text-3xl font-semibold tracking-tight md:text-4xl;
+    @apply font-mono text-3xl font-bold tracking-tight md:text-4xl;
   }
 
   .lead {
@@ -92,11 +107,11 @@ button:focus-visible,
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#0d9488] hover:shadow-glow;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-base transition-all duration-300 hover:shadow-[0_0_30px_rgba(100,220,200,0.2)];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-lg border border-borderTone bg-[#101726] px-5 py-3 text-sm font-semibold text-textMain transition duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-accentSoft;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-borderTone px-6 py-3 text-sm font-medium text-textMain transition-all duration-300 hover:border-accent/50 hover:text-accent;
   }
 
   .metric-label {
@@ -106,28 +121,7 @@ button:focus-visible,
   .metric-value {
     @apply text-3xl font-semibold text-textMain;
   }
-
-  .card-featured {
-    @apply rounded-2xl border border-accent/25 bg-panel/85 p-8 backdrop-blur-sm;
-  }
 }
-
-@keyframes reveal-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-[data-reveal] { opacity: 0; }
-[data-reveal].is-visible { animation: reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
-
-[data-reveal-stagger] > * { opacity: 0; }
-[data-reveal-stagger].is-visible > * { animation: reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
-[data-reveal-stagger].is-visible > *:nth-child(1) { animation-delay: 0ms; }
-[data-reveal-stagger].is-visible > *:nth-child(2) { animation-delay: 80ms; }
-[data-reveal-stagger].is-visible > *:nth-child(3) { animation-delay: 160ms; }
-[data-reveal-stagger].is-visible > *:nth-child(4) { animation-delay: 240ms; }
-[data-reveal-stagger].is-visible > *:nth-child(5) { animation-delay: 320ms; }
-[data-reveal-stagger].is-visible > *:nth-child(6) { animation-delay: 400ms; }
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -139,8 +133,8 @@ button:focus-visible,
     scroll-behavior: auto !important;
   }
 
-  [data-reveal],
-  [data-reveal-stagger] > * {
+  [data-reveal] {
     opacity: 1 !important;
+    transform: none !important;
   }
 }

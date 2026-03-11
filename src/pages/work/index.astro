@@ -3,22 +3,28 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
 const caseStudies = [
   {
-    href: '/work/pam',
+    slug: 'pam',
+    label: '01 / Security',
     title: 'Enterprise PAM Engineering',
-    summary:
-      'Principal engineer for enterprise privileged access deployments with automation, integration architecture, and governance at scale.'
+    description: 'Principal engineer for enterprise privileged access deployments with automation, integration architecture, and governance at scale.',
+    accent: 'rgba(100, 220, 200, 0.15)',
+    border: 'rgba(100, 220, 200, 0.3)'
   },
   {
-    href: '/work/agents',
+    slug: 'agents',
+    label: '02 / AI',
     title: 'Agentic Systems Engineering',
-    summary:
-      'Production multi-agent workflows with role boundaries, structured output validation, security controls, and approval gates.'
+    description: 'Production multi-agent workflows with role boundaries, structured output validation, security controls, and approval gates.',
+    accent: 'rgba(80, 180, 255, 0.15)',
+    border: 'rgba(80, 180, 255, 0.3)'
   },
   {
-    href: '/work/ops',
+    slug: 'ops',
+    label: '03 / Ops',
     title: 'Operations & Scale',
-    summary:
-      'Nine-year leadership progression from datacenter lead to director of operations, including team growth and P&L ownership.'
+    description: 'Nine-year leadership progression from datacenter lead to director of operations, including team growth and P&L ownership.',
+    accent: 'rgba(160, 120, 255, 0.15)',
+    border: 'rgba(160, 120, 255, 0.3)'
   }
 ];
 ---
@@ -27,28 +33,51 @@ const caseStudies = [
   title="Work"
   description="Selected case studies: enterprise Privileged Access Management (PAM), production agentic systems engineering, and operations leadership at scale."
 >
-  <section class="space-y-12">
-    <div class="max-w-4xl space-y-4">
-      <p class="eyebrow">Work</p>
-      <h1 class="section-title">Case Studies</h1>
-      <p class="lead">
-        A selection of architecture-heavy delivery work spanning security engineering, production AI systems, and
-        operations leadership.
-      </p>
+  <section class="px-6 pb-20 pt-32">
+    <div class="mx-auto max-w-4xl">
+      <div data-reveal>
+        <span class="text-xs font-mono uppercase tracking-[0.3em] text-textMuted">Work</span>
+        <h1 class="mt-4 text-balance text-4xl font-bold leading-tight text-textMain md:text-6xl">Case Studies</h1>
+        <p class="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-textMuted">
+          A selection of architecture-heavy delivery work spanning security engineering, production AI systems, and operations leadership.
+        </p>
+      </div>
     </div>
+  </section>
 
-    <div class="grid gap-6 lg:grid-cols-[2fr_1fr_1fr]" data-reveal-stagger>
+  <section class="px-6 pb-32">
+    <div class="mx-auto max-w-4xl space-y-6">
       {
-        caseStudies.map((study) => (
-          <article class="card flex h-full flex-col justify-between gap-6">
-            <div>
-              <h2 class="mb-3 font-mono text-xl font-semibold">{study.title}</h2>
-              <p class="text-textMuted">{study.summary}</p>
-            </div>
-            <a class="btn-secondary w-fit" href={study.href}>
-              Read Case Study
+        caseStudies.map((study, i) => (
+          <div data-reveal data-reveal-delay={String(i * 100)}>
+            <a
+              href={`/work/${study.slug}`}
+              class="group block overflow-hidden rounded-xl transition-all duration-500 hover:shadow-[0_0_40px_rgba(100,220,200,0.08)]"
+              style={`border:1px solid ${study.border};background:var(--surface)`}
+            >
+              <div class="relative p-8 lg:p-10">
+                <div
+                  class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={`background:radial-gradient(800px circle at 50% 50%,${study.accent},transparent 50%)`}
+                  aria-hidden="true"
+                />
+                <div class="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                  <div class="flex-1">
+                    <span class="text-xs font-mono uppercase tracking-widest text-textMuted">{study.label}</span>
+                    <h2 class="mt-3 text-2xl font-semibold text-textMain transition-colors duration-300 group-hover:text-accent md:text-3xl">{study.title}</h2>
+                    <p class="mt-3 text-pretty leading-relaxed text-textMuted">{study.description}</p>
+                  </div>
+                  <div class="flex-shrink-0">
+                    <span class="inline-flex items-center gap-2 text-sm text-textMuted transition-all duration-300 group-hover:gap-3 group-hover:text-accent">
+                      Read Case Study
+                      <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </span>
+                  </div>
+                </div>
+                <div class="absolute bottom-0 left-0 h-px w-0 transition-all duration-700 group-hover:w-full" style={`background:${study.border}`} aria-hidden="true" />
+              </div>
             </a>
-          </article>
+          </div>
         ))
       }
     </div>

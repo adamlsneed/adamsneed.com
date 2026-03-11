@@ -1,58 +1,91 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import headshot from '../assets/headshot.jpg';
 ---
 
 <MainLayout
   title="About"
   description="About Adam Sneed: security-focused engineering leader with a two-decade track record in operations, privileged access, and agentic AI systems."
 >
-  <section class="grid gap-8 lg:grid-cols-[320px,1fr]">
-    <div class="card h-fit" data-reveal>
-      <img
-        src={headshot.src}
-        width={headshot.width}
-        height={headshot.height}
-        alt="Illustrated headshot of Adam Sneed with a bookshelf background"
-        class="w-full rounded-xl border border-borderTone object-cover"
-        loading="lazy"
-      />
-    </div>
-
-    <div class="space-y-10">
-      <div class="space-y-4">
-        <p class="eyebrow">About</p>
-        <h1 class="section-title">Engineering every layer</h1>
-        <p class="lead">
-          Two decades building from the physical layer up — RedHat and AIX administration, datacenter operations, enterprise networking, all the way through security engineering and now autonomous AI agents.
-        </p>
-        <p class="text-textMuted">
-          At Netwrix, I&apos;m a Senior Solutions Architect in Professional Services — the subject matter expert on our PAM product. I design and deploy enterprise PAM solutions, build automation frameworks, and translate complex security requirements into production-grade implementations.
-        </p>
-        <p class="text-textMuted">
-          Outside of that, I engineer across all three layers. Physical: home lab infrastructure, edge devices, custom hardware rigs. Software: APIs, integration pipelines, automation systems that hold under pressure. Agentic: multi-agent orchestration, prompt engineering, and autonomous workflows built with the same discipline I bring to privileged access — least privilege, human oversight, audit trails, fail-safe defaults.
-        </p>
-        <p class="border-l-2 border-accent/40 pl-4 text-lg text-textMain">
-          Each layer informs the next. Infrastructure discipline shapes software design. Software discipline shapes agent design. That&apos;s the through-line.
-        </p>
+  <!-- Hero -->
+  <section class="px-6 pb-20 pt-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal>
+        <span class="text-xs font-mono uppercase tracking-[0.3em] text-textMuted">About</span>
+        <h1 class="mt-4 text-balance text-4xl font-bold leading-tight text-textMain md:text-6xl">Engineering every layer</h1>
       </div>
+    </div>
+  </section>
 
-      <div class="card border-l-4 border-l-accent/40" data-reveal>
-        <h2 class="mb-4 font-mono text-xl font-semibold">Operating Principles</h2>
-        <ul class="space-y-3 text-textMuted">
-          <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Build for production, not demos.</span></li>
-          <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Security is architecture, not a feature.</span></li>
-          <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Agents need guardrails.</span></li>
-          <li class="flex gap-3"><span class="mt-2 h-2 w-2 rounded-full bg-accent"></span><span>Write it down.</span></li>
+  <!-- Bio -->
+  <section class="px-6 pb-20">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="100">
+        <div class="space-y-6 text-lg leading-relaxed text-textMuted">
+          <p class="text-pretty text-xl leading-relaxed text-textMain">
+            Two decades building from the physical layer up &mdash; RedHat and AIX administration, datacenter operations, enterprise networking, all the way through security engineering and now autonomous AI agents.
+          </p>
+          <p class="text-pretty">
+            At Netwrix, I&apos;m a Senior Solutions Architect in Professional Services &mdash; the subject matter expert on our PAM product. I design and deploy enterprise PAM solutions, build automation frameworks, and translate complex security requirements into production-grade implementations.
+          </p>
+          <p class="text-pretty">
+            Outside of that, I engineer across all three layers.
+            <span class="font-medium text-textMain">Physical:</span> home lab infrastructure, edge devices, custom hardware rigs.
+            <span class="font-medium text-textMain">Software:</span> APIs, integration pipelines, automation systems that hold under pressure.
+            <span class="font-medium text-textMain">Agentic:</span> multi-agent orchestration, prompt engineering, and autonomous workflows built with the same discipline I bring to privileged access &mdash; least privilege, human oversight, audit trails, fail-safe defaults.
+          </p>
+          <p class="text-pretty">
+            Each layer informs the next. Infrastructure discipline shapes software design. Software discipline shapes agent design. That&apos;s the through-line.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Operating Principles -->
+  <section class="px-6 pb-20">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="150">
+        <h2 class="mb-8 text-2xl font-bold text-textMain md:text-3xl">Operating Principles</h2>
+        <ul class="space-y-4">
+          <li class="group flex items-start gap-4">
+            <span class="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-accent/10">
+              <span class="text-xs font-mono text-accent">01</span>
+            </span>
+            <span class="text-lg text-textMuted transition-colors duration-300 group-hover:text-textMain">Build for production, not demos.</span>
+          </li>
+          <li class="group flex items-start gap-4">
+            <span class="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-accent/10">
+              <span class="text-xs font-mono text-accent">02</span>
+            </span>
+            <span class="text-lg text-textMuted transition-colors duration-300 group-hover:text-textMain">Security is architecture, not a feature.</span>
+          </li>
+          <li class="group flex items-start gap-4">
+            <span class="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-accent/10">
+              <span class="text-xs font-mono text-accent">03</span>
+            </span>
+            <span class="text-lg text-textMuted transition-colors duration-300 group-hover:text-textMain">Agents need guardrails.</span>
+          </li>
+          <li class="group flex items-start gap-4">
+            <span class="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-accent/10">
+              <span class="text-xs font-mono text-accent">04</span>
+            </span>
+            <span class="text-lg text-textMuted transition-colors duration-300 group-hover:text-textMain">Write it down.</span>
+          </li>
         </ul>
       </div>
+    </div>
+  </section>
 
-      <div class="card" data-reveal>
-        <h2 class="mb-3 font-mono text-xl font-semibold">Policy Lens</h2>
-        <p class="text-textMuted">
-          My Juris Doctor from LSU Law informs how I design policies, evaluate regulatory risk, and write statement-of-work
-          scope with contract-level precision.
-        </p>
+  <!-- Policy Lens -->
+  <section class="px-6 pb-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="200">
+        <div class="border-l-2 border-accent/30 pl-6">
+          <h2 class="mb-4 text-2xl font-bold text-textMain md:text-3xl">Policy Lens</h2>
+          <p class="text-pretty text-lg leading-relaxed text-textMuted">
+            My Juris Doctor from LSU Law informs how I design policies, evaluate regulatory risk, and write statement-of-work scope with contract-level precision.
+          </p>
+        </div>
       </div>
     </div>
   </section>

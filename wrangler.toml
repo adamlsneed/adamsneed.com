@@ -1,0 +1,13 @@
+name = "adamsneed"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = "dist"
+
+[ai]
+binding = "AI"
+
+# D1 Analytics Database
+# TODO: Replace database_id after running: npx wrangler d1 create adamsneed-analytics
+[[d1_databases]]
+binding = "DB"
+database_name = "adamsneed-analytics"
+database_id = "27b73e51-7470-4c4e-81c2-84258615a3ba"
