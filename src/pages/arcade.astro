@@ -1,0 +1,155 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+const games = [
+  {
+    name: 'Tetris',
+    emoji: '🧱',
+    command: 'ssh tetris@tetris.adamsneed.com',
+    description: 'Classic block-stacking with SRS rotation, ghost piece, hold queue, next-3 preview, and level scaling. All 7 tetrominoes, proper wall kicks, line clear animations.',
+    features: ['SRS rotation system', 'Ghost piece & hold queue', 'Next-3 preview', 'SQLite leaderboard', 'Line clear animations'],
+    repo: 'https://github.com/adamlsneed/ssh-tetris',
+  },
+  {
+    name: 'Snake',
+    emoji: '🐍',
+    command: 'ssh -p 2223 snake@tetris.adamsneed.com',
+    description: 'Classic snake — eat food, grow longer, don\'t crash. Arrow keys or WASD, speed increases with each level, compete on the global leaderboard.',
+    features: ['Arrow keys + WASD', 'Speed scaling by level', 'SQLite leaderboard', 'Pause support'],
+    repo: 'https://github.com/adamlsneed/ssh-snake',
+  },
+];
+---
+
+<MainLayout
+  title="SSH Arcade"
+  description="Play classic games over SSH. No install, no signup — just connect from any terminal."
+>
+  <!-- Hero -->
+  <section class="px-6 pb-16 pt-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal>
+        <span class="text-xs font-mono uppercase tracking-[0.3em] text-textMuted">Projects</span>
+        <h1 class="mt-4 text-balance text-4xl font-bold leading-tight text-textMain md:text-6xl">SSH Arcade</h1>
+        <p class="mt-6 text-pretty text-lg leading-relaxed text-textMuted">
+          Classic games you can play from any terminal. No install, no signup, no browser &mdash; just SSH in and play. Built with Go, <a href="https://charm.sh" target="_blank" rel="noreferrer" class="text-accent hover:underline">Charm</a>, and raw ANSI escape codes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="100">
+        <div class="card overflow-hidden">
+          <div class="bg-panel/50 px-4 py-2.5 border-b border-borderTone/50">
+            <div class="flex items-center gap-[7px]">
+              <span class="h-[10px] w-[10px] rounded-full bg-[#ff5f57]/60"></span>
+              <span class="h-[10px] w-[10px] rounded-full bg-[#febc2e]/60"></span>
+              <span class="h-[10px] w-[10px] rounded-full bg-[#28c840]/60"></span>
+              <span class="ml-3 font-mono text-[11px] text-textMuted/50">terminal</span>
+            </div>
+          </div>
+          <div class="px-5 py-4 font-mono text-sm">
+            <p class="text-textMuted/50">$ <span class="text-accent">ssh</span> <span class="text-textMain">tetris@tetris.adamsneed.com</span></p>
+            <p class="mt-1 text-textMuted/40"># That's it. You're playing Tetris.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Games -->
+  <section class="px-6 pb-20">
+    <div class="mx-auto max-w-3xl">
+      <div class="space-y-8">
+        {games.map((game, i) => (
+          <div data-reveal data-reveal-delay={String(150 + i * 100)}>
+            <div class="card p-6 md:p-8">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h2 class="text-2xl font-bold text-textMain">
+                    <span class="mr-2">{game.emoji}</span>{game.name}
+                  </h2>
+                  <p class="mt-2 text-pretty text-textMuted">{game.description}</p>
+                </div>
+              </div>
+
+              <!-- SSH command -->
+              <div class="mt-5 flex items-center gap-3">
+                <code id={`cmd-${i}`} class="flex-1 rounded-lg bg-[#0a0f1a] border border-borderTone/50 px-4 py-2.5 font-mono text-sm text-accent select-all">
+                  {game.command}
+                </code>
+                <button
+                  class="copy-btn flex-shrink-0 rounded-lg border border-borderTone/50 bg-panel/50 p-2.5 text-textMuted transition-all duration-200 hover:border-accent/50 hover:text-accent"
+                  data-copy={game.command}
+                  aria-label={`Copy ${game.name} SSH command`}
+                >
+                  <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+
+              <!-- Features -->
+              <div class="mt-5 flex flex-wrap gap-2">
+                {game.features.map((f) => (
+                  <span class="rounded-full border border-borderTone/50 bg-panel/30 px-3 py-1 text-xs font-mono text-textMuted">
+                    {f}
+                  </span>
+                ))}
+              </div>
+
+              <!-- Source -->
+              <div class="mt-4">
+                <a href={game.repo} target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 text-xs font-mono text-textMuted/50 transition-colors duration-200 hover:text-accent">
+                  <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  View source
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section class="px-6 pb-32">
+    <div class="mx-auto max-w-3xl">
+      <div data-reveal data-reveal-delay="350">
+        <div class="border-l-2 border-accent/30 pl-6">
+          <h2 class="mb-4 text-2xl font-bold text-textMain md:text-3xl">How it's built</h2>
+          <div class="space-y-3 text-textMuted">
+            <p class="text-pretty">
+              Each game is a standalone Go binary using <a href="https://github.com/charmbracelet/wish" target="_blank" rel="noreferrer" class="text-accent hover:underline">Wish</a> (SSH server) and <a href="https://github.com/charmbracelet/bubbletea" target="_blank" rel="noreferrer" class="text-accent hover:underline">Bubble Tea</a> (TUI framework). Scores persist in SQLite via <code class="rounded bg-panel/50 px-1.5 py-0.5 text-xs font-mono text-textMuted">modernc.org/sqlite</code> &mdash; pure Go, no CGO, cross-compiles cleanly to Linux.
+            </p>
+            <p class="text-pretty">
+              Colors are rendered with raw ANSI escape codes because lipgloss color detection fails over SSH (no local TTY). Each server runs in a hardened systemd sandbox with session limits, idle timeouts, WAL-mode SQLite for safe concurrent access, and UFW firewall rules.
+            </p>
+            <p class="text-pretty">
+              Identity is tied to your SSH key fingerprint &mdash; your name and scores follow you across sessions. No account needed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const text = (btn as HTMLElement).dataset.copy;
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          const svg = btn.querySelector('svg');
+          if (svg) {
+            const original = svg.innerHTML;
+            svg.innerHTML = '<polyline points="20 6 9 17 4 12"/>';
+            setTimeout(() => { svg.innerHTML = original; }, 1500);
+          }
+        } catch {}
+      });
+    });
+  </script>
+</MainLayout>
