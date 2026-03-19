@@ -403,7 +403,7 @@ import MainLayout from '../layouts/MainLayout.astro';
             <div><span class="cmd-label">award</span>    Netwrix Hero Award — Q1 FY'25</div>
             <div class="cmd-divider"></div>
             <div class="mt-1">
-              <a href="/resume" class="cmd-link">View full resume →</a>
+              <a href="/resume/" class="cmd-link">View full resume →</a>
               <span class="cmd-muted mx-2">·</span>
               <a href="/resume/adam-sneed-resume.pdf" download class="cmd-link">Download PDF →</a>
             </div>
@@ -451,12 +451,12 @@ import MainLayout from '../layouts/MainLayout.astro';
             <div class="cmd-heading mb-2">Case Studies & Projects</div>
             <div class="cmd-divider"></div>
             <div class="mt-1">
-              <div><a href="/work/pam" class="cmd-link">Enterprise PAM Architecture</a> <span class="cmd-muted">— Credential vaulting & session governance</span></div>
-              <div><a href="/work/agents" class="cmd-link">Agentic AI Systems</a> <span class="cmd-muted">— Multi-agent orchestration platform</span></div>
-              <div><a href="/work/ops" class="cmd-link">Operations & Infrastructure</a> <span class="cmd-muted">— Datacenter to director pipeline</span></div>
+              <div><a href="/work/pam/" class="cmd-link">Enterprise PAM Architecture</a> <span class="cmd-muted">— Credential vaulting & session governance</span></div>
+              <div><a href="/work/agents/" class="cmd-link">Agentic AI Systems</a> <span class="cmd-muted">— Multi-agent orchestration platform</span></div>
+              <div><a href="/work/ops/" class="cmd-link">Operations & Infrastructure</a> <span class="cmd-muted">— Datacenter to director pipeline</span></div>
             </div>
             <div class="cmd-divider"></div>
-            <div><a href="/work" class="cmd-link">View all →</a></div>
+            <div><a href="/work/" class="cmd-link">View all →</a></div>
           `);
         },
 
@@ -476,7 +476,7 @@ import MainLayout from '../layouts/MainLayout.astro';
               </div>
             </div>
             <div class="cmd-divider"></div>
-            <div><a href="/about" class="cmd-link">Read more →</a></div>
+            <div><a href="/about/" class="cmd-link">Read more →</a></div>
           `);
         },
 
@@ -488,7 +488,7 @@ import MainLayout from '../layouts/MainLayout.astro';
               <div><span class="cmd-label">email</span>    <a href="mailto:adam@adamsneed.com" class="cmd-link">adam@adamsneed.com</a></div>
               <div><span class="cmd-label">linkedin</span> <a href="https://www.linkedin.com/in/adam-sneed-8113375/" target="_blank" rel="noreferrer" class="cmd-link">linkedin.com/in/adam-sneed</a></div>
               <div><span class="cmd-label">github</span>   <a href="https://github.com/adamlsneed" target="_blank" rel="noreferrer" class="cmd-link">github.com/adamlsneed</a></div>
-              <div><span class="cmd-label">web</span>      <a href="/contact" class="cmd-link">adamsneed.com/contact</a></div>
+              <div><span class="cmd-label">web</span>      <a href="/contact/" class="cmd-link">adamsneed.com/contact</a></div>
             </div>
           `);
         },
@@ -496,9 +496,9 @@ import MainLayout from '../layouts/MainLayout.astro';
         '/game': () => {
           addCommandOutput(`
             <div class="cmd-heading mb-2">Launching Tetris...</div>
-            <div class="cmd-muted">Redirecting to <a href="/game" class="cmd-link">/game</a></div>
+            <div class="cmd-muted">Redirecting to <a href="/game/" class="cmd-link">/game</a></div>
           `);
-          setTimeout(() => { window.location.href = '/game'; }, 800);
+          setTimeout(() => { window.location.href = '/game/'; }, 800);
         },
 
         '/clear': () => {

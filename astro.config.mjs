@@ -5,6 +5,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   site: 'https://adamsneed.com',
+  trailingSlash: 'always',
   adapter: cloudflare({
     platformProxy: { enabled: false }
   }),
