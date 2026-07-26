@@ -10,11 +10,12 @@ import MainLayout from '../layouts/MainLayout.astro';
   <section class="relative flex h-[calc(100vh-64px)] items-start justify-center overflow-hidden px-3 pt-20 pb-4 sm:px-6 md:items-center md:pt-16">
     <div class="mx-auto w-full max-w-4xl">
 
-      <!-- Terminal: animated border wrapper -->
+      <!-- Terminal: animated border wrapper.
+           Visible by default — entrance animation is CSS-only so a blocked/slow
+           module script can never leave the box stuck at opacity:0. -->
       <div
         id="terminal-outer"
-        class="terminal-glow rounded-2xl p-[1.5px]"
-        style="opacity:0; transform: translateY(20px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);"
+        class="terminal-glow terminal-enter rounded-2xl p-[1.5px]"
       >
         <div id="terminal" class="relative overflow-hidden rounded-2xl bg-[#070b14]">
 
@@ -113,6 +114,22 @@ import MainLayout from '../layouts/MainLayout.astro';
         0 0 100px rgba(20,184,166,0.04),
         0 30px 60px rgba(0,0,0,0.4);
       animation: border-rotate 3s linear infinite;
+    }
+
+    /* CSS entrance — never leave the terminal stuck invisible if JS fails */
+    @keyframes terminal-enter {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .terminal-enter {
+      animation: terminal-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .terminal-enter {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
     }
 
     @keyframes border-rotate {
@@ -296,15 +313,6 @@ import MainLayout from '../layouts/MainLayout.astro';
       const terminalOuter = document.getElementById('terminal-outer');
       if (!body || !input) return;
 
-      // ── Entrance animation ────────────────────────────
-
-      requestAnimationFrame(() => {
-        if (terminalOuter) {
-          terminalOuter.style.opacity = '1';
-          terminalOuter.style.transform = 'translateY(0)';
-        }
-      });
-
       const chatHistory: Array<{role: string; content: string}> = [];
       let isProcessing = false;
 
@@ -313,7 +321,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
       // Fire-and-forget event tracking
       function trackEvent(eventType: string, eventData?: string) {
-        fetch('/api/event', {
+        fetch('/api/event/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ event_type: eventType, event_data: eventData, page: '/', session_id: sessionId }),
@@ -785,7 +793,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       const chatAPI: TerminalChatAPI = {
         async getResponse(messages, onToken, onComplete) {
           try {
-            const res = await fetch('/api/chat', {
+            const res = await fetch('/api/chat/', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ messages, session_id: sessionId }),
