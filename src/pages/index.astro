@@ -792,29 +792,52 @@ import MainLayout from '../layouts/MainLayout.astro';
 
       const chatAPI: TerminalChatAPI = {
         async getResponse(messages, onToken, onComplete) {
-          try {
-            const res = await fetch('/api/chat/', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ messages, session_id: sessionId }),
-            });
+          const payload = JSON.stringify({ messages, session_id: sessionId });
+          const headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          };
 
-            if (!res.ok) {
-              const data = await res.json().catch(() => ({}));
-              throw new Error((data as any).error || `HTTP ${res.status}`);
-            }
-
-            const data = await res.json() as { response: string };
-            const text = data.response || '';
-
-            for (let i = 0; i < text.length; i++) {
-              onToken(text[i]);
-              await new Promise(r => setTimeout(r, 8 + Math.random() * 6));
-            }
-            onComplete();
-          } catch (err: any) {
-            throw err;
+          // Prefer trailing-slash route (trailingSlash:always). Fall back to bare
+          // path for older cached clients / odd redirects.
+          let res = await fetch('/api/chat/', { method: 'POST', headers, body: payload });
+          let contentType = res.headers.get('content-type') || '';
+          if (!contentType.includes('application/json')) {
+            res = await fetch('/api/chat', { method: 'POST', headers, body: payload, redirect: 'follow' });
+            contentType = res.headers.get('content-type') || '';
           }
+
+          const raw = await res.text();
+
+          if (!contentType.includes('application/json')) {
+            throw new Error(
+              res.ok
+                ? 'Chat API returned a non-JSON response. Hard-refresh the page (Cmd+Shift+R) and try again.'
+                : `Chat API error (HTTP ${res.status}).`
+            );
+          }
+
+          let data: { response?: string; error?: string } = {};
+          try {
+            data = JSON.parse(raw);
+          } catch {
+            throw new Error('Chat API returned invalid JSON.');
+          }
+
+          if (!res.ok) {
+            throw new Error(data.error || `HTTP ${res.status}`);
+          }
+
+          const text = data.response || '';
+          if (!text) {
+            throw new Error('Chat API returned an empty response.');
+          }
+
+          for (let i = 0; i < text.length; i++) {
+            onToken(text[i]);
+            await new Promise(r => setTimeout(r, 8 + Math.random() * 6));
+          }
+          onComplete();
         }
       };
 
