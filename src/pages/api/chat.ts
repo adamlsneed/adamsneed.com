@@ -163,36 +163,92 @@ export const POST: APIRoute = async ({ request, locals }) => {
       });
     }
 
-    // llama-3.1-8b-instruct was deprecated on Workers AI 2026-05-30.
-    // Keep the still-supported -fast variant (drop-in messages API).
-    const MODEL = '@cf/meta/llama-3.1-8b-instruct-fast';
-    const result = await ai.run(MODEL, {
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...sanitized,
-      ],
-      max_tokens: 512,
-      temperature: 0.7,
-    });
+    // Model failover chain. Override at runtime via Pages env CHAT_MODELS
+    // (comma-separated Workers AI model IDs) without a code change.
+    // Default order: current primary → CF-recommended durable flash → small Meta backup.
+    const DEFAULT_MODELS = [
+      '@cf/meta/llama-3.1-8b-instruct-fast',
+      '@cf/zai-org/glm-4.7-flash',
+      '@cf/meta/llama-3.2-3b-instruct',
+    ];
+    const envModels = typeof runtime?.env?.CHAT_MODELS === 'string'
+      ? String(runtime.env.CHAT_MODELS)
+          .split(',')
+          .map((m: string) => m.trim())
+          .filter(Boolean)
+      : [];
+    const MODELS = envModels.length > 0 ? envModels : DEFAULT_MODELS;
 
-    const responseText =
-      (typeof result === 'string' ? result : null) ||
-      (result && typeof result === 'object'
-        ? (result as any).response ??
-          (result as any).result?.response ??
-          (Array.isArray((result as any).result)
-            ? (result as any).result.map((p: any) => p?.response ?? p?.generated_text ?? '').join('')
-            : null) ??
-          (result as any).generated_text ??
-          ''
-        : '');
+    const messagesPayload = [
+      { role: 'system', content: SYSTEM_PROMPT },
+      ...sanitized,
+    ];
+
+    const extractText = (result: unknown): string => {
+      if (typeof result === 'string') return result.trim();
+      if (!result || typeof result !== 'object') return '';
+      const r = result as any;
+      const candidates = [
+        r.response,
+        r.result?.response,
+        r.generated_text,
+        r.result?.generated_text,
+        r.output_text,
+        Array.isArray(r.result)
+          ? r.result.map((p: any) => p?.response ?? p?.generated_text ?? p?.text ?? '').join('')
+          : null,
+        Array.isArray(r.output)
+          ? r.output.map((p: any) => {
+              if (typeof p === 'string') return p;
+              if (Array.isArray(p?.content)) {
+                return p.content.map((c: any) => c?.text ?? c?.content ?? '').join('');
+              }
+              return p?.content ?? p?.text ?? '';
+            }).join('')
+          : null,
+      ];
+      for (const c of candidates) {
+        if (typeof c === 'string' && c.trim()) return c.trim();
+      }
+      return '';
+    };
+
+    let responseText = '';
+    let usedModel = '';
+    const failures: string[] = [];
+
+    for (const model of MODELS) {
+      try {
+        const result = await ai.run(model, {
+          messages: messagesPayload,
+          max_tokens: 512,
+          temperature: 0.7,
+        });
+        const text = extractText(result);
+        if (text) {
+          responseText = text;
+          usedModel = model;
+          break;
+        }
+        failures.push(`${model}: empty response`);
+        console.error('Chat API empty model result:', model, JSON.stringify(result)?.slice(0, 400));
+      } catch (modelErr: any) {
+        const msg = modelErr?.message || String(modelErr);
+        failures.push(`${model}: ${msg}`);
+        console.error('Chat API model failed:', model, msg);
+      }
+    }
 
     if (!responseText) {
-      console.error('Chat API empty model result:', JSON.stringify(result)?.slice(0, 500));
+      console.error('Chat API all models failed:', failures.join(' | '));
       return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
         status: 502,
         headers: { 'Content-Type': 'application/json' },
       });
+    }
+
+    if (failures.length > 0) {
+      console.warn(`Chat API used fallback model ${usedModel} after: ${failures.join(' | ')}`);
     }
 
     // Log question + response to D1 (fire-and-forget, don't block response)
@@ -216,7 +272,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
     }
 
     return new Response(JSON.stringify({ response: responseText }), {
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        // Helpful for debugging deploys / which model answered (not shown in UI)
+        'X-Chat-Model': usedModel,
+      },
     });
   } catch (err: any) {
     console.error('Chat API error:', err?.message || err, err?.stack || '');

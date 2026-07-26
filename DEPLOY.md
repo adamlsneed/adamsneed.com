@@ -28,7 +28,9 @@ What it does:
 - `npm run build`
 - Runs `npx wrangler pages deploy dist --project-name adamsneed --commit-dirty=true`
 - Auth: Wrangler OAuth (`wrangler login`) preferred. Optional: set `CLOUDFLARE_API_TOKEN` in the environment.
-- Homepage chat uses Workers AI `@cf/meta/llama-3.1-8b-instruct-fast` (base `llama-3.1-8b-instruct` was deprecated 2026-05-30).
+- Homepage chat uses Workers AI with a failover chain:
+  `@cf/meta/llama-3.1-8b-instruct-fast` → `@cf/zai-org/glm-4.7-flash` → `@cf/meta/llama-3.2-3b-instruct`.
+  Optional Pages env `CHAT_MODELS` (comma-separated) overrides the chain without a code change.
 
 Cloudflare:
 - Project: `adamsneed`
