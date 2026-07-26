@@ -20,13 +20,15 @@ Target: `adamsneed.com` + `www`
 
 ```bash
 cd ~/dev/adamsneed.com
+# one-time (or if auth expires): npx wrangler login
 npm run deploy:prod
 ```
 
 What it does:
 - `npm run build`
-- Pulls `cloudflare.api_token` from `~/.cache/zip/credentials.json`
 - Runs `npx wrangler pages deploy dist --project-name adamsneed --commit-dirty=true`
+- Auth: Wrangler OAuth (`wrangler login`) preferred. Optional: set `CLOUDFLARE_API_TOKEN` in the environment.
+- Homepage chat uses Workers AI `@cf/meta/llama-3.1-8b-instruct-fast` (base `llama-3.1-8b-instruct` was deprecated 2026-05-30).
 
 Cloudflare:
 - Project: `adamsneed`

@@ -11,7 +11,7 @@
     "resume:pdf": "node scripts/generate-pdf.cjs",
     "astro": "astro",
     "deploy:staging": "npm run build && rsync -avz --delete dist/ root@192.168.100.50:/var/www/adamsneed.com/",
-    "deploy:prod": "npm run build && CLOUDFLARE_API_TOKEN=$(python3 -c 'import json; print(json.load(open(\"/Users/adam/.cache/zip/credentials.json\"))[\"cloudflare\"][\"api_token\"])') CLOUDFLARE_ACCOUNT_ID=1fcc7d83253bff4d6809cc7e5864328b npx wrangler pages deploy dist --project-name adamsneed --commit-dirty=true"
+    "deploy:prod": "npm run build && CLOUDFLARE_ACCOUNT_ID=1fcc7d83253bff4d6809cc7e5864328b npx wrangler pages deploy dist --project-name adamsneed --commit-dirty=true"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.13",
