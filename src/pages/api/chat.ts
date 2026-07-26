@@ -163,7 +163,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
       });
     }
 
-    const result = await ai.run('@cf/meta/llama-3.1-8b-instruct', {
+    // llama-3.1-8b-instruct was deprecated on Workers AI 2026-05-30.
+    // Keep the still-supported -fast variant (drop-in messages API).
+    const MODEL = '@cf/meta/llama-3.1-8b-instruct-fast';
+    const result = await ai.run(MODEL, {
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         ...sanitized,
@@ -171,6 +174,26 @@ export const POST: APIRoute = async ({ request, locals }) => {
       max_tokens: 512,
       temperature: 0.7,
     });
+
+    const responseText =
+      (typeof result === 'string' ? result : null) ||
+      (result && typeof result === 'object'
+        ? (result as any).response ??
+          (result as any).result?.response ??
+          (Array.isArray((result as any).result)
+            ? (result as any).result.map((p: any) => p?.response ?? p?.generated_text ?? '').join('')
+            : null) ??
+          (result as any).generated_text ??
+          ''
+        : '');
+
+    if (!responseText) {
+      console.error('Chat API empty model result:', JSON.stringify(result)?.slice(0, 500));
+      return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
+        status: 502,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     // Log question + response to D1 (fire-and-forget, don't block response)
     const db = runtime?.env?.DB;
@@ -185,18 +208,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
         try {
           await db.prepare(
             'INSERT INTO chat_messages (session_id, ip_hash, question, response, user_agent) VALUES (?, ?, ?, ?, ?)'
-          ).bind(session_id || null, ipHash, lastUserMsg.content, result.response || '', ua).run();
+          ).bind(session_id || null, ipHash, lastUserMsg.content, responseText, ua).run();
         } catch (e) {
           console.error('D1 log error:', e);
         }
       }
     }
 
-    return new Response(JSON.stringify({ response: result.response }), {
+    return new Response(JSON.stringify({ response: responseText }), {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err: any) {
-    console.error('Chat API error:', err);
+    console.error('Chat API error:', err?.message || err, err?.stack || '');
     return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },

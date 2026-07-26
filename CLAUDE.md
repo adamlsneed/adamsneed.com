@@ -19,7 +19,7 @@ npm run resume:pdf     # Regenerate public/resume/adam-sneed-resume.pdf via Pupp
 - **Tailwind CSS 3** — utility-first styling; custom design tokens in `tailwind.config.mjs`
 - **TypeScript** (strict) — tsconfig extends Astro strict preset
 - **Cloudflare Pages** — production deployment with Pages Functions for SSR routes
-- **Cloudflare Workers AI** — `@cf/meta/llama-3.1-8b-instruct` powers the homepage chat
+- **Cloudflare Workers AI** — `@cf/meta/llama-3.1-8b-instruct-fast` powers the homepage chat (base `llama-3.1-8b-instruct` was deprecated 2026-05-30)
 - **Cloudflare D1** — SQLite analytics database (`adamsneed-analytics`) for tracking chat questions, slash commands, and events
 - **@astrojs/cloudflare** adapter — enables SSR API routes while keeping pages static
 - **Internal nginx** — staging at `dev.adamsneed.com` / `192.168.100.50`
