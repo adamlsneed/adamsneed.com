@@ -84,6 +84,7 @@ const html = `<!DOCTYPE html>
   /* Company block */
   .company {
     margin-bottom: 12px;
+    break-inside: avoid;
   }
   .company-header {
     display: flex;
@@ -195,12 +196,15 @@ const html = `<!DOCTYPE html>
     margin-top: 8px;
   }
   .early strong { color: ${BODY}; }
+  .contact { flex-wrap: wrap; }
 </style></head><body>
 
 <div class="header">
   <div class="name">Adam Lacroix Sneed</div>
   <div class="contact">
     <span>Austin, TX</span>
+    <span class="sep">·</span>
+    <span>512.888.5580</span>
     <span class="sep">·</span>
     <a href="mailto:adam@adamsneed.com">adam@adamsneed.com</a>
     <span class="sep">·</span>
@@ -210,7 +214,7 @@ const html = `<!DOCTYPE html>
   </div>
 </div>
 
-<p class="summary">Senior Solutions Architect and PAM subject matter expert with deep expertise in identity &amp; access management and agentic AI systems. 20+ years in IT with 4+ years focused on enterprise PAM/EPM and IAM solutions. Designs and deploys secure, scalable automation &mdash; from credential vaulting, identity lifecycle management, and session governance to AI-driven workflow orchestration with human-in-the-loop guardrails.</p>
+<p class="summary"><strong>Manager, Global Cyber Security.</strong> Security-focused engineering leader with deep expertise in PAM, IAM, and enterprise cybersecurity. 20+ years in IT/security with 4+ years focused on enterprise PAM engineering, automation, and compliance. Combines hands-on engineering leadership with team management to deliver credential vaulting, session management, and service account governance across on-prem and cloud environments.</p>
 
 <h2>Technical Skills</h2>
 <div class="skills">
@@ -228,11 +232,10 @@ const html = `<!DOCTYPE html>
   <span class="skill">REST APIs</span>
   <span class="skill">Terraform &amp; Ansible</span>
   <span class="skill">CI/CD Pipelines</span>
-  <span class="skill">Agentic Workflow Design</span>
-  <span class="skill">Prompt Engineering</span>
-  <span class="skill">AI-Assisted Automation</span>
-  <span class="skill">Multi-Agent Systems</span>
-  <span class="skill">Agent Orchestration</span>
+  <span class="skill">Non-Human Identity Governance</span>
+  <span class="skill">AI Agent Access &amp; MCP</span>
+  <span class="skill">LLM-Assisted Engineering</span>
+  <span class="skill">Local LLM Inference</span>
   <span class="skill">Policy Enforcement</span>
   <span class="skill">NIST/CIS/ISO 27001</span>
   <span class="skill">SOX/PCI</span>
@@ -243,16 +246,31 @@ const html = `<!DOCTYPE html>
 
 <div class="company">
   <div class="company-header">
+    <span class="company-name">McDonald's Corporation</span>
+    <span class="company-location">Remote from Austin, TX</span>
+  </div>
+  <p class="role">Manager, Global Cyber Security <span class="dates">&middot; Apr 2026 &ndash; Present</span></p>
+  <ul>
+    <li>Lead PAM platform engineering, operations, and service delivery across a Fortune 100 enterprise's on-prem and multi-cloud environments.</li>
+    <li>Drive PAM strategy, roadmap, and governance aligned with Zero Trust, least privilege, risk management, and compliance.</li>
+    <li>Partner with security architecture, identity, infrastructure, and audit teams to integrate PAM with SIEM, ITSM, and DevOps/CI-CD workflows.</li>
+    <li>Lead and mentor PAM engineers; establish runbooks, SOPs, and operational standards for program maturity.</li>
+    <li>Own enterprise selection and program design for non-human identity governance across service accounts, workload identities, and AI agent credentials.</li>
+  </ul>
+</div>
+
+<div class="company">
+  <div class="company-header">
     <span class="company-name">Netwrix Corporation</span>
     <span class="company-location">Remote from Austin, TX</span>
   </div>
-  <p class="role">Senior Solutions Architect, Privileged Access Management <span class="dates">&middot; Sep 2021 &ndash; Present</span></p>
+  <p class="role">Senior Solutions Architect, Privileged Access Management <span class="dates">&middot; Sep 2021 &ndash; Apr 2026</span></p>
   <ul>
     <li>PAM subject matter expert for enterprise deployments across Fortune-class organizations &mdash; credential vaulting, session proxying, JIT access, and service account governance integrated with AD/Entra ID, AWS/Azure cloud IAM, SIEM/SOAR, and ITSM platforms.</li>
     <li>Architect API-driven automation frameworks (PowerShell, Python, REST APIs) for privileged account lifecycle management &mdash; onboarding, credential rotation, and access workflows enforcing least-privilege at scale.</li>
-    <li>Design operational runbooks, decision-logic SOPs, and escalation policies that map to agentic workflow patterns &mdash; conditional branching, retry logic, approval gates, and automated remediation.</li>
-    <li>Lead root cause analysis and platform resilience engineering; build reusable knowledge bases ensuring operational continuity across teams.</li>
-    <li>Oversee vendor-led PAM implementations: SOW scoping, UAT, and production cutovers within Agile delivery frameworks.</li>
+    <li>Led root cause analysis, platform tuning, Agile delivery, and operational KB/runbook/SOP development; oversaw vendor-led SOW scoping, UAT, and production cutovers.</li>
+    <li>Designed a TypeScript MCP server exposing the Netwrix Privilege Secure REST API to LLM workflows for ephemeral admin sessions, rotation reporting, and access automation.</li>
+    <li>Pioneered AI-assisted engineering with Claude Code and built local Ollama inference for security-sensitive use cases; concurrently architected independent PAM platform IP (Moat).</li>
   </ul>
   <div class="award">
     <span class="award-emoji">&#127942;</span>
@@ -263,19 +281,6 @@ const html = `<!DOCTYPE html>
   </div>
 </div>
 
-<div class="company section-accent">
-  <div class="company-header">
-    <span class="company-name">Agentic &amp; AI Systems Engineering</span>
-    <span class="company-location">2024 &ndash; Present</span>
-  </div>
-  <ul>
-    <li>Design, build, and operate a production multi-agent system &mdash; 5+ specialized AI agents coordinating across security monitoring, business intelligence, home automation, and infrastructure management with defined roles, guardrails, and chain-of-command policies.</li>
-    <li>Engineer prompt-driven workflows with structured output parsing, verification loops, retry logic, approval gates, and failure handling &mdash; reliability engineering applied to AI automation.</li>
-    <li>Build AI-driven business intelligence pipelines: automated competitor monitoring, web scraping, LLM-powered analysis, and branded email digest delivery.</li>
-    <li>Security-first agent architecture: credential isolation, tool-use policies, output sanitization, injection detection, and mandatory code scanning.</li>
-    <li>Cross-agent communication protocols, session orchestration, and workflow engines with webhook triggers, template variables, and status-driven state machines.</li>
-  </ul>
-</div>
 
 <div class="company">
   <div class="company-header">

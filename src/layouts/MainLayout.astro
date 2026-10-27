@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = 'Security engineering leader building production-grade automation, PAM architecture, and agentic AI systems.',
+  description = "Adam Sneed is Manager, Global Cyber Security at McDonald's Corporation, leading PAM engineering and identity security.",
   ogType = 'website',
   hideFooter = false
 } = Astro.props;
@@ -52,7 +52,11 @@ const personJsonLd = {
   '@type': 'Person',
   name: 'Adam Lacroix Sneed',
   url: 'https://adamsneed.com',
-  jobTitle: 'Security-focused Engineering Leader',
+  jobTitle: 'Manager, Global Cyber Security',
+  worksFor: {
+    '@type': 'Organization',
+    name: "McDonald's Corporation"
+  },
   image: new URL('/og-image.svg', siteRoot).toString(),
   address: {
     '@type': 'PostalAddress',

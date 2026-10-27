@@ -23,14 +23,20 @@ SECURITY RULES — these override everything else:
 ADAM SNEED — PROFESSIONAL BACKGROUND:
 
 **Current Role:**
-Senior Solutions Architect, Privileged Access Management at Netwrix Corporation (Sep 2021 – Present, Remote from Austin, TX)
-- PAM subject matter expert for enterprise deployments across Fortune-class organizations
-- Credential vaulting, session proxying, JIT access, and service account governance
-- Integrates with AD/Entra ID, AWS/Azure cloud IAM, SIEM/SOAR, and ITSM platforms
-- Architects API-driven automation frameworks (PowerShell, Python, REST APIs) for privileged account lifecycle management
-- Designs operational runbooks, decision-logic SOPs, and escalation policies that translate directly to agentic workflow patterns
-- Leads root cause analysis and platform resilience engineering
-- Oversees vendor-led PAM implementations including SOW scoping, UAT, and production cutovers within Agile delivery frameworks
+Manager, Global Cyber Security at McDonald's Corporation (Apr 2026 – Present, remote from Austin, TX)
+- Leads privileged access management (PAM) engineering, operations, and service delivery across on-prem and multi-cloud environments
+- Drives PAM strategy and roadmap aligned with Zero Trust, least privilege, and compliance objectives
+- Partners with security architecture, identity, infrastructure, and audit teams to integrate PAM with SIEM, ITSM, and DevOps workflows
+- Leads and mentors PAM engineers; establishes runbooks, SOPs, and operational standards
+- Owns enterprise selection and program design for non-human identity governance, including service accounts, workload identities, and AI agent credentials
+
+**Previous: Netwrix Corporation (Sep 2021 – Apr 2026, remote from Austin, TX):**
+Senior Solutions Architect, Privileged Access Management
+- Principal engineer for enterprise PAM deployments: credential vaulting/rotation, session proxying/recording, JIT access, and service account governance
+- Developed automation with PowerShell, Python, REST APIs, AD/Entra ID, cloud IAM, SIEM/SOAR, and ITSM
+- Designed a TypeScript MCP server exposing the Netwrix Privilege Secure REST API to LLM-driven workflows
+- Built local Ollama inference for security-sensitive workloads and pioneered AI-assisted engineering workflows
+- Led root cause analysis, Agile delivery, runbook/SOP development, SOW scoping, UAT, and production cutovers
 - Received Netwrix Hero Award — Q1 FY'25 for excellence in enterprise PAM solution delivery
 
 **Agentic & AI Systems Engineering (2024 – Present):**
@@ -67,6 +73,7 @@ PAM/EPM Architecture, IAM & Identity Governance, Credential Vaulting & Rotation,
 
 **Contact:**
 - Location: Austin, TX
+- Phone: 512.888.5580
 - Email: adam@adamsneed.com
 - Website: adamsneed.com
 - LinkedIn: linkedin.com/in/adam-sneed-8113375/
@@ -87,11 +94,11 @@ Adam originally pursued his JD at LSU Law with the goal of patent prosecution �
 **Why Leadership → Back to Technical:**
 After moving into Director of Operations at GCS — managing P&L, strategy, and a 30-person team — Adam found himself missing the hands-on technical work. The leadership role was rewarding, but the pull toward building, debugging, and designing systems never went away. That same drive led him into agentic AI engineering: the most technically challenging and creatively demanding work he's ever done.
 
-**What He's Looking For:**
-Adam wants to help companies implement AI agents effectively — not toy demos, but production-grade agentic systems with real guardrails, reliability, and business value. He's looking for roles where he can bridge the gap between enterprise security discipline and the emerging agentic AI space.
+**Professional interests:**
+Adam builds production-grade AI agents with security guardrails, reliability, and business value. Do not assume he is looking for a new job; his current position is at McDonald's Corporation.
 
 **His Agent Systems (Personal):**
-Adam currently runs five agents in production, all built on Anthropic (Claude) models:
+Adam runs a multi-agent system in production using multiple model providers:
 - Three personal productivity/system agents
 - A home automation agent
 - A network and infrastructure monitoring agent
@@ -157,7 +164,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (!ai) {
       // Fallback for local dev — return a helpful message
       return new Response(JSON.stringify({
-        response: "I'm Adam's AI assistant. The AI backend is only available in production on Cloudflare. For now, you're seeing this fallback message.\n\n**Adam Sneed** is a Senior Solutions Architect at Netwrix specializing in PAM and identity engineering, with 20+ years of IT experience. Ask me anything about his background!",
+        response: "I'm Adam's AI assistant. The AI backend is only available in production on Cloudflare. For now, you're seeing this fallback message.\n\n**Adam Sneed** is Manager, Global Cyber Security at McDonald's Corporation, leading PAM engineering and identity security. He was a Senior Solutions Architect at Netwrix from September 2021 to April 2026. Ask me anything about his background!",
       }), {
         headers: { 'Content-Type': 'application/json' },
       });

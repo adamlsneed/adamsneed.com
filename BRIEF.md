@@ -25,12 +25,12 @@ Three cards below hero:
 - 🔐 Security Engineering — Enterprise PAM, credential vaulting, zero-trust architecture
 - 🤖 Agentic Systems — Multi-agent orchestration, prompt engineering, guardrails
 - ⚙️ Operations & Scale — 20 years building from datacenter metal to cloud-native automation
-CTA: "I'm currently exploring opportunities in agentic systems engineering, security architecture, and AI-adjacent technical leadership."
+CTA: "I lead PAM engineering in Global Cyber Security at McDonald's Corporation and build agentic security systems."
 [View My Work →] [Download Resume →]
 
 ### 2. About (/about)
 Photo: headshot.jpg (illustrated style, bookshelf background)
-Copy: Two decades enterprise IT. Started RedHat/AIX, progressed through datacenter ops, technical leadership, security engineering. Now leads PAM at Netwrix. Builds multi-agent AI systems with same rigor as privileged access: least privilege, human-in-the-loop, audit trails, fail-safe defaults.
+Copy: Two decades enterprise IT. Started RedHat/AIX, progressed through datacenter ops, technical leadership, security engineering. Leads PAM at McDonald's Corporation since April 2026; previously a PAM architect at Netwrix through April 2026. Builds multi-agent AI systems with the same rigor as privileged access: least privilege, human-in-the-loop, audit trails, fail-safe defaults.
 Principles:
 - Build for production, not demos
 - Security is architecture, not a feature
@@ -41,7 +41,7 @@ JD from LSU Law — informs policy design, regulatory risk analysis, contract-le
 ### 3. Work (/work) — Three case studies
 
 #### /work/pam — Enterprise PAM Engineering
-Principal engineer for enterprise PAM deployments at Netwrix. Credential lifecycle automation (Python, PowerShell). Session governance — proxied recording, JIT access. Integration architecture — PAM + SIEM/SOAR + ITSM + CI/CD. Netwrix Hero Award (Q1 FY'25).
+Historical Netwrix PAM work (Sep 2021–Apr 2026): principal engineer for enterprise deployments. Credential lifecycle automation (Python, PowerShell), proxied recording, JIT access, PAM + SIEM/SOAR + ITSM + CI/CD integration. Netwrix Hero Award (Q1 FY'25). Current McDonald's PAM engineering leadership belongs in bio and resume.
 
 #### /work/agents — Agentic Systems Engineering
 Production multi-agent system — 5+ specialized agents with defined roles, permissions, chains of command. Prompt-engineered workflows with structured output, verification loops, retry logic, approval gates. Security-first: credential isolation, injection detection, code scanning. Cross-agent communication, session orchestration, webhook state machines. Commercial intelligence product built on top. Tools used: Claude Code, OpenClaw, prompt engineering, agentic workflow design. Keep abstract — don't name ScoutPulse.
@@ -77,7 +77,7 @@ JSON workflow structure:
 ```
 
 ### 6. Contact (/contact)
-"Let's Talk" — exploring opportunities in agentic systems engineering, security architecture, AI-adjacent technical leadership.
+CTA: "I lead PAM engineering and build agentic security systems."
 Email: adam@adamsneed.com | Phone: 512.888.5580
 LinkedIn: https://www.linkedin.com/in/adam-sneed-8113375/
 GitHub: https://github.com/adamlsneed
@@ -86,27 +86,36 @@ No contact form. Direct is better.
 ### 7. Game (/game) — "Root Access"
 Security decision card game. You're a newly hired security engineer. Inbox fills with access requests, incident alerts, vendor demands. Triage: Approve, Deny, Investigate, Escalate. 5 rounds of 4-6 cards. Score: Security Posture (0-100), Business Satisfaction (0-100), Your Sanity (0-100). Vanilla JS + CSS, card-based UI, JSON scenario definitions, single-page.
 
-## Resume Content (ATS-First — render as HTML on /resume page)
+## Resume Content (updated from Adam's 2026-05-18 DOCX; render as HTML on /resume page)
 
 ADAM LACROIX SNEED
 Austin, TX | 512.888.5580 | adam@adamsneed.com | adamsneed.com | linkedin.com/in/adam-sneed-8113375/
 
 SUMMARY
-Security-focused Engineering Leader building at the intersection of privileged access management and agentic AI systems. 20+ years in IT with 4+ years leading enterprise PAM/EPM engineering. Designs and deploys secure, scalable automation — from credential vaulting and session governance to AI-driven workflow orchestration with human-in-the-loop guardrails. Proven ability to architect API-driven integrations across PAM, SIEM/SOAR, ITSM, and cloud IAM platforms while translating compliance requirements (NIST, CIS, SOX/PCI) into production-grade policy enforcement.
+Manager, Global Cyber Security at McDonald's Corporation. Security-focused engineering leader with expertise in PAM, IAM, and enterprise cybersecurity. 20+ years in IT/security; 4+ years focused on enterprise PAM engineering, automation, and compliance. Combines hands-on engineering leadership and team management to deliver privileged access services across on-prem and cloud environments.
 
 TECHNICAL SKILLS
-PAM/EPM Engineering & Architecture | Credential Vaulting & Rotation | SIEM/SOAR & ITSM Integration | Zero Trust & Least Privilege | Cloud IAM (AWS/Azure/GCP) | AD/Entra ID | PowerShell, Python, SQL | REST API Integration & Orchestration | Terraform, Ansible & IaC | DevOps & CI/CD Pipelines | Agentic Workflow Design | Prompt Engineering & Evaluation | AI-Assisted Automation | Multi-Agent Systems | Policy Enforcement & Guardrails | Reliability Engineering | NIST, CIS, ISO 27001, SOX/PCI | Agile (Scrum/Kanban)
+PAM/EPM Engineering & Architecture | Credential Vaulting & Rotation | SIEM/SOAR & ITSM Integration | Zero Trust & Least Privilege | Cloud IAM (AWS/Azure/GCP) | AD/Entra ID | PowerShell, Python, SQL | REST API Integration & Orchestration | Terraform, Ansible & IaC | DevOps & CI/CD Pipelines | Non-Human Identity Governance | AI Agent Access & MCP | LLM-Assisted Engineering | NIST, CIS, ISO 27001, SOX/PCI | Agile (Scrum/Kanban)
 
 PROFESSIONAL EXPERIENCE
 
+MCDONALD'S CORPORATION — Remote from Austin, TX
+Manager, Global Cyber Security | 04/2026 – Present
+- Lead PAM engineering and operations for global business units, covering privileged access across on-prem and multi-cloud environments.
+- Drive PAM strategy, roadmap, and program governance aligned with Zero Trust, least privilege, enterprise risk, and compliance.
+- Partner with security, identity, infrastructure, and audit teams to integrate PAM with SIEM, ITSM, and DevOps workflows.
+- Lead and mentor PAM engineers; develop runbooks and operational standards.
+- Own non-human identity governance program design for service accounts, workload identities, and AI agent credentials.
+
 NETWRIX CORPORATION — Remote from Austin, TX
-Senior Solutions Architect, Privileged Access Management | 09/2021 – Present
+Senior Solutions Architect, Privileged Access Management | 09/2021 – 04/2026
 - Serve as principal engineer for enterprise PAM deployments across Fortune-class organizations, integrating credential vaulting, session proxying, JIT access, and service account governance with AD/Entra ID, AWS/Azure cloud IAM, SIEM/SOAR, and ITSM platforms.
 - Architect API-driven automation frameworks (PowerShell, Python, REST APIs) for privileged account lifecycle management — onboarding, credential rotation, access workflows — reducing manual intervention and enforcing least-privilege policies at scale.
 - Design and codify operational runbooks, decision-logic SOPs, and escalation policies that translate directly to agentic workflow patterns — conditional branching, retry logic, human-in-the-loop approval gates, and automated remediation.
 - Lead root cause analysis and platform resilience engineering; create reusable knowledge bases and handoff documentation ensuring operational continuity across teams.
 - Oversee vendor-led PAM implementations including SOW scoping, UAT execution, and production cutovers within Agile delivery frameworks (Scrum/Kanban).
 - Awarded Netwrix Hero Award (Q1 FY'25) for excellence in enterprise PAM solution delivery.
+- Designed a TypeScript MCP server for the Netwrix Privilege Secure REST API; pioneered AI-assisted engineering, local Ollama inference, and independently architected Moat PAM platform IP.
 
 AGENTIC & AI SYSTEMS ENGINEERING | 2025 – Present
 - Design, build, and operate a production multi-agent system — coordinating 5+ specialized AI agents across security monitoring, business intelligence, home automation, and infrastructure management with defined roles, guardrails, and chain-of-command policies.

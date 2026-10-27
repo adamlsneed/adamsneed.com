@@ -8,7 +8,7 @@
     "start": "astro dev",
     "build": "astro build && node scripts/fix-routes.mjs",
     "preview": "astro preview",
-    "resume:pdf": "node scripts/generate-pdf.cjs",
+    "resume:pdf": "npx puppeteer browsers install chrome && node scripts/generate-pdf.cjs",
     "astro": "astro",
     "deploy:staging": "npm run build && rsync -avz --delete dist/ root@192.168.100.50:/var/www/adamsneed.com/",
     "deploy:prod": "npm run build && CLOUDFLARE_ACCOUNT_ID=1fcc7d83253bff4d6809cc7e5864328b npx wrangler pages deploy dist --project-name adamsneed --commit-dirty=true"
@@ -24,6 +24,8 @@
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.16"
+    "puppeteer": "^25.16.0",
+    "tailwindcss": "^3.4.16",
+    "yauzl": "^3.4.0"
   }
 }
