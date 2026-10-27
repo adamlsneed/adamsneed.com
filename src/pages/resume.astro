@@ -205,7 +205,7 @@ const skills = [
     // Track resume PDF downloads
     document.querySelectorAll('a[href*="resume"][download]').forEach(link => {
       link.addEventListener('click', () => {
-        fetch('/api/event', {
+        fetch('/api/event/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ event_type: 'resume_download', page: '/resume' }),

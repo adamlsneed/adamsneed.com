@@ -802,14 +802,10 @@ import MainLayout from '../layouts/MainLayout.astro';
             'Accept': 'application/json',
           };
 
-          // Prefer trailing-slash route (trailingSlash:always). Fall back to bare
-          // path for older cached clients / odd redirects.
-          let res = await fetch('/api/chat/', { method: 'POST', headers, body: payload });
-          let contentType = res.headers.get('content-type') || '';
-          if (!contentType.includes('application/json')) {
-            res = await fetch('/api/chat', { method: 'POST', headers, body: payload, redirect: 'follow' });
-            contentType = res.headers.get('content-type') || '';
-          }
+          // Cloudflare Pages serves bare /api/chat as homepage HTML; only the
+          // trailing-slash route reaches the worker with trailingSlash:always.
+          const res = await fetch('/api/chat/', { method: 'POST', headers, body: payload });
+          const contentType = res.headers.get('content-type') || '';
 
           const raw = await res.text();
 
